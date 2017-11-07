@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<form method="POST">
+  {% csrf_token %}
+  <div class="row">
+    <div class="col-12 col-sm-6">
+      {% with form.nombre as input %} <!-- input = form.nombre -->
+        {% include 'includes/input.html' %}
+      {% endwith %}
+    </div>
+    <div class="col-12 col-sm-6">
+      {% with form.valor_cuota as input %}
+        {% include 'includes/input.html' %}
+      {% endwith %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      {% with form.descripcion as input %}
+        {% include 'includes/input.html' %}
+      {% endwith %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary pull-right">
+        <i class="fa fa-save"></i> Guardar
+      </button>
+    </div>
+  </div>
+</form>
+{% endblock body %}

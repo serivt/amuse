@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="row">
+  <div class="col-12">
+    <h2>
+      {% if form.instance.pk %}
+       Modificar persona
+      {% else %}
+        Agregar persona
+      {% endif %}
+    </h2>
+    <hr>
+  </div>
+</div>
+<form method="POST" enctype='multipart/form-data'>
+  {% csrf_token %}
+  <div class="row">
+    <div class="col-12 col-sm-3 col-md-3">
+      {% with form.primer_nombre as input %} <!-- input = form.nombre -->
+        {% include 'includes/input.html' %}
+      {% endwith %}
+    </div>
+    <div class="col-12 col-sm-3 col-md-3">
+      {% with form.segundo_nombre as input %}
+        {% include 'includes/input.html' %}
+      {% endwith %}
+    </div>
+    <div class="col-12 col-sm-3 col-md-3">
+      {% with form.primer_apellido as input %} <!-- input = form.nombre -->
+        {% include 'includes/input.html' %}
+      {% endwith %}
+    </div>
+    <div class="col-12 col-sm-3 col-md-3">
+      {% with form.segundo_apellido as input %}
+        {% include 'includes/input.html' %}
+      {% endwith %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-sm-6 col-md-3">
+    {% with form.tipo_identificacion as input %}
+      {% include 'includes/input.html' %}
+    {% endwith %}
+    </div>
+    <div class="col-12 col-sm-6 col-md-3">
+    {% with form.numero_identificacion as input %}
+      {% include 'includes/input.html' %}
+    {% endwith %}
+    </div>
+    <div class="col-12 col-sm-6 col-md-3">
+    {% with form.fecha_nacimiento as input %}
+      {% include 'includes/input.html' %}
+    {% endwith %}
+    </div>
+    <div class="col-12 col-sm-6 col-md-3">
+    {% with form.imagen_perfil as input %}
+      {% include 'includes/input.html' %}
+    {% endwith %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-sm-6 col-md-3">
+    {% with form.telefono as input %}
+      {% include 'includes/input.html' %}
+    {% endwith %}
+    </div>
+    <div class="col-12 col-sm-6 col-md-3">
+    {% with form.roles as input %}
+      {% include 'includes/input.html' %}
+    {% endwith %}
+    </div>
+    <div class="col-12 col-sm-6 col-md-3">
+    {% with form.rh as input %}
+      {% include 'includes/input.html' %}
+    {% endwith %}
+    </div>
+    <div class="col-12 col-sm-6 col-md-3">
+    {% with form.eps as input %}
+      {% include 'includes/input.html' %}
+    {% endwith %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-sm-6 col-md-3">
+    {% with form.correo as input %}
+      {% include 'includes/input.html' %}
+    {% endwith %}
+    </div>
+    <div class="col-12 col-sm-6 col-md-3">
+      {% with form.grupos_dirige as input %}
+        {% include 'includes/input.html' %}
+      {% endwith %}
+    </div>
+    <div class="col-12 col-sm-6 col-md-3">
+        {% with form.acudiente as input %}
+          {% include 'includes/input.html' %}
+        {% endwith %}
+      </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#acudiente-form-modal">
+        <i class="fa fa-plus"></i> Agregar acudiente
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary pull-right">
+        <i class="fa fa-save"></i> Guardar
+      </button>
+    </div>
+  </div>
+</form>
+
+<div class="modal fade" id="acudiente-form-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Agregar acudiente</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {% include 'includes/acudiente_form.html' %}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" id="guardar-acudiente">Agregar</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock body %}
+
+{% block script %}
+<script>
+  function guardarAcuediente() {
+    let $form = $('#acudiente-form')
+    let data = $form.serializeArray();
+    $.ajax({
+      url: '{% url "personas:agregar_acudiente" %}',
+      data: data,
+      type: 'POST',
+    }).done(function(respuesta) {
+    })
+    .fail(function() {
+      alert('Error al guardar el acudiente');
+    })
+    .always(function() {
+      $form.each(function(){
+        $(this).val('');
+      })
+    });
+  }
+  $('#guardar-acudiente').on('click', function(){
+    guardarAcuediente();
+  })
+</script>
+{% endblock script %}

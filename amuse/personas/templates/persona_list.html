@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<table class="table datatables">
+  <thead>
+    <tr>
+      <th>Nombre Completo</th>
+      <th>Email</th>
+      <th>Teléfono</th>
+      <th>Roles</th>
+      <th>Estado</th>
+      <th>Opciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for object in object_list %}
+      <tr>
+        <td>{{ object.get_nombre_completo }}</td>
+        <td>{{ object.correo }}</td>
+        <td>{{ object.telefono }}</td>
+        <td>{{ object.get_roles }}</td>
+        <td>
+          {% if object.estado %}
+            Activo
+          {% else %}
+            Inactivo
+          {% endif %}
+        </td>
+        <td>
+          <a href="{% url 'personas:editar' object.pk %}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock body %}

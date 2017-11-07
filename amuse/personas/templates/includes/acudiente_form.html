@@ -1,0 +1,39 @@
+<form id="acudiente-form" method="POST">
+  {% csrf_token %}
+  <div class="row">
+    <div class="col-12 col-sm-6">
+    {% with form.primer_nombre as input %}
+      {% include 'includes/input.html' %}
+    {% endwith %}
+    </div>
+    <div class="col-12 col-sm-6">
+    {% with form.segundo_nombre as input %}
+      {% include 'includes/input.html' %}
+    {% endwith %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-sm-6">
+    {% with form.primer_apellido as input %}
+      {% include 'includes/input.html' %}
+    {% endwith %}
+    </div>
+    <div class="col-12 col-sm-6">
+    {% with form.segundo_apellido as input %}
+      {% include 'includes/input.html' %}
+    {% endwith %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-sm-6">
+    {% with form.correo as input %}
+      {% include 'includes/input.html' %}
+    {% endwith %}
+    </div>
+    <div class="col-12 col-sm-6">
+    {% with form.telefono as input %}
+      {% include 'includes/input.html' %}
+    {% endwith %}
+    </div>
+  </div>
+</form>
