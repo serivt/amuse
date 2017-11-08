@@ -9,7 +9,9 @@
       <th>Teléfono</th>
       <th>Roles</th>
       <th>Estado</th>
+      {% if 'personas.change_persona' in request.user.get_all_permissions or 'personas.delete_persona' in request.user.get_all_permissions %}
       <th>Opciones</th>
+      {% endif %}
     </tr>
   </thead>
   <tbody>
@@ -27,7 +29,12 @@
           {% endif %}
         </td>
         <td>
+          {% if 'personas.change_persona' in request.user.get_all_permissions %}
           <a href="{% url 'personas:editar' object.pk %}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
+          {% endif %}
+          {% if 'personas.delete_persona' in request.user.get_all_permissions %}
+          <a href="{% url 'personas:eliminar' object.pk %}" class="btn btn-sm btn-danger {% if not object.estado %}disabled" disabled="disabled"{% else %}"{% endif %}><i class="fa fa-trash"></i></a>
+          {% endif %}
         </td>
       </tr>
     {% endfor %}

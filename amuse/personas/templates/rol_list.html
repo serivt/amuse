@@ -7,7 +7,9 @@
       <th>Nombre</th>
       <th>Descripción</th>
       <th>Estado</th>
+      {% if 'personas.change_rol' in request.user.get_all_permissions or 'personas.delete_rol' in request.user.get_all_permissions %}
       <th>Opciones</th>
+      {% endif %}
     </tr>
   </thead>
   <tbody>
@@ -23,7 +25,12 @@
           {% endif %}
         </td>
         <td>
-          <a href="{% url 'grupos:editar' object.pk %}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
+          {% if 'personas.change_rol' in request.user.get_all_permissions %}
+          <a href="{% url 'personas:editar_rol' object.pk %}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
+          {% endif %}
+          {% if 'personas.delete_rol' in request.user.get_all_permissions %}
+          <a href="{% url 'personas:eliminar_rol' object.pk %}" class="btn btn-sm btn-danger {% if not object.estado %}disabled" disabled="disabled"{% else %}"{% endif %}><i class="fa fa-trash"></i></a>
+          {% endif %}
         </td>
       </tr>
     {% endfor %}

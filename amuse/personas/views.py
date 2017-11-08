@@ -6,6 +6,7 @@ from django.views.generic import View
 from django.views.generic.list import ListView
 from django.views.generic.edit import FormView
 
+from generales.views import EliminarView
 from personas.models import Rol, Persona
 from personas.forms import RolForm, AcudienteForm, PersonaForm
 
@@ -90,6 +91,11 @@ class PersonaFormView(LoginRequiredMixin, PermissionRequiredMixin, FormView):
 lista_roles = RolListView.as_view()
 agregar_rol = RolFormView.as_view(permission_required='personas.add_rol')
 modificar_rol = RolFormView.as_view(permission_required='personas.change_rol')
+eliminar_rol = EliminarView.as_view(
+    model=Rol,
+    success_url=reverse_lazy('personas:lista_roles'),
+    permission_required='personas.delete_rol'
+)
 
 lista_personas = PersonaListView.as_view()
 agregar_acudiente = AcudienteFormView.as_view(
@@ -98,3 +104,8 @@ agregar_persona = PersonaFormView.as_view(
     permission_required='personas.add_persona')
 modificar_persona = PersonaFormView.as_view(
     permission_required='personas.change_persona')
+eliminar_persona = EliminarView.as_view(
+    model=Persona,
+    success_url=reverse_lazy('personas:lista'),
+    permission_required='personas.delete_persona'
+)

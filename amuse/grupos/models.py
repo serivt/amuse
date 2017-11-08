@@ -15,6 +15,10 @@ class Grupo(models.Model):
     fecha_inactivacion = models.DateTimeField('Fecha de inactivación',
                                               blank=True, null=True)
     categoria = models.ForeignKey('grupos.Categoria')
+    estudiantes = models.ManyToManyField('personas.Persona',
+        verbose_name='Estudiantes', related_name='Estudiantes')
+    director = models.ForeignKey('personas.Persona', verbose_name='Director',
+        related_name='Director')
 
     class Meta:
         permissions = (
@@ -49,3 +53,28 @@ class Categoria(models.Model):
 
     def __str__(self):
         return self.nombre
+
+
+@python_2_unicode_compatible
+class Pago(models.Model):
+    grupo = models.ForeignKey('grupos.Grupo', verbose_name='Grupo')
+    persona = models.ForeignKey('personas.Persona', verbose_name='Estudiante')
+    valor_pago = models.FloatField('Valor pagado')
+    alerta_pago = models.BooleanField(default=False)
+    estado = models.BooleanField(default=True)
+
+    class Meta:
+        permissions = (
+            ('view_pago', 'Puede ver pagos'),
+        )
+
+    def save(self, *args, **kwargs):
+        if self.valor_pago != self.get_valor_cuota():
+            self.alerta_pago = True
+        super(Pago, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return self.grupo.nombre
+
+    def get_valor_cuota(self):
+        return self.grupo.categoria.valor_cuota

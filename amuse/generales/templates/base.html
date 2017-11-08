@@ -76,10 +76,10 @@
               <div class="dropdown-divider"></div>
               {% endif %}
               {% if 'grupos.view_pago' in request.user.get_all_permissions %}
-              <a class="dropdown-item" href="{% url 'grupos:lista_categorias' %}">Listar pagos</a>
+              <a class="dropdown-item" href="{% url 'grupos:lista_pagos' %}">Listar pagos</a>
               {% endif %}
               {% if 'grupos.add_pago' in request.user.get_all_permissions %}
-              <a class="dropdown-item" href="{% url 'grupos:agregar_categorias' %}">Agregar pago</a>
+              <a class="dropdown-item" href="{% url 'grupos:agregar_pagos' %}">Agregar pago</a>
               {% endif %}
             </div>
           </li>

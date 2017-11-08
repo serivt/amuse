@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 
+{% load humanize %}
+
 {% block body %}
 <table class="table datatables">
   <thead>
     <tr>
       <th>Nombre</th>
       <th>Descripción</th>
-      <th>Categoría</th>
-      <th>Fecha de creación</th>
+      <th>Valor de la cuota</th>
       <th>Estado</th>
       <th>Opciones</th>
     </tr>
@@ -17,8 +18,7 @@
       <tr>
         <td>{{ object.nombre }}</td>
         <td>{{ object.descripcion|default:'Sin descripción' }}</td>
-        <td>{{ object.categoria }}</td>
-        <td>{{ object.fecha_creacion }}</td>
+        <td>{{ object.valor_cuota|intcomma }}</td>
         <td>
           {% if object.estado %}
             Activo
@@ -27,7 +27,12 @@
           {% endif %}
         </td>
         <td>
-          <a href="{% url 'grupos:editar' object.pk %}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
+          {% if 'grupos.change_categoria' in request.user.get_all_permissions %}
+          <a href="{% url 'grupos:editar_categorias' object.pk %}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
+          {% endif %}
+          {% if 'grupos.delete_categoria' in request.user.get_all_permissions %}
+          <a href="{% url 'grupos:eliminar_categoria' object.pk %}" class="btn btn-sm btn-danger {% if not object.estado %}disabled" disabled="disabled"{% else %}"{% endif %}><i class="fa fa-trash"></i></a>
+          {% endif %}
         </td>
       </tr>
     {% endfor %}

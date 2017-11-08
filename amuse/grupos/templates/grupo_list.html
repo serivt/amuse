@@ -9,7 +9,9 @@
       <th>Categoría</th>
       <th>Fecha de creación</th>
       <th>Estado</th>
+      {% if 'grupos.change_grupo' in request.user.get_all_permissions or 'grupos.delete_grupo' in request.user.get_all_permissions %}
       <th>Opciones</th>
+      {% endif %}
     </tr>
   </thead>
   <tbody>
@@ -17,8 +19,7 @@
       <tr>
         <td>{{ object.nombre }}</td>
         <td>{{ object.descripcion|default:'Sin descripción' }}</td>
-        <td>{{ object.categoria }}</td>
-        <td>{{ object.fecha_creacion }}</td>
+        <td>{{ object.valor_cuota }}</td>
         <td>
           {% if object.estado %}
             Activo
@@ -27,7 +28,12 @@
           {% endif %}
         </td>
         <td>
+          {% if 'grupos.change_grupo' in request.user.get_all_permissions %}
           <a href="{% url 'grupos:editar' object.pk %}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
+          {% endif %}
+          {% if 'grupos.delete_grupo' in request.user.get_all_permissions %}
+          <a href="{% url 'grupos:eliminar_grupo' object.pk %}" class="btn btn-sm btn-danger {% if not object.estado %}disabled" disabled="disabled"{% else %}"{% endif %}><i class="fa fa-trash"></i></a>
+          {% endif %}
         </td>
       </tr>
     {% endfor %}

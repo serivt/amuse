@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+{% block body %}
+<table class="table datatables">
+  <thead>
+    <tr>
+      <th>Grupo</th>
+      <th>Estudiante</th>
+      <th>Valor de la cuota</th>
+      <th>Valor pagado</th>
+      <th>Estado</th>
+      {% if 'grupos.change_pago' in request.user.get_all_permissions or 'grupos.delete_pago' in request.user.get_all_permissions %}
+      <th>Opciones</th>
+      {% endif %}
+    </tr>
+  </thead>
+  <tbody>
+    {% for object in object_list %}
+      <tr>
+        <td>{{ object.grupo.nombre }}</td>
+        <td>{{ object.persona.get_nombre_completo }}</td>
+        <td>{{ object.get_valor_cuota|intcomma }}</td>
+        <td>{{ object.valor_pago|intcomma }}</td>
+        <td>
+          {% if object.estado %}
+            Activo
+          {% else %}
+            Inactivo
+          {% endif %}
+        </td>
+        <td>
+          {% if 'grupos.change_pago' in request.user.get_all_permissions %}
+          <a href="{% url 'grupos:editar_pagos' object.pk %}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
+          {% endif %}
+          {% if 'grupos.delete_pago' in request.user.get_all_permissions %}
+          <a href="{% url 'grupos:eliminar_pago' object.pk %}" class="btn btn-sm btn-danger {% if not object.estado %}disabled" disabled="disabled"{% else %}"{% endif %}><i class="fa fa-trash"></i></a>
+          {% endif %}
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock body %}

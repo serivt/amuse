@@ -87,11 +87,13 @@
       {% include 'includes/input.html' %}
     {% endwith %}
     </div>
+    {% comment %}
     <div class="col-12 col-sm-6 col-md-3">
       {% with form.grupos_dirige as input %}
         {% include 'includes/input.html' %}
       {% endwith %}
     </div>
+    {% endcomment %}
     <div class="col-12 col-sm-6 col-md-3">
         {% with form.acudiente as input %}
           {% include 'includes/input.html' %}
@@ -100,7 +102,7 @@
   </div>
   <div class="row">
     <div class="col-12">
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#acudiente-form-modal">
+      <button type="button" class="btn btn-primary estudiante" data-toggle="modal" data-target="#acudiente-form-modal">
         <i class="fa fa-plus"></i> Agregar acudiente
       </button>
     </div>
@@ -155,8 +157,44 @@
       })
     });
   }
+  function getTextFromOption(id) {
+    return $('#id_roles > option[value="' + id + '"]').text();
+  }
   $('#guardar-acudiente').on('click', function(){
     guardarAcuediente();
   })
+  $('#id_roles').on('change', function(){
+    let valores = $(this).val();
+    let esEstudiante = false;
+    let esDirector = false;
+    let esAcudiente = false;
+    $('.estudiante').parents('.col-12').hide();
+    $('.director').parents('.col-12').hide();
+    for(let id in valores) {
+      let seleccion = getTextFromOption(valores[id]).toLowerCase();
+      console.log(seleccion);
+      if(seleccion == 'estudiante') {
+        $('.estudiante').parents('.col-12').show();
+        if(!esDirector) {
+          $('.director').parents('.col-12').hide();
+        }
+        esEstudiante = true;
+      }else if(seleccion == 'director') {
+        $('.director').parents('.col-12').show();
+        if(!esEstudiante) {
+          $('.estudiante').parents('.col-12').hide();
+        }
+        esDirector = true;
+      }else if(seleccion == 'acudiente') {
+        if(!esEstudiante) {
+          $('.estudiante').parents('.col-12').hide();
+        }
+        if(!esDirector) {
+          $('.director').parents('.col-12').hide();
+        }
+        esAcudiente = true;
+      }
+    }
+  });
 </script>
 {% endblock script %}

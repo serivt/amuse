@@ -99,10 +99,14 @@ class PersonaForm(forms.ModelForm):
                 'class': 'form-control form-control-sm datepicker',
                 'required': 'true'
             }),
-            'grupos_dirige': forms.SelectMultiple(attrs={
-                'class': 'form-control chosen-select form-control-sm director',
-            }),
+            #'grupos_dirige': forms.SelectMultiple(attrs={
+            #    'class': 'form-control chosen-select form-control-sm director',
+            #}),
             'acudiente': forms.SelectMultiple(attrs={
                 'class': 'form-control chosen-select form-control-sm estudiante',
             }),
         }
+
+    def __init__(self, *args, **kwargs):
+        super(PersonaForm, self).__init__(*args, **kwargs)
+        self.fields['acudiente'].queryset = Persona.get_acudiente(self.instance.pk)

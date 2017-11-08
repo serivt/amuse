@@ -9,6 +9,7 @@ from django.utils.encoding import python_2_unicode_compatible
 class Rol(models.Model):
     nombre = models.CharField('Nombre', max_length=255)
     descripcion = models.TextField('Descripción', blank=True, null=True)
+    estado = models.BooleanField(default=True)
 
     class Meta:
         permissions = (
@@ -19,6 +20,7 @@ class Rol(models.Model):
         return self.nombre
 
     def save(self, *args, **kwargs):
+        Group.objects.get_or_create(name=self.nombre)
         super(Rol, self).save(*args, **kwargs)
 
 
@@ -78,9 +80,9 @@ class Persona(models.Model):
     acudiente = models.ManyToManyField('personas.Persona', blank=True,
                                        null=True)
     # Director
-    grupos_dirige = models.ManyToManyField('grupos.Grupo', blank=True, 
-                                           null=True,
-                                           verbose_name='Grupos que dirige')
+    # grupos_dirige = models.ManyToManyField('grupos.Grupo', blank=True, 
+    #                                        null=True,
+    #                                       verbose_name='Grupos que dirige')
 
     class Meta:
         permissions = (
@@ -110,16 +112,20 @@ class Persona(models.Model):
         return ','.join(sorted(roles)).strip()
 
     @staticmethod
-    def get_estudiates():
+    def get_estudiantes():
         rol_estudiante = Rol.objects.get_or_create(nombre=settings.ESTUDIANTE)[0]
-        return Persona.objects.filter(roles__in=rol_estudiante)
+        return Persona.objects.filter(roles__in=[rol_estudiante])
 
     @staticmethod
     def get_directores():
         rol_director = Rol.objects.get_or_create(nombre=settings.DIRECTOR)[0]
-        return Persona.objects.filter(roles__in=rol_director)
+        return Persona.objects.filter(roles__in=[rol_director])
 
     @staticmethod
-    def get_acudiente():
+    def get_acudiente(excluir=None):
         rol_acudiente = Rol.objects.get_or_create(nombre=settings.ACUDIENTE)[0]
-        return Persona.objects.filter(roles__in=rol_acudiente)
+        if excluir:
+            return Persona.objects.filter(roles__in=[rol_acudiente]).exclude(
+                pk=excluir)
+        else:
+            return Persona.objects.filter(roles__in=[rol_acudiente])
