@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'grupos',
     'cuentas',
     'personas',
+    'proyectos',
 ]
 
 MIDDLEWARE = [
@@ -65,6 +66,7 @@ TEMPLATES = [
             BASE_DIR.child('grupos').child('templates'),
             BASE_DIR.child('cuentas').child('templates'),
             BASE_DIR.child('personas').child('templates'),
+            BASE_DIR.child('proyectos').child('templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {

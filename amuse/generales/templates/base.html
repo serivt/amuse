@@ -2,22 +2,18 @@
 <!doctype html>
 <html class="no-js" lang="">
   <head>
-  <meta charset="utf-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge" name="keywords" content="Teatro, Cultura, Dramaturgia, Tunja, Corporacion Cultural">
-  <title>Amuse</title>
-  <meta name="description" content="">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="{% static 'vendors/css/bootstrap.min.css' %}">
-  <link rel="stylesheet" href="{% static 'vendors/css/font-awesome.min.css' %}">
-  <link rel="stylesheet" href="{% static 'vendors/css/font-awesome.css' %}">
-  <link rel="stylesheet" href="{% static 'vendors/css/chosen.min.css' %}">
-  <link rel="stylesheet" href="{% static 'vendors/css/datatables.min.css' %}" />
-  <link rel="stylesheet" href="{% static 'vendors/css/jquery.dataTables.css' %}" />
-  <link rel="stylesheet" href="{% static 'vendors/css/dataTables.bootstrap.css' %}" />
-  <link rel="stylesheet" href="{% static 'vendors/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css' %}"/>
-    <link rel="stylesheet" href="{% static 'vendors/style.css' %}"/>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge" name="keywords" content="Teatro, Cultura, Dramaturgia, Tunja, Corporacion Cultural">
+    <title>Amuse</title>
+    <meta name="description" content="">
     
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'vendors/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/font-awesome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/css/chosen.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/datatables/DataTables-1.10.16/css/jquery.dataTables.css' %}" />
+    <link rel="stylesheet" href="{% static 'vendors/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'vendors/style.css' %}"/>
     {% block head %}
     {% endblock head %}
   </head>
@@ -86,10 +82,13 @@
               </a>
                <ul class="collapse">
                     {% if 'proyectos.view_proyecto' in request.user.get_all_permissions %}
-                    <li><a href="#">Listar Proyectos</a></li>
+                    <li><a href="{% url 'proyectos:lista' %}">Listar Proyectos</a></li>
                     {% endif %}
                     {% if 'proyectos.add_proyecto' in request.user.get_all_permissions %}
-                    <li><a href="#">Crear Proyectos</a></li>
+                    <li><a href="{% url 'proyectos:agregar' %}">Crear Proyectos</a></li>
+                    {% endif %}
+                    {% if 'proyectos.view_personaje' in request.user.get_all_permissions %}
+                    <li><a href="{% url 'proyectos:lista_personajes' %}">Listar personajes</a></li>
                     {% endif %}
                 </ul>            
             </li>
@@ -134,7 +133,8 @@
                     <li><a href="#">Crear Tareas</a></li>
                 </ul>            
             </li>
-              <li>
+            <!--
+            <li>
               <a href="#">Habilidades
                  <span class="fa fa-arrow-right"></span>
               </a>
@@ -142,7 +142,8 @@
                     <li><a href="#">Listar Habilidades</a></li>
                     <li><a href="#">Crear Habilidades</a></li>
                 </ul>            
-            </li>        
+            </li>   
+          -->     
               {% if 'grupos.view_pago' in request.user.get_all_permissions or 'grupos.add_pago' in request.user.get_all_permissions %}
               <li>
               <a href="#">Pagos
@@ -178,7 +179,7 @@
               <ul class="nav navbar-nav navbar-right">                
                 <li>
                   <a href="#">
-                    <span><i class="fa fa-user"></i>&#32;Administrador</span>
+                    <span><i class="fa fa-user"></i> {{ request.user.username|default:"--------" }}</span>
                   </a>
                 </li>
                 <li><div class="dropdown">
@@ -209,7 +210,7 @@
      </div>
   </div>
 
-<div class="modal fade" id="#editarPerfil-form-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editarPerfil-form-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -233,7 +234,8 @@
   <script src="{% static 'vendors/js/jquery.min.js' %}"></script>
   <script src="{% static 'vendors/js/js.js' %}"></script>
   <script src="{% static 'vendors/js/chosen.jquery.min.js' %}"></script>
-  <script src="{% static 'vendors/js/datatables.min.js' %}"></script>
+  <script src="{% static 'vendors/datatables/DataTables-1.10.16/js/jquery.dataTables.min.js' %}"></script>
+  <script src="{% static 'vendors/datatables/DataTables-1.10.16/js/dataTables.bootstrap.min.js' %}"></script>
   <script src="{% static 'vendors/js/bootstrap.min.js' %}"></script>
   <script src="{% static 'vendors/js/metisMenu.min.js' %}"></script>
   <script src="{% static 'vendors/js/toastr.min.js' %}"></script>

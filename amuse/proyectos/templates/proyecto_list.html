@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="row" style="margin-left: 10px;">
+  <div class="col-xs-12">
+    <h3>Proyectos:</h3>
+    <hr>
+  </div>
+</div>
+<table class="table datatables">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Nombre</th>
+      <th>Director</th>
+      <th>Fecha de inicio</th>
+      <th>Fecha de presentación</th>
+      <th>Estado</th>
+      <th>Opciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for object in object_list %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ object.nombre }}</td>
+        <td>{{ object.director }}</td>
+        <td>{{ object.fecha_creacion|date:'d/m/Y' }}</td>
+        <td>{{ object.fecha_interpretacion|date:'d/m/Y' }}</td>
+        <td>
+          {% if object.estado %}
+            Activo
+          {% else %}
+            Inactivo
+          {% endif %}
+        </td>
+        <td>
+          {% if 'proyectos.add_personaje' in request.user.get_all_permissions %}
+          <a href="{% url 'proyectos:agregar_personaje' object.pk %}" class="btn btn-sm btn-info"><i class="fa fa-user-plus"></i></a>
+          {% endif %}
+          {% if 'proyectos.change_proyecto' in request.user.get_all_permissions %}
+          <a href="{% url 'proyectos:editar' object.pk %}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
+          {% endif %}
+          {% if 'proyectos.delete_proyecto' in request.user.get_all_permissions %}
+          <a href="{% url 'proyectos:eliminar' object.pk %}" class="btn btn-sm btn-danger {% if not object.estado %}disabled" disabled="disabled {% else %} {% endif %}"><i class="fa fa-trash"></i></a>
+          {% endif %}
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+
+</table>
+{% endblock body %}
