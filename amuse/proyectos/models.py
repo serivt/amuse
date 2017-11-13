@@ -38,3 +38,6 @@ class Personaje(models.Model):
         permissions = (
             ('view_personaje', 'Puede ver personajes'),
         )
+
+    def __str__(self):
+        return self.nombre
