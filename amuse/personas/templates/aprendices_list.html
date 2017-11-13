@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="row" style="margin-left: 10px;">
+  <div class="col-12">
+    <h3>Aprendices:</h3>
+    <hr>
+  </div>
+</div>
+<table class="table datatables">
+  <thead>
+    <tr>
+      <th>Nombre Completo</th>
+      <th>Teléfono</th>
+      <th>Grupo</th>
+      <th>Categoría</th>
+      <th>Estado</th>
+      <th>Opciones</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td>María Camila Buitrago Vargas</td>
+        <td>3114404232</td>
+        <td>Teatro</td>
+        <td>Juvenil</td>
+        <td>Activo</td>
+        <td>
+          <a href="" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
+          <a href="" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+        </td>
+      </tr>
+  </tbody>
+
+</table>
+{% endblock body %}

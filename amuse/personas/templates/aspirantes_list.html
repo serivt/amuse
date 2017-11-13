@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="row" style="margin-left: 10px;">
+  <div class="col-12">
+    <h3>Aspirantes:</h3>
+    <hr>
+  </div>
+</div>
+<table class="table datatables">
+  <thead>
+    <tr>
+      <th>Nombre Completo</th>
+      <th>Email</th>
+      <th>Grupo</th>
+      <th>Fecha de solicitud</th>
+      <th>Opciones</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td>Sergio Iván Torrado Peñaranda</td>
+        <td>seript.16@gmail.com</td>
+        <td>Teatro</td>
+        <td>08 de Noviembre 2017</td>
+        <td>
+          <a href="" class="btn btn-sm btn-info"><i class="fa fa-eye"></i></a>
+          <a href="" class="btn btn-sm btn-success"><i class="fa fa-check"></i></a>
+          <a href="" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a>
+        </td>
+      </tr>
+  </tbody>
+
+</table>
+{% endblock body %}

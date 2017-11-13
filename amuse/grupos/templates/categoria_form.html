@@ -1,33 +1,51 @@
 {% extends 'base.html' %}
 
 {% block body %}
-<form method="POST">
-  {% csrf_token %}
-  <div class="row">
-    <div class="col-12 col-sm-6">
-      {% with form.nombre as input %} <!-- input = form.nombre -->
-        {% include 'includes/input.html' %}
-      {% endwith %}
-    </div>
-    <div class="col-12 col-sm-6">
-      {% with form.valor_cuota as input %}
-        {% include 'includes/input.html' %}
-      {% endwith %}
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-12">
-      {% with form.descripcion as input %}
-        {% include 'includes/input.html' %}
-      {% endwith %}
+<div class="borde col-md-12">
+  <div class="row" style="margin-left: 10px;">
+    <div class="col-md-12">
+      <h4 id="titulos">
+        {% if form.instance.pk %} 
+          Modificar Categoría
+        {% else %} 
+          Crear Categoría 
+        {% endif %}
+      </h4>
+      <div class="table-title">
+        <label> </label>
+      </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-12">
-      <button type="submit" class="btn btn-primary pull-right">
-        <i class="fa fa-save"></i> Guardar
-      </button>
-    </div>
-  </div>
-</form>
+  <form method="POST">
+    {% csrf_token %}
+      <div class="crear">
+        <div class="row col-md-12">
+          <div class="col-md-6 col-sm-6">
+            {% with form.nombre as input %} <!-- input = form.nombre -->
+              {% include 'includes/input.html' %}
+            {% endwith %}
+          </div>
+          <div class="col-md-6 col-sm-6">
+            {% with form.valor_cuota as input %}
+              {% include 'includes/input.html' %}
+            {% endwith %}
+          </div>
+        </div>
+        <div class="row col-md-12">
+          <div class="col-md-12">
+            {% with form.descripcion as input %}
+              {% include 'includes/input.html' %}
+            {% endwith %}
+          </div>
+        </div>
+        <div class="row col-md-12">
+          <div class="col-md-12">
+            <button type="submit" class="btn btn-primary pull-right">
+              <i class="fa fa-save"></i> Guardar
+            </button>
+          </div>
+        </div>
+      </div>
+  </form>
+</div>
 {% endblock body %}

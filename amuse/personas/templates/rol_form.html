@@ -1,28 +1,42 @@
 {% extends 'base.html' %}
 
 {% block body %}
+<div class="row" style="margin-left: 10px;">
+  <div class="col-12">
+    <h2>
+      {% if form.instance.pk %}
+       Modificar Rol
+      {% else %}
+        Agregar Rol
+      {% endif %}
+    </h2>
+    <hr>
+  </div>
+</div>
 <form method="POST">
   {% csrf_token %}
+  <div class="" style="margin-left: 300px; margin-top: 15px;">
   <div class="row">
-    <div class="col-12">
+    <div class="col-8">
       {% with form.nombre as input %} <!-- input = form.nombre -->
         {% include 'includes/input.html' %}
       {% endwith %}
     </div>
   </div>
   <div class="row">
-    <div class="col-12">
+    <div class="col-8">
       {% with form.descripcion as input %}
         {% include 'includes/input.html' %}
       {% endwith %}
     </div>
   </div>
   <div class="row">
-    <div class="col-12">
+    <div class="col-8">
       <button type="submit" class="btn btn-primary pull-right">
         <i class="fa fa-save"></i> Guardar
       </button>
     </div>
   </div>
+   </div>
 </form>
 {% endblock body %}

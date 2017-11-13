@@ -24,6 +24,12 @@ class Rol(models.Model):
         super(Rol, self).save(*args, **kwargs)
 
 
+#@python_2_unicode_compatible
+#class GrupoPersona(models.Model):
+    #grupo = models.ForeignKey('grupos.Grupo')
+    #persona = models.ForeignKey('personas.Persona')
+
+
 @python_2_unicode_compatible
 class Persona(models.Model):
     CC = 0
@@ -73,7 +79,7 @@ class Persona(models.Model):
     eps = models.CharField('EPS', max_length=50, blank=True, null=True)
     imagen_perfil = models.ImageField(upload_to='perfiles', blank=True,
                                       null=True)
-    telefono = models.CharField('Número', max_length=50)
+    telefono = models.CharField('Número Telefónico', max_length=50)
     estado = models.BooleanField('Estado', default=True)
     roles = models.ManyToManyField('personas.Rol', blank=True, null=True)
     # Estudiante

@@ -15,9 +15,9 @@ class Grupo(models.Model):
     fecha_inactivacion = models.DateTimeField('Fecha de inactivación',
                                               blank=True, null=True)
     categoria = models.ForeignKey('grupos.Categoria')
-    estudiantes = models.ManyToManyField('personas.Persona',
+    estudiantes = models.ManyToManyField('personas.Persona',#se quita?
         verbose_name='Estudiantes', related_name='Estudiantes')
-    director = models.ForeignKey('personas.Persona', verbose_name='Director',
+    director = models.ForeignKey('personas.Persona', verbose_name='Director',#se quita?
         related_name='Director')
 
     class Meta:
@@ -43,7 +43,7 @@ class Grupo(models.Model):
 class Categoria(models.Model):
     nombre = models.CharField('Nombre', max_length=50)
     descripcion = models.TextField('Descripción', blank=True, null=True)
-    valor_cuota = models.FloatField('Valor de la cuota')
+    valor_cuota = models.FloatField('Valor Cuota')
     estado = models.BooleanField('Estado', default=True)
 
     class Meta:

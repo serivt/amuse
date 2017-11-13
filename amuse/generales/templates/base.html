@@ -2,102 +2,248 @@
 <!doctype html>
 <html class="no-js" lang="">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Amuse</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{% static 'vendors/bootstrap/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'vendors/font-awesome/css/font-awesome.min.css' %}">
-    <link rel="stylesheet" href="{% static 'vendors/chosen/chosen.min.css' %}">
-    <link rel="stylesheet" href="{% static 'vendors/datatables/datatables.min.css' %}"/>
-    <link rel="stylesheet" href="{% static 'vendors/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css' %}"/>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge" name="keywords" content="Teatro, Cultura, Dramaturgia, Tunja, Corporacion Cultural">
+  <title>Amuse</title>
+  <meta name="description" content="">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'vendors/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'vendors/css/font-awesome.min.css' %}">
+  <link rel="stylesheet" href="{% static 'vendors/css/font-awesome.css' %}">
+  <link rel="stylesheet" href="{% static 'vendors/css/chosen.min.css' %}">
+  <link rel="stylesheet" href="{% static 'vendors/css/datatables.min.css' %}" />
+  <link rel="stylesheet" href="{% static 'vendors/css/jquery.dataTables.css' %}" />
+  <link rel="stylesheet" href="{% static 'vendors/css/dataTables.bootstrap.css' %}" />
+  <link rel="stylesheet" href="{% static 'vendors/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'vendors/style.css' %}"/>
+    
     {% block head %}
     {% endblock head %}
   </head>
   <body>
-    <!--[if lte IE 9]>
-      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-    <![endif]-->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="{% url 'generales:home' %}">Amuse</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-    
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          {% if 'grupos.view_grupo' in request.user.get_all_permissions or 'grupos.add_grupo' in request.user.get_all_permissions %}
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Personas
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              {% if 'personas.view_persona' in request.user.get_all_permissions %}
-              <a class="dropdown-item" href="{% url 'personas:lista' %}">Listar personas</a>
+   
+ <div class="">
+    <div id="wrapper" class="col-md-12">
+      <div class="col-md-2" >
+        <nav>
+          <ul class="metismenu" id="menu" >
+            <div class="img-perfil">
+              <a href="#" class="icon-usr">
+                <i class="fa fa-user">
+                  </i>
+                  </a>
+                  </div>
+              <li>
+              <a href="{% url 'generales:home' %}">
+                <i class="fa fa-home" aria-hidden="true"></i>
+                Inicio
+              </a>
+            </li>
+            {% if 'personas.view_persona' in request.user.get_all_permissions or 'personas.add_persona' in request.user.get_all_permissions %}
+            <li>
+                <a href="#">Directores
+                    <span class="fa fa-arrow-right"></span>
+                </a>
+                <ul class="collapse">
+                    {% if 'personas.view_persona' in request.user.get_all_permissions %}
+                    <li><a href="{% url 'personas:lista' %}">Listar Directores</a></li>
+                    {% endif %}
+                    {% if 'personas.add_persona' in request.user.get_all_permissions %}
+                    <li><a href="{% url 'personas:agregar' %}">Crear Directores</a></li>
+                    {% endif %}
+                </ul>
+            </li>
+             {% endif %}      
+             {% if 'personas.view_persona' in request.user.get_all_permissions %}
+            <li>
+              <a href="#">Aprendices
+                 <span class="fa fa-arrow-right"></span>
+              </a>
+               <ul class="collapse">
+                    {% if 'personas.view_persona' in request.user.get_all_permissions %}
+                    <li><a href="#">Listar Aprendices</a></li>
+                    {% endif %}
+                </ul>            
+            </li>
+             {% endif %}      
+             {% if 'personas.view_persona' in request.user.get_all_permissions %}
+            <li>
+              <a href="#">Aspirantes
+                 <span class="fa fa-arrow-right"></span>
+              </a>
+               <ul class="collapse">
+                    {% if 'personas.view_persona' in request.user.get_all_permissions %}
+                    <li><a href="#">Listar Aspirantes</a></li>
+                    {% endif %}
+                </ul>            
+            </li>
               {% endif %}
-              {% if 'personas.add_persona' in request.user.get_all_permissions %}
-              <a class="dropdown-item" href="{% url 'personas:agregar' %}">Agregar persona</a>
-              {% endif %}
-              {% if 'personas.view_persona' in request.user.get_all_permissions or 'personas.add_persona' in request.user.get_all_permissions %}
-              <div class="dropdown-divider"></div>
-              {% endif %}
-              {% if 'personas.view_rol' in request.user.get_all_permissions %}
-              <a class="dropdown-item" href="{% url 'personas:lista_roles' %}">Listar roles</a>
-              {% endif %}
-              {% if 'personas.add_rol' in request.user.get_all_permissions %}
-              <a class="dropdown-item" href="{% url 'personas:agregar_rol' %}">Agregar roles</a>
-              {% endif %}
-            </div>
-          </li>
-          {% endif %}
-          {% if 'grupos.view_grupo' in request.user.get_all_permissions or 'grupos.add_grupo' in request.user.get_all_permissions %}
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Grupos
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              {% if 'grupos.view_grupo' in request.user.get_all_permissions %}
-              <a class="dropdown-item" href="{% url 'grupos:lista' %}">Listar grupos</a>
-              {% endif %}
-              {% if 'grupos.add_grupo' in request.user.get_all_permissions %}
-              <a class="dropdown-item" href="{% url 'grupos:agregar' %}">Agregar grupo</a>
+              {% if 'proyectos.view_proyecto' in request.user.get_all_permissions or 'proyectos.add_proyecto' in request.user.get_all_permissions %}
+             <li>
+              <a href="#">Proyectos
+                 <span class="fa fa-arrow-right"></span>
+              </a>
+               <ul class="collapse">
+                    {% if 'proyectos.view_proyecto' in request.user.get_all_permissions %}
+                    <li><a href="#">Listar Proyectos</a></li>
+                    {% endif %}
+                    {% if 'proyectos.add_proyecto' in request.user.get_all_permissions %}
+                    <li><a href="#">Crear Proyectos</a></li>
+                    {% endif %}
+                </ul>            
+            </li>
               {% endif %}
               {% if 'grupos.view_grupo' in request.user.get_all_permissions or 'grupos.add_grupo' in request.user.get_all_permissions %}
-              <div class="dropdown-divider"></div>
-              {% endif %}
-              {% if 'grupos.view_categoria' in request.user.get_all_permissions %}
-              <a class="dropdown-item" href="{% url 'grupos:lista_categorias' %}">Listar categorias</a>
-              {% endif %}
-              {% if 'grupos.add_categoria' in request.user.get_all_permissions %}
-              <a class="dropdown-item" href="{% url 'grupos:agregar_categorias' %}">Agregar categoria</a>
+            <li>
+              <a href="#">Grupos
+                 <span class="fa fa-arrow-right"></span>
+              </a>
+               <ul class="collapse">
+                    {% if 'grupos.view_grupo' in request.user.get_all_permissions %}
+                    <li><a href="{% url 'grupos:lista' %}">Listar Grupos</a></li>
+                    {% endif %}
+                    {% if 'grupos.add_grupo' in request.user.get_all_permissions %}
+                    <li><a href="{% url 'grupos:agregar' %}">Crear Grupos</a></li>
+                    {% endif %}
+                </ul>            
+            </li>
               {% endif %}
               {% if 'grupos.view_categoria' in request.user.get_all_permissions or 'grupos.add_categoria' in request.user.get_all_permissions %}
-              <div class="dropdown-divider"></div>
+            <li>
+              <a href="#">Categorías
+                 <span class="fa fa-arrow-right"></span>
+              </a>
+               <ul class="collapse">
+                    {% if 'grupos.view_categoria' in request.user.get_all_permissions %}
+                    <li><a href="{% url 'grupos:lista_categorias' %}">Listar Categorías</a></li>
+                    {% endif %}
+                    {% if 'grupos.add_categoria' in request.user.get_all_permissions %}
+                    <li><a href="{% url 'grupos:agregar_categorias' %}">Crear Categorías</a></li>
+                    {% endif %}
+                </ul>            
+            </li>
               {% endif %}
-              {% if 'grupos.view_pago' in request.user.get_all_permissions %}
-              <a class="dropdown-item" href="{% url 'grupos:lista_pagos' %}">Listar pagos</a>
-              {% endif %}
-              {% if 'grupos.add_pago' in request.user.get_all_permissions %}
-              <a class="dropdown-item" href="{% url 'grupos:agregar_pagos' %}">Agregar pago</a>
-              {% endif %}
+
+             <li>
+              <a href="#">Tareas
+                 <span class="fa fa-arrow-right"></span>
+              </a>
+               <ul class="collapse">
+                    <li><a href="#">Historial Tareas</a></li>
+                    <li><a href="#">Crear Tareas</a></li>
+                </ul>            
+            </li>
+              <li>
+              <a href="#">Habilidades
+                 <span class="fa fa-arrow-right"></span>
+              </a>
+               <ul class="collapse">
+                    <li><a href="#">Listar Habilidades</a></li>
+                    <li><a href="#">Crear Habilidades</a></li>
+                </ul>            
+            </li>        
+              {% if 'grupos.view_pago' in request.user.get_all_permissions or 'grupos.add_pago' in request.user.get_all_permissions %}
+              <li>
+              <a href="#">Pagos
+                 <span class="fa fa-arrow-right"></span>
+              </a>
+               <ul class="collapse">
+                    {% if 'grupos.view_pago' in request.user.get_all_permissions %}
+                    <li><a href="{% url 'grupos:lista_pagos' %}">Listar Pagos</a></li>
+                    {% endif %}
+                    {% if 'grupos.add_pago' in request.user.get_all_permissions %}
+                    <li><a href="{% url 'grupos:agregar_pagos' %}">Crear Pagos</a></li>
+                    {% endif %}
+                </ul>            
+            </li>    
+            {% endif %}
+
+            </ul>
+        </nav>
+      </div>          
+                                 
+     <div id="pageContent" class="col-md-10">
+        <div id="barraSuperior" >
+          <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <a id="menu-toggle" href="#" class="nav-btn btn-dark btn-lg toggle">
+                  <i class="fa fa-bars" style="color:#fff;margin-top: 20px;"></i>
+                </a>
+                <a id="menu-toggle" href="{% url 'generales:home' %}" class="nav-btn btn-dark btn-lg toggle">
+                  <span style="font-weight: bold; color: black !important;">AMUSE</span>
+                </a>                             
+              </div>
+              <ul class="nav navbar-nav navbar-right">                
+                <li>
+                  <a href="#">
+                    <span><i class="fa fa-user"></i>&#32;Administrador</span>
+                  </a>
+                </li>
+                <li><div class="dropdown">
+                  <a class="btn dropdown-toggle" id="dropOptions" type="button" data-toggle="dropdown">
+                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a href="#" data-toggle="modal" data-target="#editarPerfil-form-modal">Editar perfil</a><!--no funciona le modal-->
+                    </li>
+                    <li>
+                      <a href="#">Cerrar sesión</a>
+                    </li>
+                  </ul>
+                </div></li>
+              </ul>
             </div>
-          </li>
-          {% endif %}
-        </ul>
+          </nav>
+        </div>
+        <div id="contenido">
+          <div class="container" id="container-principal" style="border-radius: 8px;">
+		        <div class="" style="padding: 5px 5px; margin: 20px 0px;">
+           {% block body %}
+           {% endblock body %}
+            </div>
+          </div>
+        </div>
+     </div>
+  </div>
+
+<div class="modal fade" id="#editarPerfil-form-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Editar Perfil</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-    </nav>
-    <div class="container-fluid" style="margin-top: 25px">
-      {% block body %}
-      {% endblock body %}
+      <div class="modal-body">
+        <!--{% include 'includes/acudiente_form.html' %}-->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" id="guardar-acudiente">Editar</button>
+      </div>
     </div>
-    <script src="{% static 'vendors/jquery/jquery-3.2.1.min.js' %}"></script>
-    <script src="{% static 'vendors/popper/popper.min.js' %}"></script>
-    <script src="{% static 'vendors/bootstrap/js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'vendors/chosen/chosen.jquery.min.js' %}"></script>
-    <script src="{% static 'vendors/datatables/datatables.min.js' %}"></script>
-    <script src="{% static 'vendors/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js' %}"></script>
-    
+  </div>
+</div>
+</div>
+  
+  <script src="{% static 'vendors/js/jquery.min.js' %}"></script>
+  <script src="{% static 'vendors/js/js.js' %}"></script>
+  <script src="{% static 'vendors/js/chosen.jquery.min.js' %}"></script>
+  <script src="{% static 'vendors/js/datatables.min.js' %}"></script>
+  <script src="{% static 'vendors/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'vendors/js/metisMenu.min.js' %}"></script>
+  <script src="{% static 'vendors/js/toastr.min.js' %}"></script>
+  <script src="{% static 'vendors/js/popper.min.js' %}"></script>
+  <script src="{% static 'vendors/js/bootstrap-datepicker.min.js' %}"></script>
+    <script>
+        $(function () {
+            $('#menu').metisMenu();
+        });
+    </script>
     <script>
       $('.chosen-select').chosen();
       $('.datatables').DataTable({
@@ -105,9 +251,9 @@
             "url": "{% static 'vendors/datatables/spanish.js' %}"
         }
       });
-      $('.datepicker').datepicker({
-        format: 'dd/mm/yyyy'
-      });
+       $('.datepicker').datepicker({
+         format: 'dd/mm/yyyy'
+       });
     </script>
     {% block script %}
     {% endblock script %}

@@ -1,122 +1,176 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} 
 
 {% block body %}
-<div class="row">
-  <div class="col-12">
-    <h2>
-      {% if form.instance.pk %}
-       Modificar persona
-      {% else %}
-        Agregar persona
-      {% endif %}
-    </h2>
-    <hr>
+<div class="borde col-md-12">
+  <div class="row" style="margin-left: 10px;">
+    <div class="col-md-12">
+      <h4 id="titulos">
+        {% if form.instance.pk %} 
+          Modificar Director 
+        {% else %} 
+          Crear Director 
+        {% endif %}
+      </h4>
+      <div class="table-title">
+        <label> </label>
+      </div>
+    </div>
   </div>
+  <form method="POST" enctype='multipart/form-data'>
+    {% csrf_token %}
+    <div class="crear">
+      <div class="row col-md-12">
+        <div class="col-md-6 ">
+          {% with form.primer_nombre as input %}
+          <!-- input = form.nombre -->
+          {% include 'includes/input.html' %} 
+          {% endwith %}
+        </div>
+        <div class="col-md-6 ">
+          {% with form.segundo_nombre as input %} 
+          {% include 'includes/input.html' %} 
+          {% endwith %}
+        </div>
+      </div>
+      <div class=" row col-md-12">
+        <div class="col-md-6">
+          {% with form.primer_apellido as input %}
+          <!-- input = form.nombre -->
+          {% include 'includes/input.html' %} 
+          {% endwith %}
+        </div>
+        <div class="col-md-6">
+          {% with form.segundo_apellido as input %} 
+          {% include 'includes/input.html' %} 
+          {% endwith %}
+        </div>
+      </div>
+      <div class="row col-md-12">
+        <div class="col-md-6">
+          {% with form.tipo_identificacion as input %} 
+          {% include 'includes/input.html' %} 
+          {% endwith %}
+        </div>
+        <div class="col-md-6 col-sm-6">
+          {% with form.numero_identificacion as input %} 
+          {% include 'includes/input.html' %} 
+          {% endwith %}
+        </div>
+      </div>
+      <div class="row col-md-12">
+        <div class="col-md-6">
+          {% with form.telefono as input %} 
+          {% include 'includes/input.html' %} 
+          {% endwith %}
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            {% with form.correo as input %} 
+            {% include 'includes/input.html' %} 
+            {% endwith %}
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 col-sm-6 col-md-3">
+        <label>Grupo</label>
+      </div>
+      <div class="col-md-12 col-sm-6 col-md-3">
+        {% with form.estado as input %} 
+        {% include 'includes/input.html' %} 
+        {% endwith %}
+      </div>
+      <div class="row col-md-12">
+        <div class="col-md-12">
+          <button type="submit" class="btn btn-primary pull-right">
+            <i class="fa fa-save"></i> Guardar
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
 </div>
-<form method="POST" enctype='multipart/form-data'>
-  {% csrf_token %}
-  <div class="row">
-    <div class="col-12 col-sm-3 col-md-3">
-      {% with form.primer_nombre as input %} <!-- input = form.nombre -->
-        {% include 'includes/input.html' %}
-      {% endwith %}
-    </div>
-    <div class="col-12 col-sm-3 col-md-3">
-      {% with form.segundo_nombre as input %}
-        {% include 'includes/input.html' %}
-      {% endwith %}
-    </div>
-    <div class="col-12 col-sm-3 col-md-3">
-      {% with form.primer_apellido as input %} <!-- input = form.nombre -->
-        {% include 'includes/input.html' %}
-      {% endwith %}
-    </div>
-    <div class="col-12 col-sm-3 col-md-3">
-      {% with form.segundo_apellido as input %}
-        {% include 'includes/input.html' %}
-      {% endwith %}
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-12 col-sm-6 col-md-3">
-    {% with form.tipo_identificacion as input %}
-      {% include 'includes/input.html' %}
-    {% endwith %}
-    </div>
-    <div class="col-12 col-sm-6 col-md-3">
-    {% with form.numero_identificacion as input %}
-      {% include 'includes/input.html' %}
-    {% endwith %}
-    </div>
-    <div class="col-12 col-sm-6 col-md-3">
-    {% with form.fecha_nacimiento as input %}
-      {% include 'includes/input.html' %}
-    {% endwith %}
-    </div>
-    <div class="col-12 col-sm-6 col-md-3">
-    {% with form.imagen_perfil as input %}
-      {% include 'includes/input.html' %}
-    {% endwith %}
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-12 col-sm-6 col-md-3">
-    {% with form.telefono as input %}
-      {% include 'includes/input.html' %}
-    {% endwith %}
-    </div>
-    <div class="col-12 col-sm-6 col-md-3">
-    {% with form.roles as input %}
-      {% include 'includes/input.html' %}
-    {% endwith %}
-    </div>
-    <div class="col-12 col-sm-6 col-md-3">
-    {% with form.rh as input %}
-      {% include 'includes/input.html' %}
-    {% endwith %}
-    </div>
-    <div class="col-12 col-sm-6 col-md-3">
-    {% with form.eps as input %}
-      {% include 'includes/input.html' %}
-    {% endwith %}
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-12 col-sm-6 col-md-3">
-    {% with form.correo as input %}
-      {% include 'includes/input.html' %}
-    {% endwith %}
-    </div>
-    {% comment %}
-    <div class="col-12 col-sm-6 col-md-3">
-      {% with form.grupos_dirige as input %}
-        {% include 'includes/input.html' %}
-      {% endwith %}
-    </div>
-    {% endcomment %}
-    <div class="col-12 col-sm-6 col-md-3">
+
+{% endblock body %} 
+{% block script %}
+<script>
+  // function guardarAcuediente() {
+  //   let $form = $('#acudiente-form')
+  //   let data = $form.serializeArray();
+  //   $.ajax({
+  //     url: '{% url "personas:agregar_acudiente" %}',
+  //     data: data,
+  //     type: 'POST',
+  //   }).done(function(respuesta) {
+  //   })
+  //   .fail(function() {
+  //     alert('Error al guardar el acudiente');
+  //   })
+  //   .always(function() {
+  //     $form.each(function(){
+  //       $(this).val('');
+  //     })
+  //   });
+  // }
+  function getTextFromOption(id) {
+    return $('#id_roles > option[value="' + id + '"]').text();
+  }
+  $('#guardar-acudiente').on('click', function () {
+    guardarAcuediente();
+  })
+  $('#id_roles').on('change', function () {
+    let valores = $(this).val();
+    let esEstudiante = false;
+    let esDirector = false;
+    let esAcudiente = false;
+    $('.estudiante').parents('.col-md-12').hide();
+    $('.director').parents('.col-md-12').hide();
+    for (let id in valores) {
+      let seleccion = getTextFromOption(valores[id]).toLowerCase();
+      console.log(seleccion);
+      if (seleccion == 'estudiante') {
+        $('.estudiante').parents('.col-md-12').show();
+        if (!esDirector) {
+          $('.director').parents('.col-md-12').hide();
+        }
+        esEstudiante = true;
+      } else if (seleccion == 'director') {
+        $('.director').parents('.col-md-12').show();
+        if (!esEstudiante) {
+          $('.estudiante').parents('.col-md-12').hide();
+        }
+        esDirector = true;
+      } else if (seleccion == 'acudiente') {
+        if (!esEstudiante) {
+          $('.estudiante').parents('.col-md-12').hide();
+        }
+        if (!esDirector) {
+          $('.director').parents('.col-md-12').hide();
+        }
+        esAcudiente = true;
+      }
+    }
+  });
+
+</script>
+{% endblock script %}
+
+
+<!-- <div class="col-12 col-sm-6 col-md-3">
         {% with form.acudiente as input %}
           {% include 'includes/input.html' %}
         {% endwith %}
-      </div>
-  </div>
-  <div class="row">
+      </div>-->
+
+
+<!-- <div class="row">
     <div class="col-12">
       <button type="button" class="btn btn-primary estudiante" data-toggle="modal" data-target="#acudiente-form-modal">
         <i class="fa fa-plus"></i> Agregar acudiente
       </button>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-12">
-      <button type="submit" class="btn btn-primary pull-right">
-        <i class="fa fa-save"></i> Guardar
-      </button>
-    </div>
-  </div>
-</form>
+  </div>-->
 
-<div class="modal fade" id="acudiente-form-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!--<div class="modal fade" id="acudiente-form-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -134,67 +188,4 @@
       </div>
     </div>
   </div>
-</div>
-{% endblock body %}
-
-{% block script %}
-<script>
-  function guardarAcuediente() {
-    let $form = $('#acudiente-form')
-    let data = $form.serializeArray();
-    $.ajax({
-      url: '{% url "personas:agregar_acudiente" %}',
-      data: data,
-      type: 'POST',
-    }).done(function(respuesta) {
-    })
-    .fail(function() {
-      alert('Error al guardar el acudiente');
-    })
-    .always(function() {
-      $form.each(function(){
-        $(this).val('');
-      })
-    });
-  }
-  function getTextFromOption(id) {
-    return $('#id_roles > option[value="' + id + '"]').text();
-  }
-  $('#guardar-acudiente').on('click', function(){
-    guardarAcuediente();
-  })
-  $('#id_roles').on('change', function(){
-    let valores = $(this).val();
-    let esEstudiante = false;
-    let esDirector = false;
-    let esAcudiente = false;
-    $('.estudiante').parents('.col-12').hide();
-    $('.director').parents('.col-12').hide();
-    for(let id in valores) {
-      let seleccion = getTextFromOption(valores[id]).toLowerCase();
-      console.log(seleccion);
-      if(seleccion == 'estudiante') {
-        $('.estudiante').parents('.col-12').show();
-        if(!esDirector) {
-          $('.director').parents('.col-12').hide();
-        }
-        esEstudiante = true;
-      }else if(seleccion == 'director') {
-        $('.director').parents('.col-12').show();
-        if(!esEstudiante) {
-          $('.estudiante').parents('.col-12').hide();
-        }
-        esDirector = true;
-      }else if(seleccion == 'acudiente') {
-        if(!esEstudiante) {
-          $('.estudiante').parents('.col-12').hide();
-        }
-        if(!esDirector) {
-          $('.director').parents('.col-12').hide();
-        }
-        esAcudiente = true;
-      }
-    }
-  });
-</script>
-{% endblock script %}
+</div>-->

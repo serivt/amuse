@@ -1,0 +1,152 @@
+* {
+	font-family: "FontAwesome", "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+}
+
+a.btn.dropdown-toggle{
+	margin-right: 10px;
+    margin-top: 4px;
+    color: #999c9e !important;
+    border: none !important;
+}
+
+.container{
+	width: auto !important;
+	box-shadow: 0 0 25px rgb(69, 70, 69);
+}
+
+
+.table-title {
+	border: 1px solid rgba(153, 156, 158, 1);
+    height: 2px;
+    margin-bottom: 20px;
+	margin-right: 28px;
+}
+
+.perfil img{
+	text-align: center;
+	margin:2%;
+	width:100px;
+	height:100px;
+}
+div.perfil-img{
+	text-align: center;
+}
+span.label.grupo{
+	margin: 4px;
+}
+
+body {
+	background-color: #5d2222 !important;
+	/*background-color: #893302 !important;*/
+	/*background-color: #7a2d01 !important;*/
+	}
+
+#wrapper {
+	display: flex;
+}
+
+a[class = 'btn dropdown-toggle'] {
+	color: #FFF;
+}
+
+.dataTables_filter {
+	float: right;
+}
+
+nav[class = 'navbar navbar-inverse'] {
+	border: none;
+	margin-bottom: 0px;
+	background-color: #e9e9e9;
+	border-radius: 8px 8px 0px 0px;
+	margin-left: 20px;
+}
+
+#dropOptions:hover {
+	color: #FFF;
+}
+
+.metismenu {
+	font-size: 15px;
+}
+
+.metismenu li {
+	list-style-type: none;
+	margin-left: -20px;
+	margin-bottom: 5px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+	border-radius: 5px;
+}
+
+.metismenu a {
+	color: #a7b1c2 !important;
+	font-weight: 600;	
+	text-decoration: none;
+}
+
+.metismenu a:hover {
+	color: #FFF !important;
+}
+
+.img-perfil a {
+	color: #FFF !important;
+}
+
+.icon-usr {
+    margin-top: 20px;
+    text-align: left !important;
+    font-size: 60px;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+	color: #999c9e !important;
+	font-size: 20px !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+	border: none !important;
+    background: transparent !important;
+}
+.img-perfil{
+	text-align:center;
+	margin-bottom: 20px;
+}
+.menuMinimizado{
+	display: none;
+}
+#dropOptions{
+	font-size: 20px !important;
+}
+#contenido{
+	background-color: #FFF;
+	border-radius: 0px 0px 8px 8px;
+	margin: 0px !important;
+	margin-left: 20px !important;
+	min-height: 90vh;
+}
+.borde{
+	margin: 20px 0px; 
+	padding: 10px 10px; 
+	border: 1px solid #ccc; 
+	border-radius: 8px 8px;
+}
+
+.dropdown-item {
+	color: #212529 !important;
+}
+
+.mr-auto .nav-link {
+	color: #FFF !important;
+}
+#titulos{
+	color: #5d2222;
+    font-weight: bold;
+	margin-bottom: 25px;
+}
+#crear{
+	margin-top: 15px;
+}
+#chosen{
+	height: 33px !important;
+}

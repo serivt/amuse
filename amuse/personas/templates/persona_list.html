@@ -1,26 +1,37 @@
 {% extends 'base.html' %}
 
 {% block body %}
-<table class="table datatables">
-  <thead>
-    <tr>
-      <th>Nombre Completo</th>
-      <th>Email</th>
-      <th>Teléfono</th>
-      <th>Roles</th>
-      <th>Estado</th>
-      {% if 'personas.change_persona' in request.user.get_all_permissions or 'personas.delete_persona' in request.user.get_all_permissions %}
-      <th>Opciones</th>
-      {% endif %}
-    </tr>
-  </thead>
-  <tbody>
-    {% for object in object_list %}
+<div class="borde">
+  <div class="row" style="margin-left: 10px;">
+    <div class="col-12">
+      <h4 id="titulos">Directores:</h4>
+      <div class="table-title">
+        <label> </label>
+      </div>
+    </div>
+  </div>
+  <table class="table datatables">
+    <thead>
       <tr>
+        <th>#</th>
+        <th>Nombre Completo</th>
+        <th>Email</th>
+        <th>Teléfono</th>
+        <th>Grupo</th>
+        <th>Estado</th>
+        {% if 'personas.change_persona' in request.user.get_all_permissions or 'personas.delete_persona' in request.user.get_all_permissions %}
+        <th>Opciones</th>
+        {% endif %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for object in object_list %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
         <td>{{ object.get_nombre_completo }}</td>
         <td>{{ object.correo }}</td>
         <td>{{ object.telefono }}</td>
-        <td>{{ object.get_roles }}</td>
+        <td>{{ object.nombre }}</td>
         <td>
           {% if object.estado %}
             Activo
@@ -33,11 +44,12 @@
           <a href="{% url 'personas:editar' object.pk %}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
           {% endif %}
           {% if 'personas.delete_persona' in request.user.get_all_permissions %}
-          <a href="{% url 'personas:eliminar' object.pk %}" class="btn btn-sm btn-danger {% if not object.estado %}disabled" disabled="disabled"{% else %}"{% endif %}><i class="fa fa-trash"></i></a>
+          <a href="{% url 'personas:eliminar' object.pk %}" class="btn btn-sm btn-danger {% if not object.estado %}disabled" disabled="disabled {% else %} {% endif %}"><i class="fa fa-trash"></i></a>
           {% endif %}
         </td>
       </tr>
-    {% endfor %}
-  </tbody>
-</table>
+      {% endfor %}
+      </tbody>
+  </table>
+</div>
 {% endblock body %}

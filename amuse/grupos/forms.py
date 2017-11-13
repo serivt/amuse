@@ -13,19 +13,27 @@ class GrupoForm(forms.ModelForm):
         widgets = {
             'nombre': forms.TextInput(attrs={
                 'class': 'form-control form-control-sm',
+                'minlength':3,     
+                'maxlength': 15,
+                'placeholder': 'Teatro',
                 'required': 'true'
             }),
             'descripcion': forms.Textarea(attrs={
                 'class': 'form-control',
+                'minlength':0,     
+                'maxlength': 255,
+                'placeholder': 'Descipción...'
             }),
             'categoria': forms.Select(attrs={
                 'class': 'form-control chosen-select',
+                'required': 'true'
             }),
             'estudiantes': forms.SelectMultiple(attrs={
-                'class': 'form-control chosen-select',
+                'class': 'form-control chosen-select'            
             }),
             'director': forms.Select(attrs={
                 'class': 'form-control chosen-select',
+                'required': 'true'
             }),
         }
 
@@ -43,13 +51,22 @@ class CategoriaForm(forms.ModelForm):
         widgets = {
             'nombre': forms.TextInput(attrs={
                 'class': 'form-control form-control-sm',
+                'minlength':3,     
+                'maxlength': 15,
+                'placeholder': 'Juvenil',
                 'required': 'true'
             }),
             'descripcion': forms.Textarea(attrs={
                 'class': 'form-control',
+                'minlength':0,     
+                'maxlength': 255,
+                'placeholder': 'Descripción...',
             }),
             'valor_cuota': forms.TextInput(attrs={
                 'class': 'form-control numerico',
+                'minlength':4,     
+                'maxlength': 10,
+                'placeholder': '1000',
             }),
         }
 
@@ -66,9 +83,14 @@ class PagoForm(forms.ModelForm):
             }),
             'persona': forms.Select(attrs={
                 'class': 'form-control form-control-sm  chosen',
+                 'required': 'true'
             }),
             'valor_pago': forms.TextInput(attrs={
                 'class': 'form-control numerico',
+                'minlength':4,     
+                'maxlength': 10,
+                'placeholder': '1000',
+                'required': 'true'
             }),
         }
 

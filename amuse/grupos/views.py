@@ -81,7 +81,7 @@ class PagoFormView(LoginRequiredMixin, PermissionRequiredMixin, FormView):
     def get_form(self):
         try:
             pago = Pago.objects.get(pk=self.kwargs.get('pk', 0))
-            return self.form_class(instance=pafo, **self.get_form_kwargs())
+            return self.form_class(instance=pago, **self.get_form_kwargs())
         except Pago.DoesNotExist as ex:
             return self.form_class(**self.get_form_kwargs())
 

@@ -4,7 +4,9 @@ from django.conf.urls import url
 from personas.views import (
     lista_personas, agregar_acudiente, agregar_persona, modificar_persona,
     eliminar_persona,
-    lista_roles, agregar_rol, modificar_rol, eliminar_rol
+    lista_roles, agregar_rol, modificar_rol, eliminar_rol, 
+    lista_aprendices, modificar_aprendiz,
+    lista_aspirantes
 )
 
 
@@ -20,4 +22,11 @@ urlpatterns = [
     url(r'^roles/form/$', agregar_rol, name='agregar_rol'),
     url(r'^roles/form/(?P<pk>[0-9]+)$', modificar_rol, name='editar_rol'),
     url(r'^roles/eliminar/(?P<pk>[0-9]+)$', eliminar_rol, name='eliminar_rol'),
+     #Aprendices
+    url(r'^aprendices/lista/$', lista_aprendices, name='lista_aprendices'),
+    url(r'^aprendices/form/(?P<pk>[0-9]+)$', modificar_aprendiz, name='editar_aprendiz'),
+
+    #Aspirantes
+    url(r'^aspirantes/lista/$', lista_aspirantes, name='lista_aspirantes'),
+
 ]

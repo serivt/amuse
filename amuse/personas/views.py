@@ -88,14 +88,38 @@ class PersonaFormView(LoginRequiredMixin, PermissionRequiredMixin, FormView):
         return super(PersonaFormView, self).form_valid(form)
 
 
+class AprendizListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
+    permission_required = 'personas.view_persona'
+    model = Persona
+    template_name = 'aprendices_list.html'
+
+
+class AprendizFormView(LoginRequiredMixin, PermissionRequiredMixin, View):
+    form_class = PersonaForm
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            persona = form.save(commit=False)
+            persona.roles.add(Rol.objects.get_or_create(
+                nombre=settings.ESTUDIANTE))
+            persona.save()
+        return HttpResponse(status=201) # Http Code 201 = Http Status Created
+
+    
+class AspiranteListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
+    permission_required = 'personas.view_persona'
+    model = Persona
+    template_name = 'aspirantes_list.html'
+
+
 lista_roles = RolListView.as_view()
 agregar_rol = RolFormView.as_view(permission_required='personas.add_rol')
 modificar_rol = RolFormView.as_view(permission_required='personas.change_rol')
 eliminar_rol = EliminarView.as_view(
     model=Rol,
     success_url=reverse_lazy('personas:lista_roles'),
-    permission_required='personas.delete_rol'
-)
+    permission_required='personas.delete_rol')
 
 lista_personas = PersonaListView.as_view()
 agregar_acudiente = AcudienteFormView.as_view(
@@ -107,5 +131,12 @@ modificar_persona = PersonaFormView.as_view(
 eliminar_persona = EliminarView.as_view(
     model=Persona,
     success_url=reverse_lazy('personas:lista'),
-    permission_required='personas.delete_persona'
+    permission_required='personas.delete_persona')
+    #Aprendices
+lista_aprendices = AprendizListView.as_view()
+modificar_aprendiz = AprendizFormView.as_view(
+    permission_required='personas.change_persona'
 )
+
+#Aspirantes
+lista_aspirantes = AspiranteListView.as_view()
