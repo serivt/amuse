@@ -1,3 +1,4 @@
+/**
 * {
 	font-family: "FontAwesome", "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
 }
@@ -37,8 +38,6 @@ span.label.grupo{
 
 body {
 	background-color: #5d2222 !important;
-	/*background-color: #893302 !important;*/
-	/*background-color: #7a2d01 !important;*/
 	}
 
 #wrapper {
@@ -149,4 +148,10 @@ nav[class = 'navbar navbar-inverse'] {
 }
 #chosen{
 	height: 33px !important;
+}**/
+.brand-logo {
+	padding-left: 30px !important;
+}
+.nav-wrapper {
+  background-color: #5d2222 !important;
 }

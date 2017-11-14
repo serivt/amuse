@@ -73,7 +73,6 @@ class PersonaFormView(LoginRequiredMixin, PermissionRequiredMixin, FormView):
         return context
 
     def get_form(self):
-        print(self.request.POST.get('fecha_nacimiento', None))
         try:
             persona = Persona.objects.get(pk=self.kwargs.get('pk', 0))
             print(self.form_class(instance=persona, **self.get_form_kwargs()).errors)
