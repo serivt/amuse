@@ -1,35 +1,48 @@
 {% extends 'base.html' %}
 
+{% block seccion %}
+  Aspirantes
+{% endblock seccion %}
+
 {% block body %}
-<div class="row" style="margin-left: 10px;">
-  <div class="col-12">
-    <h3>Aspirantes:</h3>
-    <hr>
+<div class="card">
+  <div class="card-content">
+    <table class="striped datatables ui celled table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Nombre Completo</th>
+          <th>Email</th>
+          <th>Teléfono</th>
+          <th>Estado</th>
+          {% if 'personas.change_persona' in request.user.get_all_permissions or 'personas.delete_persona' in request.user.get_all_permissions %}
+          <th>Opciones</th>
+          {% endif %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for object in object_list %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ object.get_nombre_completo }}</td>
+          <td>{{ object.correo }}</td>
+          <td>{{ object.telefono }}</td>
+          <td>
+            {% if object.estado %}
+              Activo
+            {% else %}
+              Inactivo
+            {% endif %}
+          </td>
+          <td>
+            {% if 'personas.change_persona' in request.user.get_all_permissions %}
+            <a href="{% url 'personas:modificar_aspirante' object.pk %}"><i class="fa fa-edit"></i> Editar</a>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </div>
 </div>
-<table class="table datatables">
-  <thead>
-    <tr>
-      <th>Nombre Completo</th>
-      <th>Email</th>
-      <th>Grupo</th>
-      <th>Fecha de solicitud</th>
-      <th>Opciones</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td>Sergio Iván Torrado Peñaranda</td>
-        <td>seript.16@gmail.com</td>
-        <td>Teatro</td>
-        <td>08 de Noviembre 2017</td>
-        <td>
-          <a href="" class="btn btn-sm btn-info"><i class="fa fa-eye"></i></a>
-          <a href="" class="btn btn-sm btn-success"><i class="fa fa-check"></i></a>
-          <a href="" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a>
-        </td>
-      </tr>
-  </tbody>
-
-</table>
 {% endblock body %}

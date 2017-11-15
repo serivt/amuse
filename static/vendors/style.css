@@ -155,3 +155,12 @@ nav[class = 'navbar navbar-inverse'] {
 .nav-wrapper {
   background-color: #5d2222 !important;
 }
+.disabled {
+	color: black !important;
+	border-bottom: none !important;
+}
+
+nav ul li a:hover, nav ul li.active, ul.collapsible {
+    background-color: #f1eaea !important;
+    color: #5d2222 !important;
+}

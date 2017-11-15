@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 from django.conf import settings
 from django.core.urlresolvers import reverse_lazy
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, HttpResponseRedirect
 from django.views.generic import View
 from django.views.generic.list import ListView
 from django.views.generic.edit import FormView
+from django.views.generic.edit import DeleteView
 
-from generales.views import EliminarView
+from generales.views import EliminarView, EliminarPermanenteView
 from personas.models import Rol, Persona
 from personas.forms import RolForm, AcudienteForm, PersonaForm
 
@@ -43,6 +44,21 @@ class PersonaListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     permission_required = 'personas.view_persona'
     model = Persona
     template_name = 'persona_list.html'
+    queryset = Persona.objects.filter(tipo_persona=Persona.DIRECTOR)
+
+
+class AspiranteListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
+    permission_required = 'personas.view_persona'
+    model = Persona
+    template_name = 'aspirantes_list.html'
+    queryset = Persona.objects.filter(tipo_persona=Persona.ASPIRANTE)
+
+
+class AprendizListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
+    permission_required = 'personas.view_persona'
+    model = Persona
+    template_name = 'aprendices_list.html'
+    queryset = Persona.objects.filter(tipo_persona=Persona.APRENDIZ)
 
 
 class AcudienteFormView(LoginRequiredMixin, PermissionRequiredMixin, View):
@@ -75,22 +91,14 @@ class PersonaFormView(LoginRequiredMixin, PermissionRequiredMixin, FormView):
     def get_form(self):
         try:
             persona = Persona.objects.get(pk=self.kwargs.get('pk', 0))
-            print(self.form_class(instance=persona, **self.get_form_kwargs()).errors)
             return self.form_class(instance=persona, **self.get_form_kwargs())
         except Persona.DoesNotExist as ex:
             return self.form_class(**self.get_form_kwargs())
 
     def form_valid(self, form):
-        print(form.errors)
         if form.is_valid():
             form.save()
         return super(PersonaFormView, self).form_valid(form)
-
-
-class AprendizListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
-    permission_required = 'personas.view_persona'
-    model = Persona
-    template_name = 'aprendices_list.html'
 
 
 class AprendizFormView(LoginRequiredMixin, PermissionRequiredMixin, View):
@@ -105,11 +113,16 @@ class AprendizFormView(LoginRequiredMixin, PermissionRequiredMixin, View):
             persona.save()
         return HttpResponse(status=201) # Http Code 201 = Http Status Created
 
-    
-class AspiranteListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
-    permission_required = 'personas.view_persona'
-    model = Persona
-    template_name = 'aspirantes_list.html'
+
+class AceptarAspiranteView(LoginRequiredMixin, PermissionRequiredMixin, View):
+    success_url = reverse_lazy('personas:lista_aprendiz')
+    permission_required = 'personas.change_persona'
+
+    def get(self, request, pk, *args, **kwargs):
+        objeto = Persona.objects.get(pk=pk)
+        objeto.tipo_persona = Persona.APRENDIZ
+        objeto.save()
+        return HttpResponseRedirect(self.success_url)
 
 
 lista_roles = RolListView.as_view()
@@ -121,6 +134,8 @@ eliminar_rol = EliminarView.as_view(
     permission_required='personas.delete_rol')
 
 lista_personas = PersonaListView.as_view()
+lista_aspirantes = AspiranteListView.as_view()
+lista_aprendiz = AprendizListView.as_view()
 agregar_acudiente = AcudienteFormView.as_view(
     permission_required='personas.add_persona')
 agregar_persona = PersonaFormView.as_view(
@@ -132,10 +147,21 @@ eliminar_persona = EliminarView.as_view(
     success_url=reverse_lazy('personas:lista'),
     permission_required='personas.delete_persona')
     #Aprendices
-lista_aprendices = AprendizListView.as_view()
-modificar_aprendiz = AprendizFormView.as_view(
+modificar_aprendiz = PersonaFormView.as_view(
+    template_name='aprendiz_form.html',
     permission_required='personas.change_persona'
 )
-
-#Aspirantes
-lista_aspirantes = AspiranteListView.as_view()
+modificar_aspirante = PersonaFormView.as_view(
+    template_name='aspirante_form.html',
+    permission_required='personas.change_persona'
+)
+eliminar_aspirante = EliminarPermanenteView.as_view(
+    model=Persona,
+    success_url=reverse_lazy('personas:lista_aspirantes'),
+    permission_required='personas.delete_persona'
+)
+aceptar_aspirante = AceptarAspiranteView.as_view()
+eliminar_aprendiz = EliminarView.as_view(
+    model=Persona,
+    success_url=reverse_lazy('personas:lista_aprendiz'),
+    permission_required='personas.delete_persona')

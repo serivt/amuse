@@ -32,6 +32,14 @@ class Rol(models.Model):
 
 @python_2_unicode_compatible
 class Persona(models.Model):
+    APRENDIZ = 0
+    ASPIRANTE = 1
+    DIRECTOR = 2
+    TIPO_PERSONA = (
+        (APRENDIZ, 'Aprendiz'),
+        (ASPIRANTE, 'Aspirante'),
+        (DIRECTOR, 'Director'),
+    )
     CC = 0
     TI = 1
     PAS = 2
@@ -85,6 +93,9 @@ class Persona(models.Model):
     # Estudiante
     acudiente = models.ManyToManyField('personas.Persona', blank=True,
                                        null=True)
+    tipo_persona = models.SmallIntegerField(choices=TIPO_PERSONA,
+                                            default=DIRECTOR)
+    
     # Director
     # grupos_dirige = models.ManyToManyField('grupos.Grupo', blank=True, 
     #                                        null=True,

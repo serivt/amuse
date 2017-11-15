@@ -55,127 +55,46 @@
       <ul id="nav-mobile" class="side-nav fixed">
         <li class="logo"><a id="logo-container" href="/" class="brand-logo">
           <img src="{% static 'img/titulo.png' %}" style="max-width: 100%;">
-        <li class="bold"><a href="{% url 'generales:home' %}" class="waves-effect waves-teal"><strong>Proyectos</strong></a></li>
+        <li class="bold"><a href="{% url 'generales:home' %}" class="waves-effect waves-teal"><strong>Inicio</strong></a></li>
         {% if 'personas.view_persona' in request.user.get_all_permissions %}
         <li class="bold"><a href="{% url 'personas:lista' %}" class="waves-effect waves-teal"><strong>Directores</strong></a></li>
         {% endif %}
         {% if 'personas.view_persona' in request.user.get_all_permissions %}
-        <li class="bold"><a href="{% url 'personas:lista' %}" class="waves-effect waves-teal"><strong>Aprendices</strong></a></li>
+        <li class="bold"><a href="{% url 'personas:lista_aprendiz' %}" class="waves-effect waves-teal"><strong>Aprendices</strong></a></li>
         {% endif %}
         {% if 'personas.view_persona' in request.user.get_all_permissions %}
-        <li class="bold"><a href="{% url 'personas:lista' %}" class="waves-effect waves-teal"><strong>Aspirantes</strong></a></li>
+        <li class="bold"><a href="{% url 'personas:lista_aspirantes' %}" class="waves-effect waves-teal"><strong>Aspirantes</strong></a></li>
         {% endif %}
-        {% if 'personas.view_persona' in request.user.get_all_permissions %}
-        <li class="bold"><a href="{% url 'personas:lista' %}" class="waves-effect waves-teal"><strong>Grupos</strong></a></li>
+        {% if 'grupos.view_grupo' in request.user.get_all_permissions %}
+        <li class="bold"><a href="{% url 'grupos:lista' %}" class="waves-effect waves-teal"><strong>Grupos</strong></a></li>
         {% endif %}
-        {% if 'personas.view_persona' in request.user.get_all_permissions %}
-        <li class="bold"><a href="{% url 'personas:lista' %}" class="waves-effect waves-teal"><strong>Categorias</strong></a></li>
+        {% if 'grupos.view_categoria' in request.user.get_all_permissions %}
+        <li class="bold"><a href="{% url 'grupos:lista_categorias' %}" class="waves-effect waves-teal"><strong>Categorias</strong></a></li>
         {% endif %}
-        {% if 'personas.view_persona' in request.user.get_all_permissions %}
-        <li class="bold"><a href="{% url 'personas:lista' %}" class="waves-effect waves-teal"><strong>Pagos</strong></a></li>
-        {% endif %}
-        <!--
-        <li class="bold active"><a href="getting-started.html" class="waves-effect waves-teal">Getting Started</a></li>
+        {% if 'proyectos.view_proyecto' in request.user.get_all_permissions %}
         <li class="no-padding">
           <ul class="collapsible collapsible-accordion">
-            <li class="bold"><a class="collapsible-header  waves-effect waves-teal">CSS</a>
+            <li class="bold"><a class="collapsible-header  waves-effect waves-teal"><strong>Proyectos y personajes</strong></a>
               <div class="collapsible-body">
                 <ul>
-                  <li><a href="color.html">Color</a></li>
-                  <li><a href="grid.html">Grid</a></li>
-                  <li><a href="helpers.html">Helpers</a></li>
-                  <li><a href="media-css.html">Media</a></li>
-                  <li><a href="pulse.html">Pulse</a></li>
-                  <li><a href="sass.html">Sass</a></li>
-                  <li><a href="shadow.html">Shadow</a></li>
-                  <li><a href="table.html">Table</a></li>
-                  <li><a href="css-transitions.html">Transitions</a></li>
-                  <li><a href="typography.html">Typography</a></li>
+                  <li><a href="{% url 'proyectos:lista' %}">Proyectos</a></li>
+                  <li><a href="{% url 'proyectos:lista_personajes' %}">Personajes</a></li>
                 </ul>
               </div>
             </li>
           </ul>
-        </li>-->
+        </li>
+        {% endif %}
+        {% if 'grupos.view_pago' in request.user.get_all_permissions %}
+        <li class="bold"><a href="{% url 'grupos:lista_pagos' %}" class="waves-effect waves-teal"><strong>Pagos</strong></a></li>
+        {% endif %}
+        <li class="bold"><a href="{% url 'cuentas:logout' %}" class="waves-effect waves-teal"><strong>Cerrar sesión</strong></a></li>
       </ul>
     </header>
 
 
 
    <!--
- <div class="">
-    <div id="wrapper" class="col-md-12">
-      <div class="col-md-2" >
-        <nav>
-          <ul class="metismenu" id="menu" >
-            <div class="img-perfil">
-              <a href="#" class="icon-usr">
-                <i class="fa fa-user">
-                  </i>
-                  </a>
-                  </div>
-              <li>
-              <a href="{% url 'generales:home' %}">
-                <i class="fa fa-home" aria-hidden="true"></i>
-                Inicio
-              </a>
-            </li>
-            {% if 'personas.view_persona' in request.user.get_all_permissions or 'personas.add_persona' in request.user.get_all_permissions %}
-            <li>
-                <a href="#">Directores
-                    <span class="fa fa-arrow-right"></span>
-                </a>
-                <ul class="collapse">
-                    {% if 'personas.view_persona' in request.user.get_all_permissions %}
-                    <li><a href="{% url 'personas:lista' %}">Listar Directores</a></li>
-                    {% endif %}
-                    {% if 'personas.add_persona' in request.user.get_all_permissions %}
-                    <li><a href="{% url 'personas:agregar' %}">Crear Directores</a></li>
-                    {% endif %}
-                </ul>
-            </li>
-             {% endif %}      
-             {% if 'personas.view_persona' in request.user.get_all_permissions %}
-            <li>
-              <a href="#">Aprendices
-                 <span class="fa fa-arrow-right"></span>
-              </a>
-               <ul class="collapse">
-                    {% if 'personas.view_persona' in request.user.get_all_permissions %}
-                    <li><a href="#">Listar Aprendices</a></li>
-                    {% endif %}
-                </ul>            
-            </li>
-             {% endif %}      
-             {% if 'personas.view_persona' in request.user.get_all_permissions %}
-            <li>
-              <a href="#">Aspirantes
-                 <span class="fa fa-arrow-right"></span>
-              </a>
-               <ul class="collapse">
-                    {% if 'personas.view_persona' in request.user.get_all_permissions %}
-                    <li><a href="#">Listar Aspirantes</a></li>
-                    {% endif %}
-                </ul>            
-            </li>
-              {% endif %}
-              {% if 'proyectos.view_proyecto' in request.user.get_all_permissions or 'proyectos.add_proyecto' in request.user.get_all_permissions %}
-             <li>
-              <a href="#">Proyectos
-                 <span class="fa fa-arrow-right"></span>
-              </a>
-               <ul class="collapse">
-                    {% if 'proyectos.view_proyecto' in request.user.get_all_permissions %}
-                    <li><a href="{% url 'proyectos:lista' %}">Listar Proyectos</a></li>
-                    {% endif %}
-                    {% if 'proyectos.add_proyecto' in request.user.get_all_permissions %}
-                    <li><a href="{% url 'proyectos:agregar' %}">Crear Proyectos</a></li>
-                    {% endif %}
-                    {% if 'proyectos.view_personaje' in request.user.get_all_permissions %}
-                    <li><a href="{% url 'proyectos:lista_personajes' %}">Listar personajes</a></li>
-                    {% endif %}
-                </ul>            
-            </li>
-              {% endif %}
               {% if 'grupos.view_grupo' in request.user.get_all_permissions or 'grupos.add_grupo' in request.user.get_all_permissions %}
             <li>
               <a href="#">Grupos
@@ -323,6 +242,8 @@
   <script src="{% static 'vendors/js/toastr.min.js' %}"></script>
   <script src="{% static 'vendors/js/popper.min.js' %}"></script>-->
   <script src="{% static 'vendors/js/bootstrap-datepicker.min.js' %}"></script>
+  <script src="{% static 'vendors/js/sweetalert.min.js' %}"></script>
+  
     <script>
         /*$(function () {
             $('#menu').metisMenu();

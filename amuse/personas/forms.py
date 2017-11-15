@@ -73,7 +73,7 @@ class PersonaForm(forms.ModelForm):
 
     class Meta:
         model = Persona
-        exclude = ['estado']
+        exclude = ['tipo_persona', 'estado']
         widgets = {
             'primer_nombre': forms.TextInput(attrs={
                 'class': 'form-control form-control-sm',

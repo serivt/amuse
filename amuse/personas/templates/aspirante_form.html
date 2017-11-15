@@ -2,23 +2,16 @@
 
 {% block seccion %}
 {% if form.instance.pk %}
-  Modificar director
+  Modificar aspirante
 {% else %}
-  Agregar director
+  Agregar aspirante
 {% endif %}
 {% endblock seccion %}
 
 {% block opciones %}
-<li><a href="{% url 'personas:lista' %}"><i class="material-icons left">arrow_back</i> Volver</a></li>
-  {% if form.instance.pk %}
-  <li><a id="eliminar" data-target="{% url 'personas:eliminar' form.instance.pk %}">
-    {% if form.instance.estado %}
-    <i class="material-icons left">block</i> Inactivar</a>
-    {% else %}
-    <i class="material-icons left">check</i> Activar</a>
-    {% endif %}
-  </li>
-  {% endif %}
+<li><a href="{% url 'personas:lista_aspirantes' %}"><i class="material-icons left">arrow_back</i> Volver</a></li>
+<li><a href="{% url 'personas:aceptar_aspirante' form.instance.pk %}"><i class="material-icons left">check</i> Aceptar</a></li>
+<li><a id="eliminar" data-target="{% url 'personas:eliminar_aspirante' form.instance.pk %}"><i class="material-icons left">block</i> Rechazar</a></li>
 {% endblock opciones %}
 
 {% block body %}
@@ -90,10 +83,10 @@
     e.preventDefault();
     {% if form.instance.estado %}
     swal({
-      title: "¿Esta seguro?",
-      text: '¿Esta por inactivar este director, desea continuar?', 
+      title: "¿Eliminar?",
+      text: '¿Esta por rechazar este aspirante permanentemente, desea continuar?', 
       icon: "warning",
-      buttons: ["Cancelar", "Inactivar"],
+      buttons: ["Cancelar", "Rechazar"],
       dangerMode: true,
     })
     .then((willDelete) => {

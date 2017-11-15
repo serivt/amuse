@@ -20,8 +20,20 @@ class EliminarView(LoginRequiredMixin, PermissionRequiredMixin, View):
     def get(self, request, pk, *args, **kwargs):
         objeto = self.model.objects.get(pk=pk)
         if hasattr(objeto, 'estado'):
-            objeto.estado = False
+            objeto.estado = not objeto.estado
             objeto.save()
         else:
             objeto.delete()
+        return HttpResponseRedirect(self.success_url)
+
+
+class EliminarPermanenteView(LoginRequiredMixin, PermissionRequiredMixin,
+                             View):
+    model = None
+    success_url = '/'
+    permission_required = ''
+
+    def get(self, request, pk, *args, **kwargs):
+        objeto = self.model.objects.get(pk=pk)
+        objeto.delete()
         return HttpResponseRedirect(self.success_url)
