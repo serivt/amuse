@@ -19,7 +19,7 @@ class ProyectoForm(forms.ModelForm):
                 'required': 'true'
             }),
             'descripcion': forms.Textarea(attrs={
-                'class': 'form-control form-control-sm',
+                'class': 'materialize-textarea',
             }),
             'valor_boleta': forms.TextInput(attrs={
                 'class': 'form-control form-control-sm numerico',
@@ -30,14 +30,20 @@ class ProyectoForm(forms.ModelForm):
                 'required': 'true'
             }),
             'director': forms.Select(attrs={
-                'class': 'form-control form-control-sm chosen-select',
+                'class': 'material-select',
                 'required': 'true'
             }),
             'grupos': forms.SelectMultiple(attrs={
-                'class': 'form-control form-control-sm chosen-select',
+                'class': 'input-field'
             }),
             'fecha_interpretacion': forms.DateInput(attrs={
-                'class': 'form-control form-control-sm datepicker',
+                # 'class': 'form-control form-control-sm datepicker',
+                'class':'datepicker',
+                'required': 'true'
+            }),
+            'imagen': forms.DateInput(attrs={
+                'class': 'btn',
+                'type':'file',
                 'required': 'true'
             }),
         }
@@ -57,10 +63,10 @@ class PersonajeForm(forms.ModelForm):
                 'required': 'true'
             }),
             'descripcion': forms.Textarea(attrs={
-                'class': 'form-control form-control-sm',
+                  'class': 'materialize-textarea',
             }),
             'persona': forms.Select(attrs={
-                'class': 'form-control form-control-sm chosen-select',
+                 'class': 'material-select',
                 'required': 'true'
             }),
         }

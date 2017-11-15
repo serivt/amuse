@@ -19,20 +19,20 @@ class GrupoForm(forms.ModelForm):
                 'required': 'true'
             }),
             'descripcion': forms.Textarea(attrs={
-                'class': 'form-control',
+                'class': 'materialize-textarea',
                 'minlength':0,     
                 'maxlength': 255,
-                'placeholder': 'Descipción...'
+                'placeholder': ''
             }),
             'categoria': forms.Select(attrs={
-                'class': 'form-control chosen-select',
+                'class': 'material-select',
                 'required': 'true'
             }),
-            'estudiantes': forms.SelectMultiple(attrs={
-                'class': 'form-control chosen-select'            
+            'estudiantes': forms.SelectMultiple(attrs={ #revisar, esta mal
+                'class': 'input-field'
             }),
             'director': forms.Select(attrs={
-                'class': 'form-control chosen-select',
+                'class': 'material-select',
                 'required': 'true'
             }),
         }
@@ -57,10 +57,10 @@ class CategoriaForm(forms.ModelForm):
                 'required': 'true'
             }),
             'descripcion': forms.Textarea(attrs={
-                'class': 'form-control',
+                'class': 'materialize-textarea',
                 'minlength':0,     
                 'maxlength': 255,
-                'placeholder': 'Descripción...',
+                'placeholder': '',
             }),
             'valor_cuota': forms.TextInput(attrs={
                 'class': 'form-control numerico',
@@ -78,12 +78,12 @@ class PagoForm(forms.ModelForm):
         exclude = ['estado'] # Excluir
         widgets = {
             'grupo': forms.Select(attrs={
-                'class': 'form-control form-control-sm chosen',
+                 'class': 'material-select',
                 'required': 'true'
             }),
             'persona': forms.Select(attrs={
-                'class': 'form-control form-control-sm  chosen',
-                 'required': 'true'
+                 'class': 'material-select',
+                'required': 'true'
             }),
             'valor_pago': forms.TextInput(attrs={
                 'class': 'form-control numerico',

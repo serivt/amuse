@@ -1,15 +1,16 @@
 {% extends 'base.html' %}
 
+{% block seccion %}
+  Personajes
+{% endblock seccion %}
+
+{% block opciones %}
+{% endblock opciones %}
+
 {% block body %}
-<div class="row" style="margin-left: 10px;">
-  <div class="col-xs-12">
-    <h3>Personajes:</h3>
-    <hr>
-  </div>
-</div>
-<table class="table datatables">
-  <thead>
-    <tr>
+    <table class="striped datatables ui celled table">
+      <thead>
+        <tr>
       <th>#</th>
       <th>Nombre</th>
       <th>Descripción</th>
@@ -36,10 +37,16 @@
         </td>
         <td>
           {% if 'proyectos.change_personaje' in request.user.get_all_permissions %}
-          <a href="{% url 'proyectos:modificar_personaje' object.proyecto.pk object.pk %}" class="btn btn-sm btn-warning {% if not object.estado %}disabled" disabled="disabled {% else %} {% endif %}"><i class="fa fa-edit"></i></a>
+          <!--<a href="{% url 'proyectos:modificar_personaje' object.proyecto.pk object.pk %}" class="btn btn-sm btn-warning {% if not object.estado %}disabled" disabled="disabled {% else %} {% endif %}"><i class="fa fa-edit"></i></a>-->
+           <a href="{% url 'proyectos:modificar_personaje' object.proyecto.pk object.pk %}" class="btn btn-warning" role="button"
+            style="background-color: rgba(255, 69, 0, 0.7); width: 0px !important; height: 35px !important; border-radius: 10px !important;">                  
+            <i class="fa fa-edit" style="margin-left: -7px;"></i></a>
           {% endif %}
           {% if 'proyectos.delete_proyecto' in request.user.get_all_permissions %}
-          <a href="{% url 'proyectos:eliminar' object.pk %}" class="btn btn-sm btn-danger {% if not object.estado %}disabled" disabled="disabled {% else %} {% endif %}"><i class="fa fa-trash"></i></a>
+          <!--<a href="{% url 'proyectos:eliminar' object.pk %}" class="btn btn-sm btn-danger {% if not object.estado %}disabled" disabled="disabled {% else %} {% endif %}"><i class="fa fa-trash"></i></a>-->
+          <a href="{% url 'proyectos:eliminar_personaje'  object.pk %}" class="btn btn-sm btn-danger {% if not object.estado %}disabled" disabled="disabled {% else %} {% endif %}" role="button"
+            style="background-color: #db2828; width: 0px !important; height: 35px !important; border-radius: 10px !important;">                  
+            <i class="fa fa-trash" style="margin-left: -7px;"></i></a>
           {% endif %}
         </td>
       </tr>

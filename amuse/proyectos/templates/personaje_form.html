@@ -1,45 +1,53 @@
 {% extends 'base.html' %} 
 
+{% block seccion %}
+{% if form.instance.pk %}
+  Modificar personajes
+{% else %}
+  Agregar personajes
+{% endif %}
+{% endblock seccion %}
+
+{% block opciones %}
+<li><a href="{% url 'proyectos:lista_personajes' %}"><i class="material-icons left">arrow_back</i> Volver</a></li>
+  {% if form.instance.pk %}
+  <li><a id="eliminar" data-target="{% url 'proyectos:eliminar_personaje' form.instance.pk %}">
+    {% if form.instance.estado %}
+    <i class="material-icons left">block</i> Inactivar</a>
+    {% else %}
+    <i class="material-icons left">check</i> Activar</a>
+    {% endif %}
+  </li>
+  {% endif %}
+{% endblock opciones %}
+
 {% block body %}
-<div class="borde col-xs-12" style="padding-bottom: 15px">
-  <div class="row col-xs-12">
-    <div class="col-xs-12">
-      <h4 id="titulos">
-        {% if form.instance.pk %} 
-          Modificar Personaje 
-        {% else %} 
-          Crear Personaje 
-        {% endif %}
-      </h4>
-      <hr>
-    </div>
-  </div>
   <form method="POST" enctype='multipart/form-data'>
     {% csrf_token %}
     <input type="hidden" name="proyecto" value="{{ proyecto }}">
-    <div class="row col-xs-12">
-      <div class="col-xs-6">
+    <div class="row col m12">
+      <div class="col m6">
         {% with form.nombre as input %}
         <!-- input = form.nombre -->
             {% include 'includes/input.html' %} 
         {% endwith %}
       </div>
-      <div class="col-xs-6">
+      <div class="col m6">
         {% with form.persona as input %}
         <!-- input = form.nombre -->
           {% include 'includes/input.html' %} 
         {% endwith %}
       </div>
-      <div class="col-xs-12">
+      <div class="col m12">
         {% with form.descripcion as input %}
         <!-- input = form.nombre -->
           {% include 'includes/input.html' %} 
         {% endwith %}
       </div>
     </div>
-    <div class="row col-xs-12">
-      <div class="col-md-12">
-        <button type="submit" class="btn btn-primary pull-right">
+    <div class="row col m12">
+      <div class="col m12">
+        <button type="submit" class="btn btn-primary pull-right" style="border-radius: 20px !important;">
           <i class="fa fa-save"></i> Guardar
         </button>
       </div>
@@ -47,3 +55,30 @@
   </form>
 </div>
 {% endblock body %} 
+
+
+
+{% block script %}
+<script>
+  $('#eliminar').on('click', function(e){
+    let url = $(this).attr('data-target');
+    e.preventDefault();
+    {% if form.instance.estado %}
+    swal({
+      title: "¿Esta seguro?",
+      text: '¿Esta por inactivar este personaje, desea continuar?', 
+      icon: "warning",
+      buttons: ["Cancelar", "Inactivar"],
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        window.location.href = url;
+      }
+    });
+    {% else %}
+    window.location.href = url;
+    {% endif %}
+  });
+</script>
+{% endblock %}

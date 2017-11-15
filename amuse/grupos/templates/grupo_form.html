@@ -1,65 +1,94 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} 
+
+{% block seccion %}
+{% if form.instance.pk %}
+  Modificar grupo
+{% else %}
+  Agregar grupo
+{% endif %}
+{% endblock seccion %}
+
+{% block opciones %}
+<li><a href="{% url 'grupos:lista' %}"><i class="material-icons left">arrow_back</i> Volver</a></li>
+  {% if form.instance.pk %}
+  <li><a id="eliminar" data-target="{% url 'grupos:eliminar_grupo' form.instance.pk %}">
+    {% if form.instance.estado %}
+    <i class="material-icons left">block</i> Inactivar</a>
+    {% else %}
+    <i class="material-icons left">check</i> Activar</a>
+    {% endif %}
+  </li>
+  {% endif %}
+{% endblock opciones %}
 
 {% block body %}
-<div class="borde col-md-12">
-  <div class="row" style="margin-left: 10px;">
-    <div class="col-md-12">
-      <h4 id="titulos">
-        {% if form.instance.pk %} 
-          Modificar Grupo
-        {% else %} 
-          Crear Grupo 
-        {% endif %}
-      </h4>
-      <div class="table-title">
-        <label> </label>
-      </div>
-    </div>
-  </div>
   <form method="POST">
     {% csrf_token %}
       <div class="crear">
-        <div class="row col-md-12">
-          <div class="col-md-6 col-sm-6">
+        <div class="row col s12 m12">
+          <div class="col m6 col s12">
             {% with form.nombre as input %} <!-- input = form.nombre -->
               {% include 'includes/input.html' %}
             {% endwith %}
           </div>
-          <div class="col-md-6 col-sm-6">
+          <div class="col m6 col s12">
             {% with form.categoria as input %}
               {% include 'includes/input.html' %}
             {% endwith %}
           </div>
         </div>
-        <div class="row col-md-12">
-          <div class="col-md-6">
-            {% with form.descripcion as input %}
-              {% include 'includes/input.html' %}
-            {% endwith %}
-          </div>
-          <div class="col-md-6">
-            <div class="row">
-              <div class="col-md-12">
+           <div class="row col m12">
+              <div class="col m6">  
                 {% with form.director as input %}
                   {% include 'includes/input.html' %}
                 {% endwith %}
               </div>
-              <div class="col-md-12">
+              <div class="col m6">
                 {% with form.estudiantes as input %}
                   {% include 'includes/input.html' %}
                 {% endwith %}
               </div>
-            </div>
-          </div>
         </div>
-        <div class="row col-md-12">
-          <div class="col-md-md-12">
-            <button type="submit" class="btn btn-primary pull-right">
-              <i class="fa fa-save"></i> Guardar
-            </button>
+        <div class="row col m12">
+          <div class="col m12">
+            {% with form.descripcion as input %}
+              {% include 'includes/input.html' %}
+            {% endwith %}
+          </div>
+          </div>
+        <div class="row col m12">
+          <div class="col m12">
+            <button type="submit" class="btn btn-primary pull-right" style="border-radius: 20px !important;">
+              <i class="fa fa-save"></i> Guardar</button>
           </div>
         </div>
       </div>
   </form>
-</div>
 {% endblock body %}
+
+
+
+{% block script %}
+<script>
+  $('#eliminar').on('click', function(e){
+    let url = $(this).attr('data-target');
+    e.preventDefault();
+    {% if form.instance.estado %}
+    swal({
+      title: "¿Esta seguro?",
+      text: '¿Esta por inactivar este grupo, desea continuar?', 
+      icon: "warning",
+      buttons: ["Cancelar", "Inactivar"],
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        window.location.href = url;
+      }
+    });
+    {% else %}
+    window.location.href = url;
+    {% endif %}
+  });
+</script>
+{% endblock %}
