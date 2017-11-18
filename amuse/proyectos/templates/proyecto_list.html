@@ -36,7 +36,7 @@
             Inactivo
           {% endif %}
         </td>
-        <td>
+        <td style="width: 175px;">
           {% if 'proyectos.add_personaje' in request.user.get_all_permissions %}
           <!--<a href="{% url 'proyectos:agregar_personaje' object.pk %}" class="btn btn-sm btn-info"><i class="fa fa-user-plus"></i></a>-->
            <a href="{% url 'proyectos:agregar_personaje' object.pk %}"  class="btn btn-sm btn-info" role="button"

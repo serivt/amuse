@@ -9,7 +9,7 @@ class Proyecto(models.Model):
     descripcion = models.TextField('Descripción', blank=True, null=True)
     fecha_creacion = models.DateField('Fecha de creación', auto_now_add=True)
     fecha_interpretacion = models.DateField('Fecha de interpretación')
-    valor_boleta = models.FloatField('Valor de la boleta')
+    valor_boleta = models.FloatField('Valor Boleta')
     director = models.ForeignKey('personas.Persona', verbose_name='Director')
     grupos = models.ManyToManyField('grupos.Grupo', verbose_name='Grupos')
     lugar = models.CharField('Lugar', max_length=512)

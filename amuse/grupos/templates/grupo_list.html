@@ -40,6 +40,8 @@
             {% endif %}
           </td>
           <td>
+            <div style="width: 100%;">
+              <div style="width: 75%; margin: auto !important; display: flex;">
             {% if 'grupos.change_grupo' in request.user.get_all_permissions %}
             <!--<a href="{% url 'grupos:editar' object.pk %}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>-->
             <a href="{% url 'grupos:editar' object.pk %}" class="btn btn-warning" role="button"
@@ -49,9 +51,11 @@
             {% if 'grupos.delete_grupo' in request.user.get_all_permissions %}
             <!--<a href="{% url 'grupos:eliminar_grupo' object.pk %}" class="btn btn-sm btn-danger {% if not object.estado %}disabled" disabled="disabled {% else %} {% endif %}"><i class="fa fa-trash"></i></a>-->
             <a href="{% url 'grupos:eliminar_grupo'  object.pk %}" class="btn btn-sm btn-danger {% if not object.estado %}disabled" disabled="disabled {% else %} {% endif %}" role="button"
-            style="background-color: #db2828; width: 0px !important; height: 35px !important; border-radius: 10px !important;">                  
+            style="background-color: #db2828; width: 0px !important; height: 35px !important; border-radius: 10px !important; margin-left: 10px;">                  
             <i class="fa fa-trash" style="margin-left: -7px;"></i></a>
             {% endif %}
+            </div>
+            </div>
           </td>
       </tr>
     {% endfor %}

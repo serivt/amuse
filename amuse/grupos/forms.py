@@ -15,21 +15,21 @@ class GrupoForm(forms.ModelForm):
                 'class': 'form-control form-control-sm',
                 'minlength':3,     
                 'maxlength': 15,
-                'placeholder': 'Teatro',
                 'required': 'true'
             }),
             'descripcion': forms.Textarea(attrs={
                 'class': 'materialize-textarea',
+                'data-length':'255',
                 'minlength':0,     
-                'maxlength': 255,
-                'placeholder': ''
+                'maxlength': 255
             }),
             'categoria': forms.Select(attrs={
                 'class': 'material-select',
                 'required': 'true'
             }),
             'estudiantes': forms.SelectMultiple(attrs={ #revisar, esta mal
-                'class': 'input-field'
+                 #'value disabled selected':'Choose your option',###AQUIIIIIIII
+                 'class': 'material-select'
             }),
             'director': forms.Select(attrs={
                 'class': 'material-select',
@@ -60,7 +60,6 @@ class CategoriaForm(forms.ModelForm):
                 'class': 'materialize-textarea',
                 'minlength':0,     
                 'maxlength': 255,
-                'placeholder': '',
             }),
             'valor_cuota': forms.TextInput(attrs={
                 'class': 'form-control numerico',

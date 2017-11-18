@@ -12,21 +12,20 @@ class ProyectoForm(forms.ModelForm):
         exclude = ['fecha_creacion', 'estado']
         widgets = {
             'nombre': forms.TextInput(attrs={
-                'class': 'form-control form-control-sm',
+                'class': 'valide form-control form-control-sm',
                 'minlength': 3,     
                 'maxlength': 255,
                 'placeholder': 'Los Fisicos',
                 'required': 'true'
             }),
             'descripcion': forms.Textarea(attrs={
-                'class': 'materialize-textarea',
+                'class': 'materialize-textarea'
             }),
             'valor_boleta': forms.TextInput(attrs={
-                'class': 'form-control form-control-sm numerico',
-                'required': 'true'
+                'class': 'form-control form-control-sm numerico'
             }),
             'lugar': forms.TextInput(attrs={
-                'class': 'form-control form-control-sm',
+                'class': 'validate form-control form-control-sm',
                 'required': 'true'
             }),
             'director': forms.Select(attrs={
@@ -34,11 +33,12 @@ class ProyectoForm(forms.ModelForm):
                 'required': 'true'
             }),
             'grupos': forms.SelectMultiple(attrs={
-                'class': 'input-field'
+                'class': 'material-select',
+                'required': 'true'
             }),
             'fecha_interpretacion': forms.DateInput(attrs={
-                # 'class': 'form-control form-control-sm datepicker',
                 'class':'datepicker',
+                'type':'text',
                 'required': 'true'
             }),
             'imagen': forms.DateInput(attrs={

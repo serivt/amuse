@@ -24,12 +24,17 @@
 {% block body %}
   <form method="POST" enctype='multipart/form-data'>
     {% csrf_token %}
-    <div class="row col m12">
-      <div class="col m6">
+    <div class="row col s6 m12">
+      <div class="col s3 m6">
+        <div class="col s1 m1">
+         <i class="material-icons prefix">account_circle</i>
+         </div>
+         <div class="col s2 m11">
             {% with form.nombre as input %}
             <!-- input = form.nombre -->
               {% include 'includes/input.html' %} 
             {% endwith %}
+            </div>
             </div>
              <div class="col m6">
                 <div class="file-field input-field">
@@ -37,38 +42,27 @@
                     <span>Imagen</span>
                     <input type="file">
                     </div>-->
-                    {% with form.imagen as input %}
+                    <!--{% with form.imagen as input %}
                      {% include 'includes/input.html' %} 
-                   {% endwith %}
-                    <div class="file-path-wrapper">
+                   {% endwith %}-->
+                     <form action="#">
+                        <div class="file-field input-field">
+                          <div class="btn">
+                            <span>File</span>
+                            <input type="file" multiple>
+                          </div>
+                          <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text" placeholder="Upload one or more files">
+                          </div>
+                        </div>
+                    </form>
+                    <!--<div class="file-path-wrapper">
                       <input class="file-path validate" type="text">
-                      </div>
-                      </div>          
-          </div>
-           </div>
+                      </div>-->
+                  </div>          
+            </div>
+      </div>
            <div class="row col m12">
-          <div class="col m12">
-            {% with form.descripcion as input %}
-            <!-- input = form.nombre -->
-              {% include 'includes/input.html' %} 
-            {% endwith %}
-          </div>
-          </div>
-          <div class="row col m12">
-        <div class="col m6">
-          {% with form.fecha_interpretacion as input %}
-          <!-- input = form.nombre -->
-            {% include 'includes/input.html' %} 
-          {% endwith %}
-        </div>
-        <div class="col m6">
-          {% with form.valor_boleta as input %}
-          <!-- input = form.nombre -->
-            {% include 'includes/input.html' %} 
-          {% endwith %}
-        </div>
-        </div>
-        <div class="row col m12">
         <div class="col m6">
           {% with form.director as input %}
           <!-- input = form.nombre -->
@@ -82,6 +76,27 @@
           {% endwith %}
         </div>
         </div>
+           <div class="row col m12">
+          <div class="col m12">
+            {% with form.descripcion as input %}
+            <!-- input = form.nombre -->
+              {% include 'includes/input.html' %} 
+            {% endwith %}
+          </div>
+          <div class="row col m12">
+        <div class="col m6">
+          {% with form.fecha_interpretacion as input %}
+            {% include 'includes/input.html' %} 
+          {% endwith %}
+        </div>
+        <div class="col m6">
+          {% with form.valor_boleta as input %}
+          <!-- input = form.nombre -->
+            {% include 'includes/input.html' %} 
+          {% endwith %}
+        </div>
+        </div>
+        
         <div class="row col m12">
         <div class="col m6">
           {% with form.lugar as input %}
@@ -92,13 +107,12 @@
             </div>
             <div class="row col m12">
       <div class="col m12">
-        <button type="submit" class="btn btn-primary pull-right">
+        <button type="submit" class="btn btn-primary pull-right" style="border-radius: 20px !important;">
           <i class="fa fa-save"></i> Guardar
         </button>
       </div>
        </div>
   </form>
-</div>
 {% endblock body %} 
 
 
@@ -125,4 +139,15 @@
     {% endif %}
   });
 </script>
+
+<script>
+  $('.datepicker').pickadate({
+    selectMonths: true, 
+    selectYears: 15,
+    today: 'Hoy',
+    clear: 'Limpiar',
+    close: 'Ok',
+    closeOnSelect: true
+  });
+  </script>
 {% endblock %}

@@ -102,7 +102,7 @@ class PersonaForm(forms.ModelForm):
                 'required': 'true'
             }),
             'numero_identificacion': forms.TextInput(attrs={
-                'class': 'form-control form-control-sm',
+                'class': 'validate form-control form-control-sm',
                 'minlength':8,
                 'maxlength': 11,
                 'required': 'true',
@@ -121,15 +121,17 @@ class PersonaForm(forms.ModelForm):
                 'class': 'form-control chosen-select form-control-sm',
             }),
             'correo': forms.EmailInput(attrs={
-                'class': 'form-control form-control-sm',
+                'class': 'validate form-control form-control-sm',
                 'minlength':12,             
                 'maxlength': 20,
+                'placeholder':'juan@gmail.com.co',
                 'required': 'true'
             }),
             'telefono': forms.TextInput(attrs={
-                'class': 'form-control form-control-sm',
+                'class': 'validate form-control form-control-sm',
                 'minlength':7,     
                 'maxlength': 10,
+                # 'placeholder':'3114404232',
                 'required': 'true'
             }),
             'fecha_nacimiento': forms.DateInput(attrs={

@@ -33,7 +33,7 @@
             Inactivo
           {% endif %}
         </td>
-        <td>
+        <td style="width: 120px;">
           {% if 'grupos.change_categoria' in request.user.get_all_permissions %}
           <!--<a href="{% url 'grupos:editar_categorias' object.pk %}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>-->
            <a href="{% url 'grupos:editar_categorias' object.pk %}" class="btn btn-warning" role="button"

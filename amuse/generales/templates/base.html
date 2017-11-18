@@ -15,9 +15,10 @@
     <link rel="stylesheet" href="{% static 'vendors/datatables/DataTables-1.10.16/css/dataTables.semanticui.min.css' %}">
     <link rel="stylesheet" href="{% static 'vendors/font-awesome/css/font-awesome.min.css' %}">
     <link rel="stylesheet" href="{% static 'vendors/css/chosen.min.css' %}">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
     <link rel="stylesheet" href="{% static 'vendors/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css' %}"/>
     <link rel="stylesheet" href="{% static 'vendors/style.css' %}"/>
+    <link rel="stylesheet" href="{% static 'vendors/materialIcon.css' %}"/>
     <style>
       body {
         background-image: url('{% static "img/fondo.png" %}');
@@ -74,7 +75,7 @@
         {% if 'proyectos.view_proyecto' in request.user.get_all_permissions %}
         <li class="no-padding">
           <ul class="collapsible collapsible-accordion">
-            <li class="bold"><a class="collapsible-header  waves-effect waves-teal"><strong>Proyectos y personajes</strong></a>
+            <li class="bold"><a class="collapsible-header  waves-effect waves-teal"><strong>Proyectos</strong></a>
               <div class="collapsible-body">
                 <ul>
                   <li><a href="{% url 'proyectos:lista' %}">Proyectos</a></li>
