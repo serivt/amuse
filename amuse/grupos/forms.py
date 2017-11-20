@@ -13,14 +13,14 @@ class GrupoForm(forms.ModelForm):
         widgets = {
             'nombre': forms.TextInput(attrs={
                 'class': 'form-control form-control-sm',
-                'minlength':3,     
+                'minlength': 3,     
                 'maxlength': 15,
                 'required': 'true'
             }),
             'descripcion': forms.Textarea(attrs={
                 'class': 'materialize-textarea',
-                'data-length':'255',
-                'minlength':0,     
+                'data-length': '255',
+                'minlength': 0,     
                 'maxlength': 255
             }),
             'categoria': forms.Select(attrs={

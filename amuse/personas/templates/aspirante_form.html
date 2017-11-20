@@ -62,6 +62,11 @@
             {% include 'includes/input.html' %} 
           {% endwith %}
         </div>
+        <div class="col s12 m6">
+          {% with form.habilidades as input %}
+            {% include 'includes/input.html' %} 
+          {% endwith %}
+        </div>
         <div class="col s12">
           <button type="submit" class="btn btn-primary pull-right" style="border-radius: 20px !important;">
             <i class="fa fa-save"></i> Guardar

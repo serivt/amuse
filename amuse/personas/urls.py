@@ -7,7 +7,7 @@ from personas.views import (
     lista_roles, agregar_rol, modificar_rol, eliminar_rol, 
     modificar_aprendiz,
     lista_aspirantes, lista_aprendiz, modificar_aspirante, eliminar_aspirante,
-    aceptar_aspirante, eliminar_aprendiz
+    aceptar_aspirante, eliminar_aprendiz, registro_aspirantes
 )
 
 
@@ -36,5 +36,7 @@ urlpatterns = [
         name='eliminar_aspirante'),
     url(r'^aspirantes/aceptar/(?P<pk>[0-9]+)$', aceptar_aspirante,
         name='aceptar_aspirante'),
+    url(r'^aspirantes/registro/', registro_aspirantes,
+        name='registro_aspirantes'),
         
 ]

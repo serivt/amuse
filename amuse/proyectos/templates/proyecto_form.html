@@ -22,6 +22,7 @@
 {% endblock opciones %}
 
 {% block body %}
+  {{ form.errors }}
   <form method="POST" enctype='multipart/form-data'>
     {% csrf_token %}
     <div class="row col s6 m12">
@@ -45,7 +46,6 @@
                     <!--{% with form.imagen as input %}
                      {% include 'includes/input.html' %} 
                    {% endwith %}-->
-                     <form action="#">
                         <div class="file-field input-field">
                           <div class="btn">
                             <span>File</span>
@@ -55,7 +55,6 @@
                             <input class="file-path validate" type="text" placeholder="Upload one or more files">
                           </div>
                         </div>
-                    </form>
                     <!--<div class="file-path-wrapper">
                       <input class="file-path validate" type="text">
                       </div>-->

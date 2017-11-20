@@ -15,10 +15,9 @@
     <link rel="stylesheet" href="{% static 'vendors/datatables/DataTables-1.10.16/css/dataTables.semanticui.min.css' %}">
     <link rel="stylesheet" href="{% static 'vendors/font-awesome/css/font-awesome.min.css' %}">
     <link rel="stylesheet" href="{% static 'vendors/css/chosen.min.css' %}">
-    <!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'vendors/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css' %}"/>
     <link rel="stylesheet" href="{% static 'vendors/style.css' %}"/>
-    <link rel="stylesheet" href="{% static 'vendors/materialIcon.css' %}"/>
     <style>
       body {
         background-image: url('{% static "img/fondo.png" %}');
@@ -46,13 +45,14 @@
     <header>
       <nav>
         <div class="nav-wrapper">
+          <a href="#" data-activates="nav-mobile" class="button-collapse top-nav waves-effect waves-light circle" style="z-index: 9999999999; display: inline-block; position: relative; left: 20px; top: 0;height: auto;"><i class="material-icons">menu</i></a>
           <a href="#!" class="brand-logo">{% block seccion %}{% endblock seccion %}</a>
           <ul class="right hide-on-med-and-down">
             {% block opciones %}{% endblock opciones %}
           </ul>
         </div>
       </nav>
-      <div class="container"><a href="#" data-activates="nav-mobile" class="button-collapse top-nav waves-effect waves-light circle hide-on-large-only"><i class="material-icons">menu</i></a></div>
+      <div class="container"></div>
       <ul id="nav-mobile" class="side-nav fixed">
         <li class="logo"><a id="logo-container" href="/" class="brand-logo">
           <img src="{% static 'img/titulo.png' %}" style="max-width: 100%;">
@@ -248,6 +248,7 @@
   <script src="{% static 'vendors/js/popper.min.js' %}"></script>-->
   <script src="{% static 'vendors/js/bootstrap-datepicker.min.js' %}"></script>
   <script src="{% static 'vendors/js/sweetalert.min.js' %}"></script>
+  <script src="{% static 'vendors/js/script.js' %}"></script>
   
     <script>
         /*$(function () {
@@ -266,8 +267,9 @@
             "lengthChange": false,
         }
       });
-       $('.datepicker').datepicker({
-         format: 'dd/mm/yyyy'
+       $('.mydatepicker').pickadate({
+         format: 'dd/mm/yyyy',
+         formatSubmit: 'dd/mm/yyyy'
        });
     </script>
     {% block script %}

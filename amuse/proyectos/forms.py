@@ -37,7 +37,7 @@ class ProyectoForm(forms.ModelForm):
                 'required': 'true'
             }),
             'fecha_interpretacion': forms.DateInput(attrs={
-                'class':'datepicker',
+                'class':'mydatepicker',
                 'type':'text',
                 'required': 'true'
             }),

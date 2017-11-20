@@ -31,7 +31,7 @@
           <!--<td>{{ object.descripcion|default:'Sin descripción' }}</td>-->
           <td>{{ object.categoria }}</td>
           <td>{{ object.fecha_creacion | date:'d/m/y' }}</td>
-          <td>10</td>
+          <td>{{ object.estudiantes.all|length }}</td>
           <td>
             {% if object.estado %}
               Activo

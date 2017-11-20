@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 from django import forms
+from django.contrib.auth import get_user_model
 
 from personas.models import Rol, Persona
+
+USER_MODEL = get_user_model()
 
 
 class RolForm(forms.ModelForm):
@@ -73,7 +76,7 @@ class PersonaForm(forms.ModelForm):
 
     class Meta:
         model = Persona
-        exclude = ['tipo_persona', 'estado']
+        exclude = ['usuario', 'tipo_persona', 'estado']
         widgets = {
             'primer_nombre': forms.TextInput(attrs={
                 'class': 'form-control form-control-sm',
@@ -102,7 +105,7 @@ class PersonaForm(forms.ModelForm):
                 'required': 'true'
             }),
             'numero_identificacion': forms.TextInput(attrs={
-                'class': 'validate form-control form-control-sm',
+                'class': 'form-control form-control-sm numerico',
                 'minlength':8,
                 'maxlength': 11,
                 'required': 'true',
@@ -144,6 +147,9 @@ class PersonaForm(forms.ModelForm):
             'acudiente': forms.SelectMultiple(attrs={
                 'class': 'material-select',
             }),
+            'habilidades': forms.SelectMultiple(attrs={
+                'class': 'material-select',
+            }),
             'estado': forms.CheckboxInput(attrs={
                 'class':'checkbox',
                 'value':'true'
@@ -153,3 +159,19 @@ class PersonaForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(PersonaForm, self).__init__(*args, **kwargs)
         self.fields['acudiente'].queryset = Persona.get_acudiente(self.instance.pk)
+
+
+class UsuarioForm(forms.ModelForm):
+    """ Formulario para la creacion/modificacion de usuarios del sistema """
+
+    class Meta:
+        model = USER_MODEL
+        fields = ['username', 'password']
+        widgets = {
+            'username': forms.TextInput(attrs={
+                'class': 'form-control',
+            }),
+            'password': forms.PasswordInput(attrs={
+                'class': 'form-control',
+            }),
+        }

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.conf import settings
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import Group, User
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 
@@ -95,7 +95,12 @@ class Persona(models.Model):
                                        null=True)
     tipo_persona = models.SmallIntegerField(choices=TIPO_PERSONA,
                                             default=DIRECTOR)
-    
+    usuario = models.ForeignKey(User, verbose_name='Usuario', blank=True,
+                                null=True)
+    habilidades = models.ManyToManyField('personas.Habilidad', blank=True,
+                                null=True)
+
+
     # Director
     # grupos_dirige = models.ManyToManyField('grupos.Grupo', blank=True, 
     #                                        null=True,
@@ -130,13 +135,11 @@ class Persona(models.Model):
 
     @staticmethod
     def get_estudiantes():
-        rol_estudiante = Rol.objects.get_or_create(nombre=settings.ESTUDIANTE)[0]
-        return Persona.objects.filter(roles__in=[rol_estudiante])
+        return Persona.objects.filter(tipo_persona=Persona.APRENDIZ)
 
     @staticmethod
     def get_directores():
-        rol_director = Rol.objects.get_or_create(nombre=settings.DIRECTOR)[0]
-        return Persona.objects.filter(roles__in=[rol_director])
+        return Persona.objects.filter(tipo_persona=Persona.DIRECTOR)
 
     @staticmethod
     def get_acudiente(excluir=None):
@@ -146,3 +149,11 @@ class Persona(models.Model):
                 pk=excluir)
         else:
             return Persona.objects.filter(roles__in=[rol_acudiente])
+
+
+@python_2_unicode_compatible
+class Habilidad(models.Model):
+    nombre = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.nombre

@@ -4,9 +4,16 @@ from django.contrib.auth.mixins import (
 from django.shortcuts import render, HttpResponseRedirect
 from django.views.generic import TemplateView, View
 
+from grupos.models import Grupo
+
 
 class HomeView(LoginRequiredMixin, TemplateView):
     template_name = 'home.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(HomeView, self).get_context_data(**kwargs)
+        context['grupos'] = Grupo.objects.filter(estado=True)
+        return context
 
 
 home = HomeView.as_view()

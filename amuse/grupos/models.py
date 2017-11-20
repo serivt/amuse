@@ -28,6 +28,9 @@ class Grupo(models.Model):
     def __str__(self):
         return self.nombre
 
+    def get_numero_proyectos(self):
+        return self.proyecto_set.all().count()
+
     def reactivar(self):
         self.estado = True
         self.fecha_inactivacion = None

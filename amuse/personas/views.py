@@ -2,14 +2,14 @@
 from django.conf import settings
 from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
-from django.views.generic import View
+from django.views.generic import View, TemplateView
 from django.views.generic.list import ListView
 from django.views.generic.edit import FormView
 from django.views.generic.edit import DeleteView
 
 from generales.views import EliminarView, EliminarPermanenteView
 from personas.models import Rol, Persona
-from personas.forms import RolForm, AcudienteForm, PersonaForm
+from personas.forms import RolForm, AcudienteForm, PersonaForm, UsuarioForm
 
 from django.contrib.auth.mixins import (
     LoginRequiredMixin, PermissionRequiredMixin
@@ -83,8 +83,10 @@ class PersonaFormView(LoginRequiredMixin, PermissionRequiredMixin, FormView):
         context = super(PersonaFormView, self).get_context_data(**kwargs)
         if self.request.method == 'POST':
             acudiente_form = AcudienteForm(self.request.POST)
+            context['user_form'] = UsuarioForm(self.request.POST)
         else:
             acudiente_form = AcudienteForm()
+            context['user_form'] = UsuarioForm()
         context['acudiente_form'] = acudiente_form
         return context
 
@@ -96,8 +98,16 @@ class PersonaFormView(LoginRequiredMixin, PermissionRequiredMixin, FormView):
             return self.form_class(**self.get_form_kwargs())
 
     def form_valid(self, form):
-        if form.is_valid():
-            form.save()
+        user_form = UsuarioForm(self.request.POST)
+        if form.is_valid() and user_form.is_valid():
+            persona = form.save(commit=False)
+            usuario = user_form.save(commit=False)
+            usuario.set_password(usuario.password)
+            usuario.is_superuser = True
+            usuario.save()
+            persona.usuario = usuario
+            persona.save()
+            form.save_m2m()
         return super(PersonaFormView, self).form_valid(form)
 
 
@@ -121,10 +131,38 @@ class AceptarAspiranteView(LoginRequiredMixin, PermissionRequiredMixin, View):
     def get(self, request, pk, *args, **kwargs):
         objeto = Persona.objects.get(pk=pk)
         objeto.tipo_persona = Persona.APRENDIZ
+        objeto.usuario.is_active = True
+        objeto.usuario.save()
         objeto.save()
         return HttpResponseRedirect(self.success_url)
 
 
+class RegistroAspiranteView(FormView):
+    template_name = 'registro_aspirantes.html'
+    form_class = PersonaForm
+    success_url = reverse_lazy('generales:home')
+
+    def get_context_data(self, **kwargs):
+        context = super(RegistroAspiranteView, self).get_context_data(**kwargs)
+        context['user_form'] = UsuarioForm()
+        return context
+
+    def form_valid(self, form):
+        user_form = UsuarioForm(self.request.POST)
+        if form.is_valid() and user_form.is_valid():
+            persona = form.save(commit=False)
+            persona.tipo_persona = Persona.ASPIRANTE
+            usuario = user_form.save(commit=False)
+            usuario.is_active = False
+            usuario.set_password(usuario.password)
+            usuario.save()
+            persona.usuario = usuario
+            persona.save()
+            form.save_m2m()
+        return super(RegistroAspiranteView, self).form_valid(form)
+
+
+registro_aspirantes = RegistroAspiranteView.as_view()
 lista_roles = RolListView.as_view()
 agregar_rol = RolFormView.as_view(permission_required='personas.add_rol')
 modificar_rol = RolFormView.as_view(permission_required='personas.change_rol')
