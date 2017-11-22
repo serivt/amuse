@@ -8,8 +8,10 @@ from django.views.generic.edit import FormView
 from django.views.generic.edit import DeleteView
 
 from generales.views import EliminarView, EliminarPermanenteView
-from personas.models import Rol, Persona
-from personas.forms import RolForm, AcudienteForm, PersonaForm, UsuarioForm
+from personas.models import Rol, Persona, Tarea
+from personas.forms import (
+    RolForm, AcudienteForm, PersonaForm, UsuarioForm, TareaForm
+)
 
 from django.contrib.auth.mixins import (
     LoginRequiredMixin, PermissionRequiredMixin
@@ -162,6 +164,37 @@ class RegistroAspiranteView(FormView):
         return super(RegistroAspiranteView, self).form_valid(form)
 
 
+class TareaListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
+    permission_required = 'personas.view_tarea'
+    model = Tarea
+    template_name = 'tarea_list.html'
+
+
+class TareaFormView(LoginRequiredMixin, PermissionRequiredMixin, FormView):
+    form_class = TareaForm
+    template_name = 'tarea_form.html'
+    success_url = reverse_lazy('personas:lista_tareas')
+
+    def get_form(self):
+        try:
+            tarea = Tarea.objects.get(pk=self.kwargs.get('pk', 0))
+            return self.form_class(instance=tarea, **self.get_form_kwargs())
+        except Tarea.DoesNotExist as ex:
+            return self.form_class(**self.get_form_kwargs())
+
+    def form_valid(self, form):
+        if form.is_valid():
+            form.save()
+        return super(TareaFormView, self).form_valid(form)
+
+lista_tareas = TareaListView.as_view()
+agregar_tarea = TareaFormView.as_view(permission_required='personas.add_tarea')
+modificar_tarea = TareaFormView.as_view(permission_required='personas.change_tarea')
+eliminar_tarea = EliminarView.as_view(
+    model=Tarea,
+    success_url=reverse_lazy('personas:lista_tareas'),
+    permission_required='personas.delete_tarea')
+
 registro_aspirantes = RegistroAspiranteView.as_view()
 lista_roles = RolListView.as_view()
 agregar_rol = RolFormView.as_view(permission_required='personas.add_rol')
@@ -203,3 +236,4 @@ eliminar_aprendiz = EliminarView.as_view(
     model=Persona,
     success_url=reverse_lazy('personas:lista_aprendiz'),
     permission_required='personas.delete_persona')
+    

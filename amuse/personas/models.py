@@ -157,3 +157,43 @@ class Habilidad(models.Model):
 
     def __str__(self):
         return self.nombre
+
+
+@python_2_unicode_compatible
+class Tarea(models.Model):
+    SIN_EMPEZAR = 0
+    EN_PROCESO = 1
+    FINALIZADA = 2
+    ESTADOS_CHOICES = (
+        (SIN_EMPEZAR, 'Sin empezar'),
+        (EN_PROCESO, 'En proceso'),
+        (FINALIZADA, 'Finalizada'),
+    )
+    titulo = models.CharField('Titulo', max_length=255)
+    descripcion = models.TextField('Descripción')
+    fecha_registro = models.DateTimeField(auto_now_add=True)
+    fecha_limite = models.DateField('Fecha limite')
+    persona_responsable = models.ManyToManyField(
+        'personas.Persona', verbose_name='Persona responsable', blank=True,
+        null=True)
+    grupos_responsable = models.ManyToManyField(
+        'grupos.Grupo', verbose_name='Grupo responsable', blank=True,
+        null=True)
+    estado = models.SmallIntegerField(choices=ESTADOS_CHOICES,
+                                      default=SIN_EMPEZAR)
+
+    def __str__(self):
+        return self.titulo
+
+    class Meta:
+        permissions = (
+            ('view_tarea', 'Puede ver tareas'),
+        )
+
+    def get_responsables(self):
+        responsables = []
+        for responsable in self.persona_responsable.all():
+            responsables.append(' %s' % responsable.get_nombre_completo())
+        for responsable in self.grupos_responsable.all():
+            responsables.append(' %s' % responsable.nombre)
+        return ','.join(sorted(responsables)).strip()

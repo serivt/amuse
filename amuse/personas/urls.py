@@ -7,7 +7,8 @@ from personas.views import (
     lista_roles, agregar_rol, modificar_rol, eliminar_rol, 
     modificar_aprendiz,
     lista_aspirantes, lista_aprendiz, modificar_aspirante, eliminar_aspirante,
-    aceptar_aspirante, eliminar_aprendiz, registro_aspirantes
+    aceptar_aspirante, eliminar_aprendiz, registro_aspirantes,
+    lista_tareas, agregar_tarea, modificar_tarea, eliminar_tarea
 )
 
 
@@ -17,12 +18,18 @@ urlpatterns = [
     url(r'^form/$', agregar_persona, name='agregar'),
     url(r'^form/(?P<pk>[0-9]+)$', modificar_persona, name='editar'),
     url(r'^eliminar/(?P<pk>[0-9]+)$', eliminar_persona, name='eliminar'),
+    # Tareas
+    url(r'^tareas/lista/$', lista_tareas, name='lista_tareas'),
+    url(r'^tareas/form/$', agregar_tarea, name='agregar_tarea'),
+    url(r'^tareas/form/(?P<pk>[0-9]+)$', modificar_tarea, name='editar_tarea'),
+    url(r'^tareas/eliminar/(?P<pk>[0-9]+)$', eliminar_tarea,
+        name='eliminar_tarea'),
     # Roles
     url(r'^roles/lista/$', lista_roles, name='lista_roles'),
     url(r'^roles/form/$', agregar_rol, name='agregar_rol'),
     url(r'^roles/form/(?P<pk>[0-9]+)$', modificar_rol, name='editar_rol'),
     url(r'^roles/eliminar/(?P<pk>[0-9]+)$', eliminar_rol, name='eliminar_rol'),
-     #Aprendices
+    # Aprendices
     url(r'^aprendices/form/(?P<pk>[0-9]+)$', modificar_aprendiz,
         name='editar_aprendiz'),
     url(r'^aprendiz/lista/$', lista_aprendiz, name='lista_aprendiz'),

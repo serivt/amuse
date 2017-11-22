@@ -72,6 +72,9 @@
         {% if 'grupos.view_categoria' in request.user.get_all_permissions %}
         <li class="bold"><a href="{% url 'grupos:lista_categorias' %}" class="waves-effect waves-teal"><strong>Categorias</strong></a></li>
         {% endif %}
+        {% if 'personas.view_tarea' in request.user.get_all_permissions %}
+        <li class="bold"><a href="{% url 'personas:lista_tareas' %}" class="waves-effect waves-teal"><strong>Tareas</strong></a></li>
+        {% endif %}
         {% if 'proyectos.view_proyecto' in request.user.get_all_permissions %}
         <li class="no-padding">
           <ul class="collapsible collapsible-accordion">

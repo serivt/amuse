@@ -2,7 +2,7 @@
 from django import forms
 from django.contrib.auth import get_user_model
 
-from personas.models import Rol, Persona
+from personas.models import Rol, Persona, Tarea
 
 USER_MODEL = get_user_model()
 
@@ -175,3 +175,36 @@ class UsuarioForm(forms.ModelForm):
                 'class': 'form-control',
             }),
         }
+
+
+class TareaForm(forms.ModelForm):
+
+    class Meta:
+        model = Tarea
+        exclude = ['fecha_registro']
+        widgets = {
+            'titulo': forms.TextInput(attrs={
+                'class': 'form-control form-control-sm',
+            }),
+            'descripcion': forms.Textarea(attrs={
+                'class': 'materialize-textarea',
+            }),
+            'persona_responsable': forms.SelectMultiple(attrs={
+                'class': 'material-select',
+            }),
+            'grupos_responsable': forms.SelectMultiple(attrs={
+                'class': 'material-select',
+            }),
+            'fecha_limite': forms.DateInput(attrs={
+                'class': 'mydatepicker',
+                'required': 'true'
+            }),
+            'estado': forms.Select(attrs={
+                'class': 'material-select',
+            }),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(TareaForm, self).__init__(*args, **kwargs)
+        if not self.instance.pk:
+            del self.fields['estado']
