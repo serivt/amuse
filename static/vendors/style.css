@@ -164,3 +164,6 @@ nav ul li a:hover, nav ul li.active, ul.collapsible {
     background-color: #f1eaea !important;
     color: #5d2222 !important;
 }
+.borde-Cajas{
+	    border-radius: 25px;
+}
