@@ -1,22 +1,30 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block body %}
 {% for grupo in grupos %}
-<div class="row col m3 borde-Cajas" style="margin: 25px;color: black; background-color: rgba(130, 180, 0, 0.7);">
-    <div class="row col m12" style="">
-        <div class="borde-Cajas row col m12">
-            <center><i class="fa fa-music fa-3x" aria-hidden="true"></i></center>
-            <center><h4>{{ grupo.nombre }}</h4></center>
-            <center><h5>{{ grupo.get_numero_proyectos }} Proyectos</h5></center>
+<div class="container">
+  <div class="slider" style="margin-bottom: -55px !important;">
+    <div class="col s4 m4" >
+        <div class="row">
+            <div class="col s10 m10">
+                <div class="small card">
+                    <div class="card-image">
+                        <img src="{% static 'img/danza.jpg'%}">
+                        <span class="card-title">{{ grupo.nombre }}</span>
+                    </div>
+                    <div class="card-content">
+                        <center><h3>{{ grupo.get_numero_proyectos }} Proyectos</h3></center>
+                    </div>
+                    <div class="card-action">
+                        <a href="#">{{ grupo.descripcion }}</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-<!--    <div class="row col m12" style="">
-        <div class="borde-Cajas row col m12">    
-           <h5> <center><a class="button" href="" ><i class="fa fa-arrow-right" aria-hidden="true"
-           style="color: forestgreen; font-weight: bold;">
-               Ver Detalles</i></center></h5>
-        </div>
-    </div>-->
+   </div>
 </div>
 {% endfor %}
 {% endblock body %}

@@ -31,7 +31,7 @@ class AcudienteForm(forms.ModelForm):
                   'segundo_apellido', 'correo', 'telefono']
         widgets = {
             'primer_nombre': forms.TextInput(attrs={
-                'class': 'form-control form-control-sm',
+                'class': 'validate form-control form-control-sm',
                 'minlength':3,     
                 'maxlength': 15,
                 'placeholder': 'Juan',
@@ -44,7 +44,7 @@ class AcudienteForm(forms.ModelForm):
                 'placeholder': 'Esteban'
             }),
             'primer_apellido': forms.TextInput(attrs={
-                'class': 'form-control form-control-sm',
+                'class': 'validate form-control form-control-sm',
                 'minlength':3,     
                 'maxlength': 15,
                 'placeholder': 'Sans',
@@ -57,14 +57,14 @@ class AcudienteForm(forms.ModelForm):
                 'placeholder': 'Sans'
             }),
             'correo': forms.EmailInput(attrs={
-                'class': 'form-control form-control-sm',
+                'class': 'validate form-control form-control-sm',
                 'minlength':12,             
                 'maxlength': 20,
                 'placeholder': 'nombre@gmail.com',
                 'required': 'true'
             }),
             'telefono': forms.TextInput(attrs={
-                'class': 'form-control form-control-sm',
+                'class': 'validate form-control form-control-sm numerico',
                 'minlength':7,     
                 'maxlength': 10,
                 'placeholder': '3108020320',
@@ -79,7 +79,7 @@ class PersonaForm(forms.ModelForm):
         exclude = ['usuario', 'tipo_persona', 'estado']
         widgets = {
             'primer_nombre': forms.TextInput(attrs={
-                'class': 'form-control form-control-sm',
+                'class': 'validate form-control form-control-sm',
                 'minlength':3,     
                 'maxlength': 15,
                 'required': 'true'
@@ -90,7 +90,7 @@ class PersonaForm(forms.ModelForm):
                 'maxlength': 15,
             }),
             'primer_apellido': forms.TextInput(attrs={
-                'class': 'form-control form-control-sm',
+                'class': 'validate form-control form-control-sm',
                 'minlength':3,     
                 'maxlength': 15,
                 'required': 'true'
@@ -101,11 +101,11 @@ class PersonaForm(forms.ModelForm):
                 'maxlength': 15,
             }),
             'tipo_identificacion': forms.Select(attrs={
-                'class': 'material-select',
+                'class': 'validate material-select',
                 'required': 'true'
             }),
             'numero_identificacion': forms.TextInput(attrs={
-                'class': 'form-control form-control-sm numerico',
+                'class': 'validate form-control form-control-sm numerico',
                 'minlength':8,
                 'maxlength': 11,
                 'required': 'true',
@@ -131,10 +131,9 @@ class PersonaForm(forms.ModelForm):
                 'required': 'true'
             }),
             'telefono': forms.TextInput(attrs={
-                'class': 'validate form-control form-control-sm',
+                'class': 'validate form-control form-control-sm numerico',
                 'minlength':7,     
                 'maxlength': 10,
-                # 'placeholder':'3114404232',
                 'required': 'true'
             }),
             'fecha_nacimiento': forms.DateInput(attrs={
@@ -148,7 +147,8 @@ class PersonaForm(forms.ModelForm):
                 'class': 'material-select',
             }),
             'habilidades': forms.SelectMultiple(attrs={
-                'class': 'material-select',
+                'class': 'validate material-select',
+                'required': 'true'
             }),
             'estado': forms.CheckboxInput(attrs={
                 'class':'checkbox',
@@ -184,19 +184,23 @@ class TareaForm(forms.ModelForm):
         exclude = ['fecha_registro']
         widgets = {
             'titulo': forms.TextInput(attrs={
-                'class': 'form-control form-control-sm',
+                'class': 'validate form-control form-control-sm',
+                'required': 'true'
             }),
             'descripcion': forms.Textarea(attrs={
-                'class': 'materialize-textarea',
+                'class': 'validate materialize-textarea',
+                'required': 'true'
             }),
             'persona_responsable': forms.SelectMultiple(attrs={
-                'class': 'material-select',
+                'class': 'validate material-select',
+                'required': 'true'
             }),
             'grupos_responsable': forms.SelectMultiple(attrs={
-                'class': 'material-select',
+                'class': 'validate material-select',
+                'required': 'true'
             }),
             'fecha_limite': forms.DateInput(attrs={
-                'class': 'mydatepicker',
+                'class': 'validate mydatepicker',
                 'required': 'true'
             }),
             'estado': forms.Select(attrs={

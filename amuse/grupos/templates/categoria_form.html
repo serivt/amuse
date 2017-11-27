@@ -26,26 +26,26 @@
     {% csrf_token %}
       <div class="crear">
         <div class="row col m12">
-          <div class="col m6 s6">
-            {% with form.nombre as input %} <!-- input = form.nombre -->
+          <div class="col m6 s12">
+            {% with form.nombre as input %}
               {% include 'includes/input.html' %}
             {% endwith %}
           </div>
-          <div class="col m6 s6">
+          <div class="col m6 s12">
             {% with form.valor_cuota as input %}
               {% include 'includes/input.html' %}
             {% endwith %}
           </div>
         </div>
-        <div class="row col m12">
-          <div class="col m12">
+        <div class="row col s12 m12">
+          <div class="col s12 m12">
             {% with form.descripcion as input %}
               {% include 'includes/input.html' %}
             {% endwith %}
           </div>
         </div>
-        <div class="row col m12">
-          <div class="col m12">
+        <div class="row col s12 m12">
+          <div class="col s12 m12">
             <button type="submit" class="btn btn-primary pull-right" style="border-radius: 20px !important;">
               <i class="fa fa-save"></i> Guardar
             </button>

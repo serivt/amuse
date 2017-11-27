@@ -9,30 +9,30 @@ class GrupoForm(forms.ModelForm):
 
     class Meta:
         model = Grupo
-        exclude = ['fecha_inactivacion', 'estado'] # Excluir
+        exclude = ['fecha_inactivacion', 'estado']
         widgets = {
             'nombre': forms.TextInput(attrs={
-                'class': 'form-control form-control-sm',
+                'class': 'validate form-control form-control-sm',
                 'minlength': 3,     
                 'maxlength': 15,
                 'required': 'true'
             }),
             'descripcion': forms.Textarea(attrs={
-                'class': 'materialize-textarea',
-                'data-length': '255',
+                'class': 'validate materialize-textarea',
+                'data-length': '150',
                 'minlength': 0,     
-                'maxlength': 255
-            }),
-            'categoria': forms.Select(attrs={
-                'class': 'material-select',
+                'maxlength': 150,
                 'required': 'true'
             }),
-            'estudiantes': forms.SelectMultiple(attrs={ #revisar, esta mal
-                 #'value disabled selected':'Choose your option',###AQUIIIIIIII
+            'categoria': forms.Select(attrs={
+                'class': 'validate material-select',
+                'required': 'true'
+            }),
+            'estudiantes': forms.SelectMultiple(attrs={
                  'class': 'material-select'
             }),
             'director': forms.Select(attrs={
-                'class': 'material-select',
+                'class': 'validate material-select',
                 'required': 'true'
             }),
         }
@@ -50,7 +50,7 @@ class CategoriaForm(forms.ModelForm):
         exclude = ['estado'] # Excluir
         widgets = {
             'nombre': forms.TextInput(attrs={
-                'class': 'form-control form-control-sm',
+                'class': 'validate form-control form-control-sm',
                 'minlength':3,     
                 'maxlength': 15,
                 'placeholder': 'Juvenil',
@@ -62,10 +62,11 @@ class CategoriaForm(forms.ModelForm):
                 'maxlength': 255,
             }),
             'valor_cuota': forms.TextInput(attrs={
-                'class': 'form-control numerico',
+                'class': 'validate form-control numerico',
                 'minlength':4,     
                 'maxlength': 10,
                 'placeholder': '1000',
+                'required': 'true'
             }),
         }
 
@@ -77,15 +78,15 @@ class PagoForm(forms.ModelForm):
         exclude = ['estado'] # Excluir
         widgets = {
             'grupo': forms.Select(attrs={
-                 'class': 'material-select',
+                 'class': 'validate material-select',
                 'required': 'true'
             }),
             'persona': forms.Select(attrs={
-                 'class': 'material-select',
+                 'class': 'validate material-select',
                 'required': 'true'
             }),
             'valor_pago': forms.TextInput(attrs={
-                'class': 'form-control numerico',
+                'class': 'validate form-control numerico',
                 'minlength':4,     
                 'maxlength': 10,
                 'placeholder': '1000',

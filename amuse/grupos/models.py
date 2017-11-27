@@ -7,17 +7,17 @@ from django.utils.encoding import python_2_unicode_compatible
 
 @python_2_unicode_compatible
 class Grupo(models.Model):
-    nombre = models.CharField('Nombre', max_length=50)
-    descripcion = models.TextField('Descripción', blank=True, null=True)
+    nombre = models.CharField('Nombre*', max_length=50)
+    descripcion = models.TextField('Descripción*', max_length= 150)
     estado = models.BooleanField('Estado', default=True)
     fecha_creacion = models.DateTimeField('Fecha de creación',
                                           auto_now_add=True)
     fecha_inactivacion = models.DateTimeField('Fecha de inactivación',
                                               blank=True, null=True)
-    categoria = models.ForeignKey('grupos.Categoria')
-    estudiantes = models.ManyToManyField('personas.Persona',#se quita?
-        verbose_name='Estudiantes', related_name='Estudiantes')
-    director = models.ForeignKey('personas.Persona', verbose_name='Director',#se quita?
+    categoria = models.ForeignKey('grupos.Categoria', verbose_name='Categoria*')
+    estudiantes = models.ManyToManyField('personas.Persona',
+        verbose_name='Aprendices', related_name='Estudiantes', blank=True, null=True)
+    director = models.ForeignKey('personas.Persona', verbose_name='Director*',#se quita?
         related_name='Director')
 
     class Meta:
@@ -44,9 +44,9 @@ class Grupo(models.Model):
 
 @python_2_unicode_compatible
 class Categoria(models.Model):
-    nombre = models.CharField('Nombre', max_length=50)
+    nombre = models.CharField('Nombre*', max_length=50)
     descripcion = models.TextField('Descripción', blank=True, null=True)
-    valor_cuota = models.FloatField('Valor Cuota')
+    valor_cuota = models.FloatField('Valor Cuota*')
     estado = models.BooleanField('Estado', default=True)
 
     class Meta:
@@ -60,9 +60,9 @@ class Categoria(models.Model):
 
 @python_2_unicode_compatible
 class Pago(models.Model):
-    grupo = models.ForeignKey('grupos.Grupo', verbose_name='Grupo')
-    persona = models.ForeignKey('personas.Persona', verbose_name='Estudiante')
-    valor_pago = models.FloatField('Valor pagado')
+    grupo = models.ForeignKey('grupos.Grupo', verbose_name='Grupo*')
+    persona = models.ForeignKey('personas.Persona', verbose_name='Aprendiz*')
+    valor_pago = models.FloatField('Valor pagado*')
     alerta_pago = models.BooleanField(default=False)
     estado = models.BooleanField(default=True)
 

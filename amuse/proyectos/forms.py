@@ -12,10 +12,17 @@ class ProyectoForm(forms.ModelForm):
         exclude = ['fecha_creacion', 'estado']
         widgets = {
             'nombre': forms.TextInput(attrs={
-                'class': 'valide form-control form-control-sm',
+                'class': 'validate form-control form-control-sm',
                 'minlength': 3,     
                 'maxlength': 255,
-                'placeholder': 'Los Fisicos',
+                'placeholder': 'Hamlet',
+                'required': 'true'
+            }),
+            'autor': forms.TextInput(attrs={
+                'class': 'validate form-control form-control-sm',
+                'minlength': 3,     
+                'maxlength': 50,
+                'placeholder': 'William Shakespeare',
                 'required': 'true'
             }),
             'descripcion': forms.Textarea(attrs={
@@ -29,11 +36,11 @@ class ProyectoForm(forms.ModelForm):
                 'required': 'true'
             }),
             'director': forms.Select(attrs={
-                'class': 'material-select',
+                'class': 'validate material-select',
                 'required': 'true'
             }),
             'grupos': forms.SelectMultiple(attrs={
-                'class': 'material-select',
+                'class': 'validate material-select',
                 'required': 'true'
             }),
             'fecha_interpretacion': forms.DateInput(attrs={
@@ -41,10 +48,14 @@ class ProyectoForm(forms.ModelForm):
                 'type':'text',
                 'required': 'true'
             }),
-            'imagen': forms.DateInput(attrs={
-                'class': 'btn',
+            'imagen': forms.TextInput(attrs={
+                'class': 'validate btn',
                 'type':'file',
                 'required': 'true'
+            }),
+            'video': forms.TextInput(attrs={
+                'class': 'btn',
+                'type':'file',
             }),
         }
 
@@ -56,17 +67,18 @@ class PersonajeForm(forms.ModelForm):
         exclude = ['estado']
         widgets = {
             'nombre': forms.TextInput(attrs={
-                'class': 'form-control form-control-sm',
+                'class': 'validate form-control form-control-sm',
                 'minlength': 3,     
                 'maxlength': 255,
                 'placeholder': 'Los Fisicos',
                 'required': 'true'
             }),
             'descripcion': forms.Textarea(attrs={
-                  'class': 'materialize-textarea',
+                  'class': 'validate materialize-textarea',
+                   'required': 'true'
             }),
             'persona': forms.Select(attrs={
-                 'class': 'material-select',
+                 'class': 'validate material-select',
                 'required': 'true'
             }),
         }

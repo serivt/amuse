@@ -1,0 +1,202 @@
+{% load static %}
+
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge" name="keywords" content="Teatro, Cultura, Dramaturgia, Tunja, Corporacion Cultural">
+    <title>Amuse</title>
+    <meta name="description" content="">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" href="{% static 'vendors/css/bootstrap.min.css' %}"> -->
+    <link rel="stylesheet" href="{% static 'vendors/materialize/css/materialize.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/materialize/css/ghpages-materialize.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/semantic/semantic.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/datatables/DataTables-1.10.16/css/dataTables.semanticui.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/font-awesome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/css/chosen.min.css' %}">
+    <!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
+    <link rel="stylesheet" href="{% static 'vendors/materialize.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'vendors/style.css' %}"/>
+    <!--<link href="https://fonts.googleapis.com/css?family=Cabin+Sketch|Encode+Sans+Expanded|Monoton|Sarala|Special+Elite|Yrsa" rel="stylesheet">-->
+    <link rel="stylesheet" href="{% static 'vendors/googleapis.css' %}"/>
+ </head>
+
+<body>
+<nav>
+    <div class="nav-wrapper">
+      <a href="{% url 'generales:inicial' %}" id="logo" class="brand-logo">
+           <img src="{% static 'img/logoAmuse.png'%}">
+      </a>
+      
+      <a href="#" data-activates="mobile-demo" class="button-collapse">
+          <i class="material-icons">menu</i> 
+      </a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="{% url 'generales:inicial' %}"><i class="material-icons left">home</i>Inicio</a></li>
+        <li><a href=""><i class="material-icons left">access_time</i>Nuestra Historia</a></li>
+        <li><a href=""><i class="material-icons left">view_module</i>Galería</a></li>
+        <li><a href="{% url 'generales:registrar' %}"><i class="material-icons left">assignment_ind</i>Registrarse</a></li>
+        <li><a href="{% url 'cuentas:login' %}"><i class="material-icons left">account_balance_wallet</i>Iniciar Sesión</a></li>
+      </ul>
+      <ul class="side-nav" id="mobile-demo">
+        <li><a href="{% url 'generales:inicial' %}"><i class="material-icons">home</i>Inicio</a></li>
+        <li><a href=""><i class="material-icons">access_time</i>Nuestra Historia</a></li>
+        <li><a href=""><i class="material-icons">view_module</i>Galería</a></li>
+        <li><a href="{% url 'generales:registrar' %}"><i class="material-icons">assignment_ind</i>Registrarse</a></li>
+        <li><a href="{% url 'cuentas:login' %}"><i class="material-icons">account_balance_wallet</i>Iniciar Sesión</a></li>
+      </ul>
+    </div>
+  </nav>
+    
+    {% block body %}
+
+ <div class="container">
+  <div class="slider">
+    <ul class="slides">
+      <li>
+        <img src="http://lorempixel.com/800/400/nightlife/3/"> 
+        <div class="caption center-align">
+          <h1>Carta de una Desconocida</h1>
+          <h3>Stefan Zweig</h3>
+          <h5 class="light grey-text text-lighten-3">Descripción o texto de ejemplo</h5>
+        </div>
+      </li>
+      <li>
+        <img src="http://lorempixel.com/800/400/nightlife/2/">
+        <div class="caption left-align">
+          <h1>Caminado por Woody</h1>
+          <h3>Left Aligned Caption</h3>
+          <h5 class="light grey-text text-lighten-3">Descripción o texto de ejemplo</h5>
+        </div>
+      </li>
+      <li>
+        <img src="http://lorempixel.com/800/400/nightlife/7/"> 
+        <div class="caption right-align">
+          <h1>La Vida es Bella</h1>
+          <h3>Right Aligned Caption</h3>
+          <h5 class="light grey-text text-lighten-3">Descripción o texto de ejemplo</h5>
+        </div>
+      </li>
+      <li>
+        <img src="http://lorempixel.com/800/400/people/4/">
+        <div class="caption center-align">
+          <h1>Mujeres</h1>
+          <h3>This is our big Tagline!</h3>
+          <h5 class="light grey-text text-lighten-3">Descripción o texto de ejemplo</h5>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="container">
+  <div class="slider">
+    <div class="col s12 m12" style="display:flex !important;">
+    <div class="row">
+      <div class="col s11 m12">
+        <div class="small card">
+          <div class="card-image">
+            <img src="{% static 'img/teatro.jpeg'%}">
+              <span class="card-title">Teatro</span>
+          </div>
+          <div class="card-content">
+            <p>"El teatro es la poesía que se levanta del libro y se hace humana. Y al hacerse humana habla y grita, llora y se desespera". Federico Lorca</p>
+          </div>
+          <div class="card-action">
+            <a href="#">Ver detalles</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col s11 m10 offset-m1">
+        <div class="small card">
+          <div class="card-image">
+            <img src="{% static 'img/danza.jpg'%}">
+              <span class="card-title">Danza</span>
+          </div>
+          <div class="card-content">
+            <p>"La danza es el lenguaje secreto del alma". Martha Graham</p>
+          </div>
+          <div class="card-action">
+            <a href="#">Ver detalles</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col s11 m12">
+        <div class="small card">
+          <div class="card-image">
+            <img src="{% static 'img/musica.jpg'%}">
+              <span class="card-title">Música</span>
+          </div>
+          <div class="card-content">
+            <p>"La música puede dar nombre a lo innombrable y comunicar lo desconocido". Leonard Bernstein</p>
+          </div>
+          <div class="card-action">
+            <a href="#">Ver detalles</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    </div>
+  </div>
+</div>
+ {% endblock body %}
+
+<footer class="page-footer" style="background-color: #5d2222 !important;">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12 m12">
+                <center><h5 class="white-text">© 2017 Copyright: AMUSE Corporacion Cultural Tierra y Fuego</h5></center>
+                <center><p class="grey-text text-lighten-4">corpculturaltierrayfuego@gmail.com</p></center>
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Siguenos en:</h5>
+                <ul>
+                 <li><a href="https://www.facebook.com/tierra.fuego.750" title=""><i class="fa fa-facebook fa-2x"></i></a></li>
+									<li><a href="http://www.nextbootstrap.com/" title=""><i class="fa fa-twitter fa-2x"></i></a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+            
+            <a class="grey-text text-lighten-4 right" href="#!"> </a>
+            </div>
+          </div>
+        </footer>
+            
+  <script src="{% static 'vendors/js/jquery.min.js' %}"></script>
+  <script src="{% static 'vendors/js/js.js' %}"></script>
+  <script src="{% static 'vendors/js/chosen.jquery.min.js' %}"></script>
+  <script src="{% static 'vendors/materialize/js/materialize.min.js' %}"></script>
+  <script src="{% static 'vendors/datatables/DataTables-1.10.16/js/jquery.dataTables.min.js' %}"></script>
+  <script src="{% static 'vendors/datatables/DataTables-1.10.16/js/dataTables.semanticui.min.js' %}"></script>
+  <script src="{% static 'vendors/js/bootstrap-datepicker.min.js' %}"></script>
+  <script src="{% static 'vendors/js/sweetalert.min.js' %}"></script>
+  <script src="{% static 'vendors/js/script.js' %}"></script>
+  <script>
+       $(".button-collapse").sideNav();
+    </script>
+    <script>
+      $(document).ready(function(){
+      $('.carousel').carousel();
+    });
+    </script>
+    <script>
+           $(document).ready(function(){
+      $('.slider').slider();
+    });
+    </script>
+
+  </body>
+</html>

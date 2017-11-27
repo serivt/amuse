@@ -7,6 +7,17 @@ from django.views.generic import TemplateView, View
 from grupos.models import Grupo
 
 
+class InicialView(LoginRequiredMixin, TemplateView):
+    template_name = 'index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(InicialView, self).get_context_data(**kwargs)
+        return context
+
+
+inicial = InicialView.as_view()
+
+
 class HomeView(LoginRequiredMixin, TemplateView):
     template_name = 'home.html'
 
@@ -17,6 +28,17 @@ class HomeView(LoginRequiredMixin, TemplateView):
 
 
 home = HomeView.as_view()
+
+
+class RegistrarView(LoginRequiredMixin, TemplateView):
+    template_name = 'registrarse.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(RegistrarView, self).get_context_data(**kwargs)
+        return context
+
+
+registrar = RegistrarView.as_view()
 
 
 class EliminarView(LoginRequiredMixin, PermissionRequiredMixin, View):

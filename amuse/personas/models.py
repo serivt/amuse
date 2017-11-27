@@ -66,18 +66,18 @@ class Persona(models.Model):
         (OPOSITIVO, 'O+'),
         (ONEGATIVO, 'O-'),
     )
-    primer_nombre = models.CharField('Primer nombre', max_length=255)
+    primer_nombre = models.CharField('Primer nombre*', max_length=255)
     segundo_nombre = models.CharField(
         'Segundo nombre', max_length=255, null=True, blank=True)
-    primer_apellido = models.CharField('Primer apellido', max_length=255)
+    primer_apellido = models.CharField('Primer apellido*', max_length=255)
     segundo_apellido = models.CharField(
         'Segundo apellido', max_length=255, null=True, blank=True)
     correo = models.EmailField('Correo electrónico', max_length=50,
                                unique=True)
     tipo_identificacion = models.SmallIntegerField(
-        'Tipo de identificación', choices=TIPO_IDENTIFICACION_CHOICES,
+        'Tipo de Identificación*', choices=TIPO_IDENTIFICACION_CHOICES,
         blank=True, null=True)
-    numero_identificacion = models.CharField('Número de Identificación',
+    numero_identificacion = models.CharField('Número de Identificación*',
                                              max_length=50, unique=True,
                                              blank=True, null=True)
     fecha_nacimiento = models.DateField('Fecha de Nacimiento',
@@ -87,7 +87,7 @@ class Persona(models.Model):
     eps = models.CharField('EPS', max_length=50, blank=True, null=True)
     imagen_perfil = models.ImageField(upload_to='perfiles', blank=True,
                                       null=True)
-    telefono = models.CharField('Número Telefónico', max_length=50)
+    telefono = models.CharField('Número Telefónico*', max_length=50)
     estado = models.BooleanField('Estado', default=True)
     roles = models.ManyToManyField('personas.Rol', blank=True, null=True)
     # Estudiante
@@ -95,9 +95,9 @@ class Persona(models.Model):
                                        null=True)
     tipo_persona = models.SmallIntegerField(choices=TIPO_PERSONA,
                                             default=DIRECTOR)
-    usuario = models.ForeignKey(User, verbose_name='Usuario', blank=True,
+    usuario = models.ForeignKey(User, verbose_name='Usuario*', blank=True,
                                 null=True)
-    habilidades = models.ManyToManyField('personas.Habilidad', blank=True,
+    habilidades = models.ManyToManyField('personas.Habilidad',  verbose_name='Habilidades*', blank=True,
                                 null=True)
 
 
@@ -169,15 +169,15 @@ class Tarea(models.Model):
         (EN_PROCESO, 'En proceso'),
         (FINALIZADA, 'Finalizada'),
     )
-    titulo = models.CharField('Titulo', max_length=255)
-    descripcion = models.TextField('Descripción')
+    titulo = models.CharField('Titulo*', max_length=255)
+    descripcion = models.TextField('Descripción*')
     fecha_registro = models.DateTimeField(auto_now_add=True)
-    fecha_limite = models.DateField('Fecha limite')
+    fecha_limite = models.DateField('Fecha limite*')
     persona_responsable = models.ManyToManyField(
-        'personas.Persona', verbose_name='Persona responsable', blank=True,
+        'personas.Persona', verbose_name='Aprendices*', blank=True,
         null=True)
     grupos_responsable = models.ManyToManyField(
-        'grupos.Grupo', verbose_name='Grupo responsable', blank=True,
+        'grupos.Grupo', verbose_name='Grupo Responsable*', blank=True,
         null=True)
     estado = models.SmallIntegerField(choices=ESTADOS_CHOICES,
                                       default=SIN_EMPEZAR)

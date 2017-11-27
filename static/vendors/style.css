@@ -167,3 +167,47 @@ nav ul li a:hover, nav ul li.active, ul.collapsible {
 .borde-Cajas{
 	    border-radius: 25px;
 }
+
+
+/*.navbar-inverse {
+    background-color: #222;
+    border-color: #080808;
+}
+.navbar-fixed-top {
+    top: 0;
+    border-width: 0 0 1px;
+}
+.container {
+    box-shadow: 0 0 25px rgb(69, 70, 69);
+    padding-top: 60px;
+    margin-bottom: 5%;
+}
+.navbar>.container-fluid .navbar-brand {
+    margin-left: 10%;
+}*/
+
+.font-encode-sans {
+    font-family: 'Encode Sans Expanded', sans-serif;
+}
+
+.font-monoton {
+    font-family: 'Monoton', cursive;
+}
+.font-cabin-sketch {
+    font-family: 'Cabin Sketch', cursive;
+}
+/*
+.navbar>.container-fluid .navbar-brand {
+    margin-left: 10%;
+}
+
+
+
+.navbar>.container-fluid .navbar-right.menu-pag {
+    margin-top: 15px;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+    color: #9d9d9d;
+}*/
+
