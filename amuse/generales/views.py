@@ -7,7 +7,7 @@ from django.views.generic import TemplateView, View
 from grupos.models import Grupo
 
 
-class InicialView(LoginRequiredMixin, TemplateView):
+class InicialView(TemplateView):
     template_name = 'index.html'
 
     def get_context_data(self, **kwargs):

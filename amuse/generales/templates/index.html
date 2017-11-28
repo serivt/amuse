@@ -38,15 +38,23 @@
         <li><a href="{% url 'generales:inicial' %}"><i class="material-icons left">home</i>Inicio</a></li>
         <li><a href=""><i class="material-icons left">access_time</i>Nuestra Historia</a></li>
         <li><a href=""><i class="material-icons left">view_module</i>Galería</a></li>
-        <li><a href="{% url 'generales:registrar' %}"><i class="material-icons left">assignment_ind</i>Registrarse</a></li>
+        {% if not request.user.is_authenticated %}
+        <li><a href="{% url 'personas:registro_aspirantes' %}"><i class="material-icons left">assignment_ind</i>Registrarse</a></li>
         <li><a href="{% url 'cuentas:login' %}"><i class="material-icons left">account_balance_wallet</i>Iniciar Sesión</a></li>
+        {% else %}
+        <li><a href="{% url 'cuentas:logout' %}"><i class="material-icons">account_balance_wallet</i>Cerrar Sesión</a></li>
+        {% endif %}
       </ul>
       <ul class="side-nav" id="mobile-demo">
         <li><a href="{% url 'generales:inicial' %}"><i class="material-icons">home</i>Inicio</a></li>
         <li><a href=""><i class="material-icons">access_time</i>Nuestra Historia</a></li>
         <li><a href=""><i class="material-icons">view_module</i>Galería</a></li>
-        <li><a href="{% url 'generales:registrar' %}"><i class="material-icons">assignment_ind</i>Registrarse</a></li>
+        {% if not request.user.is_authenticated %}
+        <li><a href="{% url 'personas:registro_aspirantes' %}"><i class="material-icons">assignment_ind</i>Registrarse</a></li>
         <li><a href="{% url 'cuentas:login' %}"><i class="material-icons">account_balance_wallet</i>Iniciar Sesión</a></li>
+        {% else %}
+        <li><a href="{% url 'cuentas:logout' %}"><i class="material-icons">account_balance_wallet</i>Cerrar Sesión</a></li>        
+        {% endif %}
       </ul>
     </div>
   </nav>
