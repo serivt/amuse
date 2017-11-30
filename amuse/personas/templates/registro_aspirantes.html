@@ -1,7 +1,7 @@
 {% extends 'base.html' %} 
 
 {% block seccion %}
-  Inscribirse como aspirtante
+  Inscribirse como aspirante
 {% endblock seccion %}
 
 {% block opciones %}
@@ -99,8 +99,8 @@
     e.preventDefault();
     {% if form.instance.estado %}
     swal({
-      title: "¿Esta seguro?",
-      text: '¿Esta por inactivar este director, desea continuar?', 
+      title: "¿Está seguro?",
+      text: '¿Está por inactivar este director, desea continuar?', 
       icon: "warning",
       buttons: ["Cancelar", "Inactivar"],
       dangerMode: true,

@@ -30,17 +30,6 @@ class HomeView(LoginRequiredMixin, TemplateView):
 home = HomeView.as_view()
 
 
-class RegistrarView(LoginRequiredMixin, TemplateView):
-    template_name = 'registrarse.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(RegistrarView, self).get_context_data(**kwargs)
-        return context
-
-
-registrar = RegistrarView.as_view()
-
-
 class EliminarView(LoginRequiredMixin, PermissionRequiredMixin, View):
     model = None
     success_url = '/'
