@@ -211,3 +211,10 @@ nav ul li a:hover, nav ul li.active, ul.collapsible {
     color: #9d9d9d;
 }*/
 
+.card .card-content{
+	display: flex !important;
+}
+.card.small{
+	margin-right: 15px !important;
+}
+
