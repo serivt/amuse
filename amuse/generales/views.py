@@ -1,10 +1,13 @@
+import json
+
 from django.contrib.auth.mixins import (
     LoginRequiredMixin, PermissionRequiredMixin
 )
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, HttpResponseRedirect, HttpResponse
 from django.views.generic import TemplateView, View
 
 from grupos.models import Grupo
+from proyectos.models import Proyecto
 
 
 class InicialView(TemplateView):
@@ -55,3 +58,32 @@ class EliminarPermanenteView(LoginRequiredMixin, PermissionRequiredMixin,
         objeto = self.model.objects.get(pk=pk)
         objeto.delete()
         return HttpResponseRedirect(self.success_url)
+
+
+class ServicioView(View):
+
+    def get(self, request, *args, **kwargs):
+        data = []
+        proyectos = Proyecto.objects.all()
+        for proyecto in proyectos:
+            grupos = []
+            for grupo in proyecto.grupos.all():
+                grupos.append(grupo.nombre)
+            _data = {
+                'id_proyecto': proyecto.pk,
+                'nombre_proyecto': proyecto.nombre,
+                'descripcion': proyecto.descripcion,
+                'imagen_proyecto': proyecto.get_imagen(),
+                'estado': 'A' if proyecto.estado else 'I',
+                'fecha_inicio': proyecto.fecha_creacion.strftime('%Y-%m-%d'),
+                'fecha_presentacion': proyecto.fecha_interpretacion.strftime(
+                    '%Y-%m-%d'),
+                'nombre_persona': proyecto.director.get_nombres(),
+                'apellido_persona': proyecto.director.get_apellidos(),
+                'nombre_grupo': grupos,
+                'direccion_presentacion': proyecto.lugar,
+                'autor': proyecto.autor,
+                'video': proyecto.video
+            }
+            data.append(_data)
+        return HttpResponse(json.dumps({'projects': data}))

@@ -27,6 +27,11 @@ class Proyecto(models.Model):
             ('view_proyecto', 'Puede ver proyectos'),
         )
 
+    def get_imagen(self):
+        if self.imagen:
+            return self.imagen.url
+        return ''
+
 
 @python_2_unicode_compatible
 class Personaje(models.Model):
