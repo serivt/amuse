@@ -22,7 +22,7 @@
 {% endblock opciones %}
 
 {% block body %}
-  <form method="POST">
+  <form method="POST" id="form">
     {% csrf_token %}
       <div class="crear">
         <div class="row col m12">
@@ -46,7 +46,7 @@
         </div>
         <div class="row col s12 m12">
           <div class="col s12 m12">
-            <button type="submit" class="btn btn-primary pull-right" style="border-radius: 20px !important;">
+            <button id="guardar" type="button" class="btn btn-primary pull-right" style="border-radius: 20px !important;">
               <i class="fa fa-save"></i> Guardar
             </button>
           </div>
@@ -59,6 +59,15 @@
 
 {% block script %}
 <script>
+  $('#guardar').on('click', function(){
+    let valor_cuota = $('#id_valor_cuota').val();
+    if(valor_cuota <= 0) {
+      alert('El valor de la cuota debe ser mayor a cero (0.0)')
+      return;
+    }
+    $('#form').submit();
+  });
+
   $('#eliminar').on('click', function(e){
     let url = $(this).attr('data-target');
     e.preventDefault();

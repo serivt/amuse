@@ -119,10 +119,8 @@
 <script>
   $('#eliminar').on('click', function (e) {
     let url = $(this).attr('data-target');
-    e.preventDefault(); { %
-      if form.instance.estado %
-    }
-    swal({
+    {% if form.instance.estado %}
+      swal({
         title: "¿Esta seguro?",
         text: '¿Esta por inactivar este proyecto, desea continuar?',
         icon: "warning",
@@ -133,23 +131,19 @@
         if (willDelete) {
           window.location.href = url;
         }
-      }); { %
-      else %
-    }
-    window.location.href = url; { % endif %
-    }
+      });
+    {% else %}
+      window.location.href = url;
+    {% endif %}
   });
 
 </script>
 
 <script>
-  $('.datepicker').pickadate({
-    selectMonths: true,
-    selectYears: 15,
-    today: 'Hoy',
-    clear: 'Limpiar',
-    close: 'Ok',
-    closeOnSelect: true
+  $('.mydatepicker-proyecto').pickadate({
+    format: 'dd/mm/yyyy',
+    formatSubmit: 'dd/mm/yyyy',
+    min: true
   });
 
 </script>

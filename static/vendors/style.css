@@ -270,3 +270,6 @@ hr{
     border: 1px solid #EEE !important; ; 
 	border-radius: 55px !important;
 }
+form {
+	width: 100%;
+}

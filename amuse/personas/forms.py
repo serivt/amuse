@@ -79,24 +79,24 @@ class PersonaForm(forms.ModelForm):
         exclude = ['usuario', 'tipo_persona', 'estado']
         widgets = {
             'primer_nombre': forms.TextInput(attrs={
-                'class': 'validate form-control form-control-sm',
+                'class': 'validate form-control form-control-sm letras',
                 'minlength':3,     
                 'maxlength': 15,
                 'required': 'true'
             }),
             'segundo_nombre': forms.TextInput(attrs={
-                'class': 'form-control form-control-sm',
+                'class': 'form-control form-control-sm letras',
                 'minlength':3,     
                 'maxlength': 15,
             }),
             'primer_apellido': forms.TextInput(attrs={
-                'class': 'validate form-control form-control-sm',
+                'class': 'validate form-control form-control-sm letras',
                 'minlength':3,     
                 'maxlength': 15,
                 'required': 'true'
             }),
             'segundo_apellido': forms.TextInput(attrs={
-                'class': 'form-control form-control-sm',
+                'class': 'form-control form-control-sm letras',
                 'minlength':3,     
                 'maxlength': 15,
             }),

@@ -44,7 +44,7 @@ class ProyectoForm(forms.ModelForm):
                 'required': 'true'
             }),
             'fecha_interpretacion': forms.DateInput(attrs={
-                'class':'mydatepicker',
+                'class':'mydatepicker-proyecto',
                 'type':'text',
                 'required': 'true'
             }),
@@ -54,8 +54,8 @@ class ProyectoForm(forms.ModelForm):
                 'required': 'true'
             }),
             'video': forms.TextInput(attrs={
-                'class': 'btn',
-                'type':'file',
+                'class': 'validate form-control form-control-sm',
+                'required': 'true'
             }),
         }
 
