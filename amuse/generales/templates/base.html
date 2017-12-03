@@ -6,6 +6,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge" name="keywords" content="Teatro, Cultura, Dramaturgia, Tunja, Corporacion Cultural">
     <title>Amuse</title>
     <meta name="description" content="">
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.png' %}"/>
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- <link rel="stylesheet" href="{% static 'vendors/css/bootstrap.min.css' %}"> -->
@@ -42,11 +43,15 @@
     {% block head %}
     {% endblock head %}
   </head>
+
   <body>
     <header>
       <nav>
         <div class="nav-wrapper">
-          <a href="#" data-activates="mobile-demo" class="button-collapse top-nav waves-effect waves-light circle" style="z-index: 999; display: inline-block; position: relative; left: 20px; top: 0;height: auto;"><i class="material-icons">menu</i></a>
+          <a href="#" data-activates="mobile-demo" class="menu button-collapse top-nav waves-effect waves-light circle" 
+          style="z-index: 999; display: inline-block; left: 20px; top: 0;height: auto;">
+          <i class="material-icons">menu</i>
+          </a>
           <a href="#!" class="brand-logo">{% block seccion %}{% endblock seccion %}</a>
           <ul class="right hide-on-med-and-down">
             {% block opciones %}{% endblock opciones %}
@@ -55,7 +60,13 @@
           <ul id="mobile-demo" class="side-nav">
             <li class="logo" style="height: 100px;"><a id="logo-container" href="/" class="brand-logo">
               <img src="{% static 'img/titulo.png' %}" style="max-width: 100%;">
+
+            {% if 'personas.view_persona' in request.user.logout %}
+            <li class="bold"><a href="{% url 'generales:inicial' %}" class="waves-effect waves-teal"><strong>Inicio</strong></a></li>
+              {% else %}
             <li class="bold"><a href="{% url 'generales:home' %}" class="waves-effect waves-teal"><strong>Inicio</strong></a></li>
+             {% endif %}
+
             {% if 'personas.view_persona' in request.user.get_all_permissions %}
             <li class="bold"><a href="{% url 'personas:lista' %}" class="waves-effect waves-teal"><strong>Directores</strong></a></li>
             {% endif %}
@@ -99,41 +110,7 @@
       </nav>
     </header>
 
-
-
-   <!--
-              {% if 'grupos.view_grupo' in request.user.get_all_permissions or 'grupos.add_grupo' in request.user.get_all_permissions %}
-            <li>
-              <a href="#">Grupos
-                 <span class="fa fa-arrow-right"></span>
-              </a>
-               <ul class="collapse">
-                    {% if 'grupos.view_grupo' in request.user.get_all_permissions %}
-                    <li><a href="{% url 'grupos:lista' %}">Listar Grupos</a></li>
-                    {% endif %}
-                    {% if 'grupos.add_grupo' in request.user.get_all_permissions %}
-                    <li><a href="{% url 'grupos:agregar' %}">Crear Grupos</a></li>
-                    {% endif %}
-                </ul>            
-            </li>
-              {% endif %}
-              {% if 'grupos.view_categoria' in request.user.get_all_permissions or 'grupos.add_categoria' in request.user.get_all_permissions %}
-            <li>
-              <a href="#">Categorías
-                 <span class="fa fa-arrow-right"></span>
-              </a>
-               <ul class="collapse">
-                    {% if 'grupos.view_categoria' in request.user.get_all_permissions %}
-                    <li><a href="{% url 'grupos:lista_categorias' %}">Listar Categorías</a></li>
-                    {% endif %}
-                    {% if 'grupos.add_categoria' in request.user.get_all_permissions %}
-                    <li><a href="{% url 'grupos:agregar_categorias' %}">Crear Categorías</a></li>
-                    {% endif %}
-                </ul>            
-            </li>
-              {% endif %}
-
-             <li>
+   <!--    <li>
               <a href="#">Tareas
                  <span class="fa fa-arrow-right"></span>
               </a>
@@ -141,84 +118,19 @@
                     <li><a href="#">Historial Tareas</a></li>
                     <li><a href="#">Crear Tareas</a></li>
                 </ul>            
-            </li>
-            <!--
-            <li>
-              <a href="#">Habilidades
-                 <span class="fa fa-arrow-right"></span>
-              </a>
-               <ul class="collapse">
-                    <li><a href="#">Listar Habilidades</a></li>
-                    <li><a href="#">Crear Habilidades</a></li>
-                </ul>            
-            </li>   
-              {% if 'grupos.view_pago' in request.user.get_all_permissions or 'grupos.add_pago' in request.user.get_all_permissions %}
-              <li>
-              <a href="#">Pagos
-                 <span class="fa fa-arrow-right"></span>
-              </a>
-               <ul class="collapse">
-                    {% if 'grupos.view_pago' in request.user.get_all_permissions %}
-                    <li><a href="{% url 'grupos:lista_pagos' %}">Listar Pagos</a></li>
-                    {% endif %}
-                    {% if 'grupos.add_pago' in request.user.get_all_permissions %}
-                    <li><a href="{% url 'grupos:agregar_pagos' %}">Crear Pagos</a></li>
-                    {% endif %}
-                </ul>            
-            </li>    
-            {% endif %}
+            </li> -->
 
-            </ul>
-        </nav>
-      </div>       -->   
-                    <!--             
-     <div id="pageContent" class="col-md-10">
-        <div id="barraSuperior" >
-          <nav class="navbar navbar-inverse">
-            <div class="container-fluid">
-              <div class="navbar-header">
-                <a id="menu-toggle" href="#" class="nav-btn btn-dark btn-lg toggle">
-                  <i class="fa fa-bars" style="color:#fff;margin-top: 20px;"></i>
-                </a>
-                <a id="menu-toggle" href="{% url 'generales:home' %}" class="nav-btn btn-dark btn-lg toggle">
-                  <span style="font-weight: bold; color: black !important;">AMUSE</span>
-                </a>                             
-              </div>
-              <ul class="nav navbar-nav navbar-right">                
-                <li>
-                  <a href="#">
-                    <span><i class="fa fa-user"></i> {{ request.user.username|default:"--------" }}</span>
-                  </a>
-                </li>
-                <li><div class="dropdown">
-                  <a class="btn dropdown-toggle" id="dropOptions" type="button" data-toggle="dropdown">
-                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li>
-                      <a href="#" data-toggle="modal" data-target="#editarPerfil-form-modal">Editar perfil</a><!--no funciona le modal
-                    </li>
-                    <li>
-                      <a href="{% url 'cuentas:logout' %}">Cerrar sesión</a>
-                    </li>
-                  </ul>
-                </div></li>
-              </ul>
-            </div>
-          </nav>
-        </div>-->
         <main style="margin-top: -7px;">
           <div class="container">
              <div class="card" style="border-radius: 10px;">
                <div class="card-content">
-            {% block body %}
-            {% endblock body %}
+                {% block body %}
+                {% endblock body %}
               </div>
             </div>
           </div>
         </main>
-     </div>
-  </div>
+
 
 <div class="modal fade" id="editarPerfil-form-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
@@ -238,7 +150,6 @@
       </div>
     </div>
   </div>
-</div>
 </div>
   
   <script src="{% static 'vendors/js/jquery.min.js' %}"></script>

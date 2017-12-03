@@ -8,6 +8,7 @@ from django.views.generic.edit import FormView
 
 from generales.views import EliminarView
 from proyectos.models import Proyecto, Personaje
+# Galeria
 from proyectos.forms import ProyectoForm, PersonajeForm
 
 from django.contrib.auth.mixins import (
@@ -74,6 +75,12 @@ class PersonajeFormView(LoginRequiredMixin, PermissionRequiredMixin, FormView):
         return super(PersonajeFormView, self).form_valid(form)
 
 
+# class GaleriaListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
+#     permission_required = 'galeria.view_galeria'
+#     model = Galeria
+#     template_name = 'galeria.html'
+
+
 lista_proyectos = ProyectoListView.as_view()
 agregar_proyectos = ProyectoFormView.as_view(
     permission_required='proyectos.add_proyectos')
@@ -93,3 +100,5 @@ eliminar_personaje = EliminarView.as_view(
     model=Personaje,
     success_url=reverse_lazy('proyectos:lista_personajes'),
     permission_required='proyectos.delete_personaje')
+
+# lista_galeria = GaleriaListView.as_view()

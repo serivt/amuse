@@ -7,6 +7,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge" name="keywords" content="Teatro, Cultura, Dramaturgia, Tunja, Corporacion Cultural">
     <title>Amuse</title>
     <meta name="description" content="">
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.png' %}"/>
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- <link rel="stylesheet" href="{% static 'vendors/css/bootstrap.min.css' %}"> -->
@@ -25,6 +26,18 @@
  </head>
 
 <body>
+  <header>
+
+<ul id="dropdown1" class="dropdown-content">
+  <li><a href="#!">Análisis</a></li>
+  <li><a href="#!">Requerimientos</a></li>
+  <li><a href="#!">Diseño</a></li>
+  <li><a href="#!">Pruebas</a></li>
+  <li class="divider"></li>
+  <li><a href="#!">Preguntas</a></li>
+  <li><a href="#!">Acerca de</a></li>
+</ul>
+
 <nav>
     <div class="nav-wrapper">
       <a href="{% url 'generales:inicial' %}" id="logo" class="brand-logo">
@@ -36,7 +49,8 @@
       </a>
       <ul class="right hide-on-med-and-down">
         <li><a href="{% url 'generales:inicial' %}"><i class="material-icons left">home</i>Inicio</a></li>
-        <li><a href=" "><i class="material-icons left">web</i>Proyecto</a></li>
+        <li><a class="dropdown-button" href="#!" data-activates="dropdown1"><i class="material-icons left">web</i>Proyecto
+        <i class="material-icons right">arrow_drop_down</i></a></li>
         <li><a href=""><i class="material-icons left">access_time</i>Nuestra Historia</a></li>
         <li><a href=""><i class="material-icons left">view_module</i>Galería</a></li>
         {% if not request.user.is_authenticated %}
@@ -60,6 +74,7 @@
       </ul>
     </div>
   </nav>
+   </header>
     
     {% block body %}
 
@@ -168,11 +183,11 @@
                 <center><h5 class="white-text">© 2017 Copyright: AMUSE Corporacion Cultural Tierra y Fuego</h5></center>
                 <center><p class="grey-text text-lighten-4">corpculturaltierrayfuego@gmail.com</p></center>
               </div>
-              <div class="col l4 offset-l2 s12">
-                <h5 class="white-text">Siguenos en:</h5>
+              <div class="col l2 offset-l1 s2 offset-s5">
+                <center><h5 class="white-text">Siguenos en:</h5></center>
                 <ul>
-                 <li><a href="https://www.facebook.com/tierra.fuego.750" title=""><i class="fa fa-facebook fa-2x"></i></a></li>
-									<li><a href="http://www.nextbootstrap.com/" title=""><i class="fa fa-twitter fa-2x"></i></a></li>
+                <center> <li><a href="https://www.facebook.com/tierra.fuego.750" title=""><i class="fa fa-facebook fa-2x"></i></a></li></center>
+								<center> <li><a href="http://www.nextbootstrap.com/" title=""><i class="fa fa-twitter fa-2x"></i></a></li></center>
                 </ul>
               </div>
             </div>

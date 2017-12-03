@@ -9,7 +9,7 @@ from django.views.generic import FormView, TemplateView, RedirectView
 class LoginView(FormView):
     form_class = AuthenticationForm
     template_name = 'login.html'
-    success_url = '/' #reverse_lazy("panel-dashboard")
+    success_url = '/home' #reverse_lazy("panel-dashboard")
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated():

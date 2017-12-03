@@ -4,6 +4,7 @@ from django.conf.urls import url
 from proyectos.views import (
     lista_proyectos, agregar_proyectos, modificar_proyectos, eliminar_proyecto,
     lista_personajes, agregar_personaje, modificar_personaje, eliminar_personaje
+    # lista_galeria
 )
 
 urlpatterns = [
@@ -18,4 +19,5 @@ urlpatterns = [
         modificar_personaje, name='modificar_personaje'),
     url(r'^personaje/eliminar/(?P<pk>[0-9]+)$', eliminar_personaje,
         name='eliminar_personaje'),
+    # url(r'^galeria/$', lista_galeria, name='galeria'),
 ]

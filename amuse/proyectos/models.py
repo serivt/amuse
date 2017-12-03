@@ -48,3 +48,13 @@ class Personaje(models.Model):
 
     def __str__(self):
         return self.nombre
+
+
+# @python_2_unicode_compatible
+# class Galeria(models.Model):
+#     imagen = models.ImageField('Imagen', upload_to='galeria', blank=False,
+#                                null=False)
+#     estado = models.BooleanField(default=True)
+
+#     class Meta:
+#         verbose_name_plural ='Galería'

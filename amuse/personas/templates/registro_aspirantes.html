@@ -1,7 +1,7 @@
 {% extends 'base.html' %} 
 
 {% block seccion %}
-  Inscribirse como aspirante
+  Inscribirse Aspirante
 {% endblock seccion %}
 
 {% block opciones %}
@@ -12,8 +12,9 @@
 
 {% block body %}
 {{ form.errors }}
-<form method="POST" enctype='multipart/form-data'>
+<form method="POST" enctype='multipart/form-data' style="width: 100% !important;"><!--width: 100% !important;-->
   {% csrf_token %}
+    <div class="form-group">
       <div class="row">
         <div class="col s12 m3">
           {% with form.primer_nombre as input %}
@@ -65,6 +66,7 @@
           {% endwith %}
         </div>
       </div>
+     {% if 'personas.view_persona' in request.user.aspirante %}
       <div class="row">
         <div class="col s12">
           <hr>
@@ -82,12 +84,15 @@
           {% endwith %}
         </div>
       </div>
+      {% endif %}
+
       <div class="row">
         <div class="col s12">
           <button type="submit" class="btn btn-primary pull-right" style="border-radius: 20px !important;">
             <i class="fa fa-save"></i> Guardar</button>
         </div>
       </div>
+    </div>
 </form>
 {% endblock body %} 
 

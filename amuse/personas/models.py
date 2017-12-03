@@ -72,7 +72,7 @@ class Persona(models.Model):
     primer_apellido = models.CharField('Primer apellido*', max_length=255)
     segundo_apellido = models.CharField(
         'Segundo apellido', max_length=255, null=True, blank=True)
-    correo = models.EmailField('Correo electrónico', max_length=50,
+    correo = models.EmailField('Correo electrónico*', max_length=50,
                                unique=True)
     tipo_identificacion = models.SmallIntegerField(
         'Tipo de Identificación*', choices=TIPO_IDENTIFICACION_CHOICES,
