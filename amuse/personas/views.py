@@ -12,10 +12,12 @@ from personas.models import Rol, Persona, Tarea
 from personas.forms import (
     RolForm, AcudienteForm, PersonaForm, UsuarioForm, TareaForm
 )
+from generales.utils import enviar_correo, generar_hash
 
 from django.contrib.auth.mixins import (
     LoginRequiredMixin, PermissionRequiredMixin
 )
+from django.contrib.auth.models import User
 
 
 class RolListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
@@ -131,10 +133,21 @@ class AceptarAspiranteView(LoginRequiredMixin, PermissionRequiredMixin, View):
     permission_required = 'personas.change_persona'
 
     def get(self, request, pk, *args, **kwargs):
+        password = generar_hash(16)
         objeto = Persona.objects.get(pk=pk)
+        usuario = User(username=objeto.correo)
+        usuario.set_password(password)
+        usuario.save()
         objeto.tipo_persona = Persona.APRENDIZ
-        objeto.usuario.is_active = True
-        objeto.usuario.save()
+        objeto.usuario = usuario
+        enviar_correo(
+            'emails/aceptar_aspirante',
+            [objeto.correo],
+            'Aceptado como Aprendiz en Amuse',
+            info={
+                'usuario': objeto,
+                'password': password
+            })
         objeto.save()
         return HttpResponseRedirect(self.success_url)
 
@@ -150,17 +163,17 @@ class RegistroAspiranteView(FormView):
         return context
 
     def form_valid(self, form):
-        user_form = UsuarioForm(self.request.POST)
-        if form.is_valid() and user_form.is_valid():
+        #user_form = UsuarioForm(self.request.POST)
+        if form.is_valid():
             persona = form.save(commit=False)
             persona.tipo_persona = Persona.ASPIRANTE
-            usuario = user_form.save(commit=False)
-            usuario.is_active = False
-            usuario.set_password(usuario.password)
-            usuario.save()
-            persona.usuario = usuario
+            #usuario = user_form.save(commit=False)
+            #usuario.is_active = False
+            #usuario.set_password(usuario.password)
+            #usuario.save()
+            #persona.usuario = usuario
             persona.save()
-            form.save_m2m()
+            #form.save_m2m()
         return super(RegistroAspiranteView, self).form_valid(form)
 
 
