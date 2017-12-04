@@ -106,6 +106,7 @@ class PersonaForm(forms.ModelForm):
             }),
             'numero_identificacion': forms.TextInput(attrs={
                 'class': 'validate form-control form-control-sm numerico',
+                'entero': 'true',
                 'minlength':8,
                 'maxlength': 11,
                 'required': 'true',
@@ -132,6 +133,7 @@ class PersonaForm(forms.ModelForm):
             }),
             'telefono': forms.TextInput(attrs={
                 'class': 'validate form-control form-control-sm numerico',
+                'entero': 'true',
                 'minlength':7,     
                 'maxlength': 10,
                 'required': 'true'

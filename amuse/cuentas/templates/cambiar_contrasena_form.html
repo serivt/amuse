@@ -1,0 +1,39 @@
+{% extends 'base.html' %} 
+
+{% block seccion %}
+Cambiar contraseña
+{% endblock seccion %}
+
+{% block opciones %}
+<li><a href="{% url 'cuentas:cuenta' %}">Volver</a></li>
+{% endblock opciones %}
+
+{% block body %}
+{{ form.errors }}
+<form method="POST" enctype='multipart/form-data'>
+  {% csrf_token %}
+      <div class="row">
+        <div class="col s12">
+          {% with form.old_password as input %}
+            {% include 'includes/input.html' %} 
+          {% endwith %}
+        </div>
+        <div class="col s12">
+          {% with form.new_password1 as input %}
+            {% include 'includes/input.html' %} 
+          {% endwith %}
+        </div>
+        <div class="col s12">
+          {% with form.new_password2 as input %}
+            {% include 'includes/input.html' %} 
+          {% endwith %}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12 m12">
+          <button type="submit" class="btn btn-primary pull-right" style="border-radius: 20px !important;">
+            <i class="fa fa-save"></i> Guardar</button>
+        </div>
+      </div>
+</form>
+{% endblock body %} 

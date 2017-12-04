@@ -60,7 +60,20 @@
           <ul id="mobile-demo" class="side-nav">
             <li class="logo" style="height: 100px;"><a id="logo-container" href="/" class="brand-logo">
               <img src="{% static 'img/titulo.png' %}" style="max-width: 100%;">
-
+            {% if request.user.is_authenticated %}
+              <li class="no-padding">
+                <ul class="collapsible collapsible-accordion">
+                  <li class="bold"><a class="collapsible-header  waves-effect waves-teal"><strong>{{ request.user.username }}</strong></a>
+                    <div class="collapsible-body">
+                      <ul>
+                        <li><a href="{% url 'cuentas:cuenta' %}">Mi cuenta</a></li>
+                        <li><a href="{% url 'cuentas:logout' %}">Cerrar sesión</a></li>
+                      </ul>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            {% endif %}
             {% if request.user.is_authenticated %}
             <li class="bold"><a href="{% url 'generales:home' %}" class="waves-effect waves-teal"><strong>Inicio</strong></a></li>
             {% else %}
@@ -101,9 +114,6 @@
             {% endif %}
             {% if 'grupos.view_pago' in request.user.get_all_permissions %}
             <li class="bold"><a href="{% url 'grupos:lista_pagos' %}" class="waves-effect waves-teal"><strong>Pagos</strong></a></li>
-            {% endif %}
-             {% if 'personas.view_persona' in request.user.get_all_permissions %}
-            <li class="bold"><a href="{% url 'cuentas:logout' %}" class="waves-effect waves-teal"><strong>Cerrar sesión</strong></a></li>
             {% endif %}
           </ul>
         </div>
