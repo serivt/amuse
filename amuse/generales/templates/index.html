@@ -77,45 +77,24 @@
    </header>
     
     {% block body %}
-
+      {% for proyecto in proyectos %}
  <div class="container">
   <div class="slider">
     <ul class="slides">
       <li>
-        <img src="http://lorempixel.com/800/400/nightlife/3/"> 
-        <div class="caption center-align">
-          <h1>Carta de una Desconocida</h1>
-          <h3>Stefan Zweig</h3>
-          <h5 class="light grey-text text-lighten-3">Descripción o texto de ejemplo</h5>
-        </div>
-      </li>
-      <li>
-        <img src="http://lorempixel.com/800/400/nightlife/2/">
+        <img src={{proyecto.imagen}}>
         <div class="caption left-align">
-          <h1>Caminado por Woody</h1>
-          <h3>Left Aligned Caption</h3>
-          <h5 class="light grey-text text-lighten-3">Descripción o texto de ejemplo</h5>
-        </div>
-      </li>
-      <li>
-        <img src="http://lorempixel.com/800/400/nightlife/7/"> 
-        <div class="caption right-align">
-          <h1>La Vida es Bella</h1>
-          <h3>Right Aligned Caption</h3>
-          <h5 class="light grey-text text-lighten-3">Descripción o texto de ejemplo</h5>
-        </div>
-      </li>
-      <li>
-        <img src="http://lorempixel.com/800/400/people/4/">
-        <div class="caption center-align">
-          <h1>Mujeres</h1>
-          <h3>This is our big Tagline!</h3>
-          <h5 class="light grey-text text-lighten-3">Descripción o texto de ejemplo</h5>
+          <h1>{{proyecto.nombre}}}</h1>
+          <h3>{{proyecto.autor}}}</h3>
+          <h4>Lugar:{{proyecto.lugar}}}</h4>
+          <h4>Fecha:{{proyecto.fecha_interpretacion}}}</h4>
+          <h5 class="light grey-text text-lighten-3">{{proyecto.descripcion}}</h5>
         </div>
       </li>
     </ul>
   </div>
 </div>
+{% endfor %}
 
 <div class="container">
   <div class="slider">
@@ -128,7 +107,7 @@
               <span class="card-title">Teatro</span>
           </div>
           <div class="card-content">
-            <p>"El teatro es la poesía que se levanta del libro y se hace humana. Y al hacerse humana habla y grita, llora y se desespera". Federico Lorca</p>
+            <p>"El teatro es la poesía que se levanta del libro y se hace humana". Federico Lorca</p>
           </div>
           <div class="card-action">
             <a href="#">Ver detalles</a>

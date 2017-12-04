@@ -8,7 +8,7 @@ from django.utils.encoding import python_2_unicode_compatible
 @python_2_unicode_compatible
 class Grupo(models.Model):
     nombre = models.CharField('Nombre*', max_length=50)
-    descripcion = models.TextField('Descripción*', max_length= 150)
+    descripcion = models.TextField('Descripción*', max_length= 57)
     estado = models.BooleanField('Estado', default=True)
     fecha_creacion = models.DateTimeField('Fecha de creación',
                                           auto_now_add=True)

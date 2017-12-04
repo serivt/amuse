@@ -2,19 +2,19 @@
 from django.conf.urls import url
 
 from personas.views import (
-    lista_personas, agregar_acudiente, agregar_persona, modificar_persona,
+    lista_personas, agregar_persona, modificar_persona,
     eliminar_persona,
     lista_roles, agregar_rol, modificar_rol, eliminar_rol, 
     modificar_aprendiz,
     lista_aspirantes, lista_aprendiz, modificar_aspirante, eliminar_aspirante,
     aceptar_aspirante, eliminar_aprendiz, registro_aspirantes,
-    lista_tareas, agregar_tarea, modificar_tarea, eliminar_tarea
-)
+    lista_tareas, agregar_tarea, modificar_tarea, eliminar_tarea,
+    lista_acudiente, modificar_acudiente, eliminar_acudiente, agregar_acudiente
+    )
 
 
 urlpatterns = [
     url(r'^lista/$', lista_personas, name='lista'),
-    url(r'^form/acudiente/$', agregar_acudiente, name='agregar_acudiente'),
     url(r'^form/$', agregar_persona, name='agregar'),
     url(r'^form/(?P<pk>[0-9]+)$', modificar_persona, name='editar'),
     url(r'^eliminar/(?P<pk>[0-9]+)$', eliminar_persona, name='eliminar'),
@@ -45,5 +45,10 @@ urlpatterns = [
         name='aceptar_aspirante'),
     url(r'^aspirantes/registro/', registro_aspirantes,
         name='registro_aspirantes'),
-        
+    #Acudiente    
+    url(r'^acudiente/lista/$', lista_acudiente, name='lista_acudiente'),
+    url(r'^form/acudiente/$', agregar_acudiente, name='agregar_acudiente'),
+    url(r'^acudiente/form/(?P<pk>[0-9]+)$', modificar_acudiente,
+        name='modificar_acudiente'),  
+    url(r'^acudiente/eliminar/(?P<pk>[0-9]+)$', eliminar_acudiente, name='eliminar_acudiente'),
 ]

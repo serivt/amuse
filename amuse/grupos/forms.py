@@ -12,16 +12,16 @@ class GrupoForm(forms.ModelForm):
         exclude = ['fecha_inactivacion', 'estado']
         widgets = {
             'nombre': forms.TextInput(attrs={
-                'class': 'validate form-control form-control-sm',
+                'class': 'validate form-control form-control-sm letras',
                 'minlength': 3,     
                 'maxlength': 15,
                 'required': 'true'
             }),
             'descripcion': forms.Textarea(attrs={
                 'class': 'validate materialize-textarea',
-                'data-length': '150',
+                'data-length': '57',
                 'minlength': 0,     
-                'maxlength': 150,
+                'maxlength': 57,
                 'required': 'true'
             }),
             'categoria': forms.Select(attrs={
@@ -50,7 +50,7 @@ class CategoriaForm(forms.ModelForm):
         exclude = ['estado'] # Excluir
         widgets = {
             'nombre': forms.TextInput(attrs={
-                'class': 'validate form-control form-control-sm',
+                'class': 'validate form-control form-control-sm letras',
                 'minlength':3,     
                 'maxlength': 15,
                 'placeholder': 'Juvenil',

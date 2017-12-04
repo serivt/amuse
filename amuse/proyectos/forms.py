@@ -12,14 +12,14 @@ class ProyectoForm(forms.ModelForm):
         exclude = ['fecha_creacion', 'estado']
         widgets = {
             'nombre': forms.TextInput(attrs={
-                'class': 'validate form-control form-control-sm',
+                'class': 'validate form-control form-control-sm letras',
                 'minlength': 3,     
                 'maxlength': 255,
                 'placeholder': 'Hamlet',
                 'required': 'true'
             }),
             'autor': forms.TextInput(attrs={
-                'class': 'validate form-control form-control-sm',
+                'class': 'validate form-control form-control-sm letras',
                 'minlength': 3,     
                 'maxlength': 50,
                 'placeholder': 'William Shakespeare',
@@ -67,7 +67,7 @@ class PersonajeForm(forms.ModelForm):
         exclude = ['estado']
         widgets = {
             'nombre': forms.TextInput(attrs={
-                'class': 'validate form-control form-control-sm',
+                'class': 'validate form-control form-control-sm letras',
                 'minlength': 3,     
                 'maxlength': 255,
                 'placeholder': 'Los Fisicos',

@@ -1,39 +1,83 @@
-<form id="acudiente-form" method="POST">
+{% extends 'base.html' %} 
+
+{% block seccion %}
+{% if form.instance.pk %}
+  Modificar Acudiente
+{% else %}
+  Agregar Acudiente
+{% endif %}
+{% endblock seccion %}
+
+{% block opciones %}
+<li><a href="{% url 'personas:lista' %}"><i class="material-icons left">arrow_back</i> Volver</a></li>
+  {% if form.instance.pk %}
+  <li><a id="eliminar" data-target="{% url 'personas:eliminar_acudiente' form.instance.pk %}">
+  {% endif %}
+{% endblock opciones %}
+
+{% block body %}
+{{ form.errors }}
+<form id="acudiente-form" method="POST" enctype='multipart/form-data'>
   {% csrf_token %}
   <div class="row">
-    <div class="col-12 col-sm-6">
+    <div class="col S12 m3">
     {% with form.primer_nombre as input %}
       {% include 'includes/input.html' %}
     {% endwith %}
     </div>
-    <div class="col-12 col-sm-6">
+    <div class="col S12 m3">
     {% with form.segundo_nombre as input %}
       {% include 'includes/input.html' %}
     {% endwith %}
     </div>
-  </div>
-  <div class="row">
-    <div class="col-12 col-sm-6">
+    <div class="col S12 m3">
     {% with form.primer_apellido as input %}
       {% include 'includes/input.html' %}
     {% endwith %}
     </div>
-    <div class="col-12 col-sm-6">
+    <div class="col S12 m3">
     {% with form.segundo_apellido as input %}
       {% include 'includes/input.html' %}
     {% endwith %}
     </div>
   </div>
   <div class="row">
-    <div class="col-12 col-sm-6">
-    {% with form.correo as input %}
-      {% include 'includes/input.html' %}
-    {% endwith %}
-    </div>
-    <div class="col-12 col-sm-6">
+     <div class="col S12 m6">
     {% with form.telefono as input %}
       {% include 'includes/input.html' %}
     {% endwith %}
     </div>
+     <div class="col S12 m6">
+    {% with form.tipo_parentezco as input %}
+      {% include 'includes/input.html' %}
+    {% endwith %}
+    </div>
   </div>
+
 </form>
+{% endblock body %}
+
+{% block script %}
+<script>
+  $('#eliminar').on('click', function(e){
+    let url = $(this).attr('data-target');
+    e.preventDefault();
+    {% if form.instance.estado %}
+    swal({
+      title: "¿Esta seguro?",
+      text: '¿Esta por inactivar este cuediente, desea continuar?', 
+      icon: "warning",
+      buttons: ["Cancelar", "Inactivar"],
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        window.location.href = url;
+      }
+    });
+    {% else %}
+    window.location.href = url;
+    {% endif %}
+  });
+</script>
+{% endblock %}

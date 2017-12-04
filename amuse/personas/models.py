@@ -35,10 +35,12 @@ class Persona(models.Model):
     APRENDIZ = 0
     ASPIRANTE = 1
     DIRECTOR = 2
+    ACUDIENTE = 3
     TIPO_PERSONA = (
         (APRENDIZ, 'Aprendiz'),
         (ASPIRANTE, 'Aspirante'),
         (DIRECTOR, 'Director'),
+        (ACUDIENTE, 'Acudiente'),
     )
     CC = 0
     TI = 1
@@ -66,6 +68,18 @@ class Persona(models.Model):
         (OPOSITIVO, 'O+'),
         (ONEGATIVO, 'O-'),
     )
+    MADRE = 0
+    PADRE = 1
+    HERMANO = 2
+    ABUELO = 3
+    TIO = 4
+    TIPO_PARENTEZCO_CHOICES =(
+        (MADRE, 'Madre'),
+        (PADRE, 'Padre'),
+        (HERMANO, 'Hermano(a)'),
+        (ABUELO, 'Abuelo(a)'),
+        (TIO, 'Tio(a)'),
+    )
     primer_nombre = models.CharField('Primer nombre*', max_length=255)
     segundo_nombre = models.CharField(
         'Segundo nombre', max_length=255, null=True, blank=True)
@@ -75,13 +89,12 @@ class Persona(models.Model):
     correo = models.EmailField('Correo electrónico*', max_length=50,
                                unique=True)
     tipo_identificacion = models.SmallIntegerField(
-        'Tipo de Identificación*', choices=TIPO_IDENTIFICACION_CHOICES,
-        blank=True, null=True)
+        'Tipo de Identificación*', choices=TIPO_IDENTIFICACION_CHOICES)
+    tipo_parentezco = models.SmallIntegerField (
+        'Parentezco*', choices=TIPO_PARENTEZCO_CHOICES)
     numero_identificacion = models.CharField('Número de Identificación*',
-                                             max_length=50, unique=True,
-                                             blank=True, null=True)
-    fecha_nacimiento = models.DateField('Fecha de Nacimiento',
-                                        blank=True, null=True)
+                                             max_length=50, unique=True)
+    fecha_nacimiento = models.DateField('Fecha de Nacimiento', blank=True, null=True)
     rh = models.SmallIntegerField(
         'RH', choices=TIPO_SANGRE_CHOICES, blank=True, null=True)
     eps = models.CharField('EPS', max_length=50, blank=True, null=True)

@@ -14,7 +14,7 @@ class RolForm(forms.ModelForm):
         fields = '__all__'
         widgets = {
             'nombre': forms.TextInput(attrs={
-                'class': 'form-control',
+                'class': 'form-control letras',
                 'required': 'true'
             }),
             'descripcion': forms.Textarea(attrs={
@@ -31,43 +31,40 @@ class AcudienteForm(forms.ModelForm):
                   'segundo_apellido', 'correo', 'telefono']
         widgets = {
             'primer_nombre': forms.TextInput(attrs={
-                'class': 'validate form-control form-control-sm',
+                'class': 'validate form-control form-control-sm letras',
                 'minlength':3,     
                 'maxlength': 15,
                 'placeholder': 'Juan',
                 'required': 'true'
             }),
             'segundo_nombre': forms.TextInput(attrs={
-                'class': 'form-control form-control-sm',
+                'class': 'form-control form-control-sm letras',
                 'minlength':3,     
                 'maxlength': 15,
                 'placeholder': 'Esteban'
             }),
             'primer_apellido': forms.TextInput(attrs={
-                'class': 'validate form-control form-control-sm',
+                'class': 'validate form-control form-control-sm letras',
                 'minlength':3,     
                 'maxlength': 15,
                 'placeholder': 'Sans',
                 'required': 'true'
             }),
             'segundo_apellido': forms.TextInput(attrs={
-                'class': 'form-control form-control-sm',
+                'class': 'form-control form-control-sm letras',
                 'minlength':3,     
                 'maxlength': 15,
                 'placeholder': 'Sans'
-            }),
-            'correo': forms.EmailInput(attrs={
-                'class': 'validate form-control form-control-sm',
-                'minlength':12,             
-                'maxlength': 20,
-                'placeholder': 'nombre@gmail.com',
-                'required': 'true'
             }),
             'telefono': forms.TextInput(attrs={
                 'class': 'validate form-control form-control-sm numerico',
                 'minlength':7,     
                 'maxlength': 10,
                 'placeholder': '3108020320',
+                'required': 'true'
+            }),
+            'tipo_parentezco': forms.Select(attrs={
+                'class': 'validate material-select',
                 'required': 'true'
             }),
         }
@@ -117,7 +114,7 @@ class PersonaForm(forms.ModelForm):
                 'maxlength': 3,
             }),
             'eps': forms.TextInput(attrs={
-                'class': 'form-control form-control-sm',
+                'class': 'form-control form-control-sm letras',
                 'minlength':5,
                 'maxlength': 25,
             }),
@@ -186,7 +183,7 @@ class TareaForm(forms.ModelForm):
         exclude = ['fecha_registro']
         widgets = {
             'titulo': forms.TextInput(attrs={
-                'class': 'validate form-control form-control-sm',
+                'class': 'validate form-control form-control-sm letras',
                 'required': 'true'
             }),
             'descripcion': forms.Textarea(attrs={

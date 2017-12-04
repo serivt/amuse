@@ -65,8 +65,17 @@ class AprendizListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     queryset = Persona.objects.filter(tipo_persona=Persona.APRENDIZ)
 
 
+class AcudienteListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
+    permission_required = 'personas.view_persona'
+    model = Persona
+    template_name = 'includes/acudiente_list.html'
+    queryset = Persona.objects.filter(tipo_persona=Persona.ACUDIENTE)
+
+
 class AcudienteFormView(LoginRequiredMixin, PermissionRequiredMixin, View):
     form_class = AcudienteForm
+    template_name = 'includes/acudiente_form.html'
+    success_url = reverse_lazy('personas:lista')
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
@@ -220,17 +229,16 @@ eliminar_rol = EliminarView.as_view(
 lista_personas = PersonaListView.as_view()
 lista_aspirantes = AspiranteListView.as_view()
 lista_aprendiz = AprendizListView.as_view()
-agregar_acudiente = AcudienteFormView.as_view(
-    permission_required='personas.add_persona')
+lista_acudiente = AcudienteListView.as_view()
+
 agregar_persona = PersonaFormView.as_view(
     permission_required='personas.add_persona')
+agregar_acudiente = PersonaFormView.as_view(
+    permission_required='personas.add_persona')
+
 modificar_persona = PersonaFormView.as_view(
     permission_required='personas.change_persona')
-eliminar_persona = EliminarView.as_view(
-    model=Persona,
-    success_url=reverse_lazy('personas:lista'),
-    permission_required='personas.delete_persona')
-    #Aprendices
+
 modificar_aprendiz = PersonaFormView.as_view(
     template_name='aprendiz_form.html',
     permission_required='personas.change_persona'
@@ -239,14 +247,30 @@ modificar_aspirante = PersonaFormView.as_view(
     template_name='aspirante_form.html',
     permission_required='personas.change_persona'
 )
+modificar_acudiente = PersonaFormView.as_view(
+    template_name='includes/acudiente_form.html',
+    permission_required='personas.change_persona'
+)
+
+
+eliminar_persona = EliminarView.as_view(
+    model=Persona,
+    success_url=reverse_lazy('personas:lista'),
+    permission_required='personas.delete_persona')
+    #Aprendices
 eliminar_aspirante = EliminarPermanenteView.as_view(
     model=Persona,
     success_url=reverse_lazy('personas:lista_aspirantes'),
     permission_required='personas.delete_persona'
 )
-aceptar_aspirante = AceptarAspiranteView.as_view()
 eliminar_aprendiz = EliminarView.as_view(
     model=Persona,
     success_url=reverse_lazy('personas:lista_aprendiz'),
     permission_required='personas.delete_persona')
+eliminar_acudiente = EliminarView.as_view(
+    model=Persona,
+    success_url=reverse_lazy('personas:lista_acudiente'),
+    permission_required='personas.delete_persona')
+
+aceptar_aspirante = AceptarAspiranteView.as_view()
     
