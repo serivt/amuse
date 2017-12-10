@@ -182,6 +182,12 @@ class RegistroAspiranteView(FormView):
             #usuario.save()
             #persona.usuario = usuario
             persona.save()
+            enviar_correo(
+                'emails/aspirante_inscrito',
+                [persona.correo],
+                'Inscripción en Amuse'
+            )
+            #
             #form.save_m2m()
         return super(RegistroAspiranteView, self).form_valid(form)
 

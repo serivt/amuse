@@ -48,13 +48,12 @@ class ProyectoForm(forms.ModelForm):
                 'type':'text',
                 'required': 'true'
             }),
-            'imagen': forms.TextInput(attrs={
+            'imagen': forms.FileInput(attrs={
                 'class': 'validate btn',
-                'type':'file',
                 'required': 'true'
             }),
             'video': forms.TextInput(attrs={
-                'class': 'validate form-control form-control-sm',
+                'class': 'form-control form-control-sm',
                 'required': 'true'
             }),
         }

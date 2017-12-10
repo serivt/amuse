@@ -91,7 +91,7 @@ class Persona(models.Model):
     tipo_identificacion = models.SmallIntegerField(
         'Tipo de Identificación*', choices=TIPO_IDENTIFICACION_CHOICES)
     tipo_parentezco = models.SmallIntegerField (
-        'Parentezco*', choices=TIPO_PARENTEZCO_CHOICES)
+        'Parentezco*', choices=TIPO_PARENTEZCO_CHOICES, null=True, blank=True)
     numero_identificacion = models.CharField('Número de Identificación*',
                                              max_length=50, unique=True)
     fecha_nacimiento = models.DateField('Fecha de Nacimiento', blank=True, null=True)
