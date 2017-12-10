@@ -90,7 +90,7 @@
             <li class="bold"><a href="{% url 'personas:lista_aspirantes' %}" class="waves-effect waves-teal"><strong>Aspirantes</strong></a></li>
             {% endif %}
             {% if 'personas.view_persona' in request.user.get_all_permissions %}
-            <li class="bold"><a href="{% url 'personas:lista' %}" class="waves-effect waves-teal"><strong>Acudientes</strong></a></li>
+            <li class="bold"><a href="{% url 'personas:lista_acudiente' %}" class="waves-effect waves-teal"><strong>Acudientes</strong></a></li>
             {% endif %}
             {% if 'grupos.view_grupo' in request.user.get_all_permissions %}
             <li class="bold"><a href="{% url 'grupos:lista' %}" class="waves-effect waves-teal"><strong>Grupos</strong></a></li>

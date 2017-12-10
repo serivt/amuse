@@ -66,26 +66,29 @@ class AprendizListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
 
 
 class AcudienteListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
-    permission_required = 'personas.view_persona'
+    permission_required = 'personas.view_acudiente'
     model = Persona
     template_name = 'includes/acudiente_list.html'
     queryset = Persona.objects.filter(tipo_persona=Persona.ACUDIENTE)
 
 
-class AcudienteFormView(LoginRequiredMixin, PermissionRequiredMixin, View):
+class AcudienteFormView(LoginRequiredMixin, PermissionRequiredMixin, FormView):
     form_class = AcudienteForm
     template_name = 'includes/acudiente_form.html'
-    success_url = reverse_lazy('personas:lista')
+    success_url = reverse_lazy('personas:lista_acudiente')
 
-    def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            persona = form.save(commit=False)
-            persona.roles.add(Rol.objects.get_or_create(
-                nombre=settings.ACUDIENTE))
-            persona.save()
-        return HttpResponse(status=201) # Http Code 201 = Http Status Created
+    def get_form(self):
+        try:
+            acudiente = Persona.objects.get(pk=self.kwargs.get('pk', 0))
+            return self.form_class(instance=acudiente, **self.get_form_kwargs())
+        except Persona.DoesNotExist as ex:
+            return self.form_class(**self.get_form_kwargs())
 
+    def form_valid(self, form):
+        acudiente = form.save(commit=False) #false, que guarde el objeto en memoria y no en la db
+        acudiente.tipo_persona = Persona.ACUDIENTE
+        acudiente.save()
+        return super(AcudienteFormView, self).form_valid(form)
 
 class PersonaFormView(LoginRequiredMixin, PermissionRequiredMixin, FormView):
     form_class = PersonaForm
@@ -239,8 +242,8 @@ lista_acudiente = AcudienteListView.as_view()
 
 agregar_persona = PersonaFormView.as_view(
     permission_required='personas.add_persona')
-agregar_acudiente = PersonaFormView.as_view(
-    permission_required='personas.add_persona')
+agregar_acudiente = AcudienteFormView.as_view(
+    permission_required='personas.add_acudiente')
 
 modificar_persona = PersonaFormView.as_view(
     permission_required='personas.change_persona')
@@ -253,9 +256,9 @@ modificar_aspirante = PersonaFormView.as_view(
     template_name='aspirante_form.html',
     permission_required='personas.change_persona'
 )
-modificar_acudiente = PersonaFormView.as_view(
+modificar_acudiente = AcudienteFormView.as_view(
     template_name='includes/acudiente_form.html',
-    permission_required='personas.change_persona'
+    permission_required='personas.change_acudiente'
 )
 
 
@@ -276,7 +279,7 @@ eliminar_aprendiz = EliminarView.as_view(
 eliminar_acudiente = EliminarView.as_view(
     model=Persona,
     success_url=reverse_lazy('personas:lista_acudiente'),
-    permission_required='personas.delete_persona')
+    permission_required='personas.delete_acudiente')
 
 aceptar_aspirante = AceptarAspiranteView.as_view()
     

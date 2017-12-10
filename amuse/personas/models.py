@@ -87,13 +87,13 @@ class Persona(models.Model):
     segundo_apellido = models.CharField(
         'Segundo apellido', max_length=255, null=True, blank=True)
     correo = models.EmailField('Correo electrónico*', max_length=50,
-                               unique=True)
+                               unique=True, null=True, blank=True)
     tipo_identificacion = models.SmallIntegerField(
-        'Tipo de Identificación*', choices=TIPO_IDENTIFICACION_CHOICES)
+        'Tipo de Identificación*', choices=TIPO_IDENTIFICACION_CHOICES, null=True, blank=True)
     tipo_parentezco = models.SmallIntegerField (
         'Parentezco*', choices=TIPO_PARENTEZCO_CHOICES, null=True, blank=True)
     numero_identificacion = models.CharField('Número de Identificación*',
-                                             max_length=50, unique=True)
+                                             max_length=50, unique=True, null=True, blank=True)
     fecha_nacimiento = models.DateField('Fecha de Nacimiento', blank=True, null=True)
     rh = models.SmallIntegerField(
         'RH', choices=TIPO_SANGRE_CHOICES, blank=True, null=True)
@@ -122,6 +122,10 @@ class Persona(models.Model):
     class Meta:
         permissions = (
             ('view_persona', 'Puede ver personas'),
+            ('view_acudiente', 'Puede ver acudiente'),
+            ('add_acudiente', 'Puede agregar acudiente'),
+            ('change_acudiente', 'Puede modificar acudiente'),
+            ('delete_acudiente', 'Puede eliminar acudiente'),
         )
 
     def __str__(self):
@@ -139,7 +143,7 @@ class Persona(models.Model):
 
     def get_nombre_completo(self):
         return '%s %s' % (self.get_nombres(), self.get_apellidos())
-
+    
     def get_roles(self):
         roles = []
         for rol in self.roles.all():

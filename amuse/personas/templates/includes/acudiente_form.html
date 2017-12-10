@@ -9,7 +9,7 @@
 {% endblock seccion %}
 
 {% block opciones %}
-<li><a href="{% url 'personas:lista' %}"><i class="material-icons left">arrow_back</i> Volver</a></li>
+<li><a href="{% url 'personas:lista_acudiente' %}"><i class="material-icons left">arrow_back</i> Volver</a></li>
   {% if form.instance.pk %}
   <li><a id="eliminar" data-target="{% url 'personas:eliminar_acudiente' form.instance.pk %}">
   {% endif %}
@@ -52,6 +52,12 @@
       {% include 'includes/input.html' %}
     {% endwith %}
     </div>
+  </div>
+  
+  <div class="col s12 m12">
+    <button type="submit" class="btn btn-primary pull-right" style="border-radius: 20px !important;">
+      <i class="fa fa-save"></i> Guardar
+    </button>
   </div>
 
 </form>

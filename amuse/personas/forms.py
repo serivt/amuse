@@ -28,7 +28,7 @@ class AcudienteForm(forms.ModelForm):
     class Meta:
         model = Persona
         fields = ['primer_nombre', 'segundo_nombre', 'primer_apellido',
-                  'segundo_apellido', 'correo', 'telefono']
+                  'segundo_apellido', 'telefono', 'tipo_parentezco']
         widgets = {
             'primer_nombre': forms.TextInput(attrs={
                 'class': 'validate form-control form-control-sm letras',
@@ -73,7 +73,7 @@ class PersonaForm(forms.ModelForm):
 
     class Meta:
         model = Persona
-        exclude = ['usuario', 'tipo_persona', 'estado']
+        exclude = ['usuario', 'tipo_persona']
         widgets = {
             'primer_nombre': forms.TextInput(attrs={
                 'class': 'validate form-control form-control-sm letras',
