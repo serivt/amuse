@@ -63,6 +63,7 @@ class Pago(models.Model):
     grupo = models.ForeignKey('grupos.Grupo', verbose_name='Grupo*')
     persona = models.ForeignKey('personas.Persona', verbose_name='Aprendiz*')
     valor_pago = models.FloatField('Valor pagado*')
+    fecha_pago = models.DateTimeField('Fecha de pago', auto_now_add=True)
     alerta_pago = models.BooleanField(default=False)
     estado = models.BooleanField(default=True)
 

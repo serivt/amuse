@@ -32,6 +32,18 @@ class Proyecto(models.Model):
             return self.imagen.url
         return ''
 
+    def get_grupos(self):
+        grupos = []
+        for grupo in self.grupos.all():
+            grupos.append(' %s' % grupo.nombre)
+        return ','.join(sorted(grupos)).strip()
+
+    def get_categorias(self):
+        grupos = []
+        for grupo in self.grupos.all():
+            grupos.append(' %s' % grupo.categoria.nombre)
+        return ','.join(sorted(grupos)).strip()
+    
 
 @python_2_unicode_compatible
 class Personaje(models.Model):

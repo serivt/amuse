@@ -68,49 +68,84 @@
               <li class="no-padding">
                 <ul class="collapsible collapsible-accordion">
                   <li class="bold"><a class="collapsible-header  waves-effect waves-teal"><strong>{{ request.user.username }}</strong></a>
-            <div class="collapsible-body">
-              <ul>
-                <li><a href="{% url 'cuentas:cuenta' %}">Mi cuenta</a></li>
-                <li><a href="{% url 'cuentas:logout' %}">Cerrar sesión</a></li>
-              </ul>
-            </div>
-          </li>
-        </ul>
-        </li>
-        {% endif %} {% if request.user.is_authenticated %}
-        <li class="bold"><a href="{% url 'generales:home' %}" class="waves-effect waves-teal"><strong>Inicio</strong></a></li>
-        {% else %}
-        <li class="bold"><a href="{% url 'generales:inicial' %}" class="waves-effect waves-teal"><strong>Inicio</strong></a></li>
-        {% endif %} {% if 'personas.view_persona' in request.user.get_all_permissions %}
-        <li class="bold"><a href="{% url 'personas:lista' %}" class="waves-effect waves-teal"><strong>Directores</strong></a></li>
-        {% endif %} {% if 'personas.view_persona' in request.user.get_all_permissions %}
-        <li class="bold"><a href="{% url 'personas:lista_aprendiz' %}" class="waves-effect waves-teal"><strong>Aprendices</strong></a></li>
-        {% endif %} {% if 'personas.view_persona' in request.user.get_all_permissions %}
-        <li class="bold"><a href="{% url 'personas:lista_aspirantes' %}" class="waves-effect waves-teal"><strong>Aspirantes</strong></a></li>
-        {% endif %} {% if 'personas.view_persona' in request.user.get_all_permissions %}
-        <li class="bold"><a href="{% url 'personas:lista_acudiente' %}" class="waves-effect waves-teal"><strong>Acudientes</strong></a></li>
-        {% endif %} {% if 'grupos.view_grupo' in request.user.get_all_permissions %}
-        <li class="bold"><a href="{% url 'grupos:lista' %}" class="waves-effect waves-teal"><strong>Grupos</strong></a></li>
-        {% endif %} {% if 'grupos.view_categoria' in request.user.get_all_permissions %}
-        <li class="bold"><a href="{% url 'grupos:lista_categorias' %}" class="waves-effect waves-teal"><strong>Categorias</strong></a></li>
-        {% endif %} {% if 'personas.view_tarea' in request.user.get_all_permissions %}
-        <li class="bold"><a href="{% url 'personas:lista_tareas' %}" class="waves-effect waves-teal"><strong>Tareas</strong></a></li>
-        {% endif %} {% if 'proyectos.view_proyecto' in request.user.get_all_permissions %}
-        <li class="no-padding">
-          <ul class="collapsible collapsible-accordion">
-            <li class="bold"><a class="collapsible-header  waves-effect waves-teal"><strong>Proyectos</strong></a>
-              <div class="collapsible-body">
-                <ul>
-                  <li><a href="{% url 'proyectos:lista' %}">Proyectos</a></li>
-                  <li><a href="{% url 'proyectos:lista_personajes' %}">Personajes</a></li>
+<<<<<<< HEAD
+=======
+                    <div class="collapsible-body">
+                      <ul>
+                        <li><a href="{% url 'cuentas:cuenta' %}">Mi cuenta</a></li>
+                        <li><a href="{% url 'cuentas:logout' %}">Cerrar sesión</a></li>
+                      </ul>
+                    </div>
+                  </li>
                 </ul>
-              </div>
+              </li>
+            {% endif %}
+            {% if request.user.is_authenticated %}
+            <li class="bold"><a href="{% url 'generales:home' %}" class="waves-effect waves-teal"><strong>Inicio</strong></a></li>
+            {% else %}
+            <li class="bold"><a href="{% url 'generales:inicial' %}" class="waves-effect waves-teal"><strong>Inicio</strong></a></li>
+            {% endif %}
+
+            {% if 'personas.view_persona' in request.user.get_all_permissions %}
+            <li class="bold"><a href="{% url 'personas:lista' %}" class="waves-effect waves-teal"><strong>Directores</strong></a></li>
+            {% endif %}
+            {% if 'personas.view_persona' in request.user.get_all_permissions %}
+            <li class="bold"><a href="{% url 'personas:lista_aprendiz' %}" class="waves-effect waves-teal"><strong>Aprendices</strong></a></li>
+            {% endif %}
+            {% if 'personas.view_persona' in request.user.get_all_permissions %}
+            <li class="bold"><a href="{% url 'personas:lista_aspirantes' %}" class="waves-effect waves-teal"><strong>Aspirantes</strong></a></li>
+            {% endif %}
+            {% if 'personas.view_acudiente' in request.user.get_all_permissions %}
+            <li class="bold"><a href="{% url 'personas:lista_acudiente' %}" class="waves-effect waves-teal"><strong>Acudientes</strong></a></li>
+            {% endif %}
+            {% if 'grupos.view_grupo' in request.user.get_all_permissions %}
+            <li class="bold"><a href="{% url 'grupos:lista' %}" class="waves-effect waves-teal"><strong>Grupos</strong></a></li>
+            {% endif %}
+            {% if 'grupos.view_categoria' in request.user.get_all_permissions %}
+            <li class="bold"><a href="{% url 'grupos:lista_categorias' %}" class="waves-effect waves-teal"><strong>Categorias</strong></a></li>
+            {% endif %}
+            {% if 'personas.view_tarea' in request.user.get_all_permissions %}
+            <li class="bold"><a href="{% url 'personas:lista_tareas' %}" class="waves-effect waves-teal"><strong>Tareas</strong></a></li>
+            {% endif %}
+            {% if 'proyectos.view_proyecto' in request.user.get_all_permissions %}
+            <li class="no-padding">
+              <ul class="collapsible collapsible-accordion">
+                <li class="bold"><a class="collapsible-header  waves-effect waves-teal"><strong>Proyectos</strong></a>
+                  <div class="collapsible-body">
+                    <ul>
+                      <li><a href="{% url 'proyectos:lista' %}">Proyectos</a></li>
+                      <li><a href="{% url 'proyectos:lista_personajes' %}">Personajes</a></li>
+                    </ul>
+                  </div>
+                </li>
+>>>>>>> bc796625a2c1e9e004605d86c94d7bece6522852
+              </ul>
+<<<<<<< HEAD
+=======
+            {% endif %}
+            {% if 'grupos.view_pago' in request.user.get_all_permissions %}
+            <li class="bold"><a href="{% url 'grupos:lista_pagos' %}" class="waves-effect waves-teal"><strong>Pagos</strong></a></li>
+            {% endif %}
+            {% if 'personas.view_persona' in request.user.get_all_permissions %}
+            <li class="no-padding">
+              <ul class="collapsible collapsible-accordion">
+                <li class="bold"><a class="collapsible-header  waves-effect waves-teal"><strong>Reportes</strong></a>
+                  <div class="collapsible-body">
+                    <ul>
+                      <li><a href="{% url 'reportes:export_proyectos_xls' %}">Proyectos</a></li>
+                      <li><a href="{% url 'reportes:export_directores_xls' %}">Directores</a></li>
+                      <li><a href="{% url 'reportes:export_aprendices_xls' %}">Aprendices</a></li>
+                      <li><a href="{% url 'reportes:export_pagos_xls' %}">Pagos</a></li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
             </li>
+            {% endif %}
+>>>>>>> bc796625a2c1e9e004605d86c94d7bece6522852
           </ul>
         </li>
-        {% endif %} {% if 'grupos.view_pago' in request.user.get_all_permissions %}
-        <li class="bold"><a href="{% url 'grupos:lista_pagos' %}" class="waves-effect waves-teal"><strong>Pagos</strong></a></li>
-        {% endif %}
+        
         </ul>
       </div>
     </nav>
