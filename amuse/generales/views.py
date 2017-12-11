@@ -21,6 +21,50 @@ class InicialView(TemplateView):
 inicial = InicialView.as_view()
 
 
+class NuestraHistoriaView(TemplateView):
+    template_name = 'nuestraHistoria.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(NuestraHistoriaView, self).get_context_data(**kwargs)
+        return context
+
+
+nuestraHistoria = NuestraHistoriaView.as_view()
+
+
+class DanzaView(TemplateView):
+    template_name = 'danza.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(DanzaView, self).get_context_data(**kwargs)
+        return context
+
+
+danza = DanzaView.as_view()
+
+
+class MusicaView(TemplateView):
+    template_name = 'musica.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(MusicaView, self).get_context_data(**kwargs)
+        return context
+
+
+musica = MusicaView.as_view()
+
+
+class TeatroView(TemplateView):
+    template_name = 'teatro.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(TeatroView, self).get_context_data(**kwargs)
+        return context
+
+
+teatro = TeatroView.as_view()
+
+
 class HomeView(LoginRequiredMixin, TemplateView):
     template_name = 'home.html'
 

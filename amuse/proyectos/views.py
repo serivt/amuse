@@ -27,6 +27,11 @@ class ProyectoFormView(LoginRequiredMixin, PermissionRequiredMixin, FormView):
     template_name = 'proyecto_form.html'
     success_url = reverse_lazy('proyectos:lista')
 
+    def get_context_data(self, *args, **kwargs):
+        context = super(ProyectoFormView, self).get_context_data(*args, **kwargs)
+        context['proyectos'] = Proyecto.objects.filter(estado=True) #consulta para recorrer los proyectos
+        return context
+
     def get_form(self):
         try:
             proyecto = Proyecto.objects.get(pk=self.kwargs.get('pk', 0))

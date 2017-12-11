@@ -9,7 +9,9 @@
 {% endblock opciones %}
 
 {% block body %}
-    <table class="striped datatables ui celled table responsive-table">
+    <!--<table class="striped datatables ui celled table responsive-table">-->
+  <table class="striped datatables ui celled table">
+    <div class="responsive-table">
       <thead>
         <tr>
       <th>#</th>
@@ -59,5 +61,6 @@
       </tr>
     {% endfor %}
   </tbody>
+ </div>
 </table>
 {% endblock body %}

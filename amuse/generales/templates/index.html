@@ -29,14 +29,35 @@
   <header>
 
 <ul id="dropdown1" class="dropdown-content">
-  <li><a href="#!">Análisis</a></li>
-  <li><a href="#!">Requerimientos</a></li>
-  <li><a href="#!">Diseño</a></li>
+  <li><a href="{% static 'archivos/Actas.pdf' %}" target="_blank">Actas</a></li>
+  <li><a href="{% static 'archivos/Análisis.pdf' %}" target="_blank">Análisis</a></li>
+  <li><a href="#">Doc. General</a></li>
+  <li><a href="{% static 'archivos/DCU.pdf' %}" target="_blank">Casos de Uso</a></li>
+  <li><a href="{% static 'archivos/RF.pdf' %}" target="_blank">RF</a></li>
+  <li><a href="{% static 'archivos/RNF.pdf' %}" target="_blank">RNF</a></li>
+  <li><a href="{% static 'archivos/AmuseDB.png' %}" target="_blank">Base de Datos</a></li>
+  <li><a href="{% static 'archivos/Prototipos.pdf' %}" target="_blank">Diseño</a></li>
   <li><a href="#!">Pruebas</a></li>
+  <li><a href="#!">Video</a></li>
   <li class="divider"></li>
   <li><a href="#!">Preguntas</a></li>
-  <li><a href="#!">Acerca de</a></li>
 </ul>
+
+<ul id="dropdown2" class="dropdown-content">
+  <li><a href="{% static 'archivos/Actas.pdf' %}" target="_blank">Actas</a></li>
+  <li><a href="{% static 'archivos/Análisis.pdf' %}" target="_blank">Análisis</a></li>
+  <li><a href="#">Doc. General</a></li>
+  <li><a href="{% static 'archivos/DCU.pdf' %}" target="_blank">Casos de Uso</a></li>
+  <li><a href="{% static 'archivos/RF.pdf' %}" target="_blank">RF</a></li>
+  <li><a href="{% static 'archivos/RNF.pdf' %}" target="_blank">RNF</a></li>
+  <li><a href="{% static 'archivos/AmuseDB.png' %}" target="_blank">Base de Datos</a></li>
+  <li><a href="{% static 'archivos/Prototipos.pdf' %}" target="_blank">Diseño</a></li>
+  <li><a href="#!">Pruebas</a></li>
+  <li><a href="#!">Video</a></li>
+  <li class="divider"></li>
+  <li><a href="#!">Preguntas</a></li>
+</ul>
+
 
 <nav>
     <div class="nav-wrapper">
@@ -51,20 +72,21 @@
         <li><a href="{% url 'generales:inicial' %}"><i class="material-icons left">home</i>Inicio</a></li>
         <li><a class="dropdown-button" href="#!" data-activates="dropdown1"><i class="material-icons left">web</i>Proyecto
         <i class="material-icons right">arrow_drop_down</i></a></li>
-        <li><a href=""><i class="material-icons left">access_time</i>Nuestra Historia</a></li>
-        <li><a href=""><i class="material-icons left">view_module</i>Galería</a></li>
+        <li><a href="{% url 'generales:nuestraHistoria' %}"><i class="material-icons left">access_time</i>Nuestra Historia</a></li>
         {% if not request.user.is_authenticated %}
         <li><a href="{% url 'personas:registro_aspirantes' %}"><i class="material-icons left">assignment_ind</i>Registrarse</a></li>
         <li><a href="{% url 'cuentas:login' %}"><i class="material-icons left">account_balance_wallet</i>Iniciar Sesión</a></li>
         {% else %}
+        <li><a href="{% url 'generales:home' %}"><i class="material-icons left">view_module</i>Amuse</a></li>
         <li><a href="{% url 'cuentas:logout' %}"><i class="material-icons left">account_balance_wallet</i>Cerrar Sesión</a></li>
         {% endif %}
       </ul>
+
       <ul class="side-nav" id="mobile-demo">
         <li><a href="{% url 'generales:inicial' %}"><i class="material-icons">home</i>Inicio</a></li>
-        <li><a href=" "><i class="material-icons left">web</i>Proyecto</a></li>
-        <li><a href=""><i class="material-icons">access_time</i>Nuestra Historia</a></li>
-        <li><a href=""><i class="material-icons">view_module</i>Galería</a></li>
+        <li><a href=" " class="dropdown-button" href="#!" data-activates="dropdown2"><i class="material-icons left">web</i>Proyecto</a></li>
+        <li><a href="{% url 'generales:nuestraHistoria' %}"><i class="material-icons">access_time</i>Nuestra Historia</a></li>
+        <!--<li><a href=""><i class="material-icons">view_module</i>Galería</a></li>-->
         {% if not request.user.is_authenticated %}
         <li><a href="{% url 'personas:registro_aspirantes' %}"><i class="material-icons">assignment_ind</i>Registrarse</a></li>
         <li><a href="{% url 'cuentas:login' %}"><i class="material-icons">account_balance_wallet</i>Iniciar Sesión</a></li>
@@ -75,26 +97,61 @@
     </div>
   </nav>
    </header>
-    
     {% block body %}
-      {% for proyecto in proyectos %}
- <div class="container">
-  <div class="slider">
-    <ul class="slides">
-      <li>
-        <img src={{proyecto.imagen}}>
-        <div class="caption left-align">
-          <h1>{{proyecto.nombre}}}</h1>
-          <h3>{{proyecto.autor}}}</h3>
-          <h4>Lugar:{{proyecto.lugar}}}</h4>
-          <h4>Fecha:{{proyecto.fecha_interpretacion}}}</h4>
-          <h5 class="light grey-text text-lighten-3">{{proyecto.descripcion}}</h5>
-        </div>
-      </li>
+
+<!-- Revisar NO funciona-->
+  <!--{% for proyecto in proyectos %}
+  <div class="container">
+    <div class="slider">
+      <ul class="slides">
+        <li class="">
+          <img src="{{ proyecto.imagen.url }}">
+          <div class="caption left-align">
+            <h1>{{proyecto.nombre}}}</h1>
+              <h3>{{proyecto.autor}}}</h3>
+              <h4>Lugar:{{proyecto.lugar}}}</h4>
+              <h4>Fecha:{{proyecto.fecha_interpretacion}}}</h4>
+              <h5 class="light grey-text text-lighten-3">{{proyecto.descripcion}}</h5>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <ul class="indicators">
+      <li class="indicator-item"></li>
+      <li class="indicator-item active"></li>
+      <li class="indicator-item"></li>
     </ul>
   </div>
-</div>
-{% endfor %}
+  {% endfor %}-->
+
+    <div class="container">
+    <div class="slider">
+      <ul class="slides">
+        <li class="">
+          <img src="https://images.unsplash.com/photo-1464817739973-0128fe77aaa1?dpr=1&auto=compress,format&fit=crop&w=1199">
+          <div class="caption center-align" style="opacity: 0; transform: translateY(-100px) translateX(0px);">
+            <h3>¡Este es nuestro gran lema!</h3>
+            <h5> Aquí está nuestro pequeño lema</h5>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <ul class="indicators">
+      <li class="indicator-item"></li>
+      <li class="indicator-item active"></li>
+      <li class="indicator-item"></li>
+    </ul>
+  </div>
+
+   <!--<div class="container">
+ <div id="index-banner" class="parallax-container">
+   <img src="http://ec2-34-237-179-64.compute-1.amazonaws.com/media/proyectos/carta.jpg">
+    <div class="section no-pad-bot">
+      <div class="container">
+      </div>
+    </div>
+  </div>
+   </div>-->
 
 <div class="container">
   <div class="slider">
@@ -110,7 +167,7 @@
             <p>"El teatro es la poesía que se levanta del libro y se hace humana". Federico Lorca</p>
           </div>
           <div class="card-action">
-            <a href="#">Ver detalles</a>
+            <a href="{% url 'generales:teatro' %}">Ver detalles</a>
           </div>
         </div>
       </div>
@@ -127,7 +184,7 @@
             <p>"La danza es el lenguaje secreto del alma". Martha Graham</p>
           </div>
           <div class="card-action">
-            <a href="#">Ver detalles</a>
+            <a href="{% url 'generales:danza' %}">Ver detalles</a>
           </div>
         </div>
       </div>
@@ -144,7 +201,7 @@
             <p>"La música puede dar nombre a lo innombrable y comunicar lo desconocido". Leonard Bernstein</p>
           </div>
           <div class="card-action">
-            <a href="#">Ver detalles</a>
+            <a href="{% url 'generales:musica' %}">Ver detalles</a>
           </div>
         </div>
       </div>

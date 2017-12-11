@@ -9,7 +9,8 @@ Tareas
 {% endblock opciones %}
 
 {% block body %}
-<table class="table datatables" style="">
+<table class="striped datatables ui celled table">
+<div class="responsive-table">
   <thead>
     <tr>
       <th>Titulo</th>
@@ -34,11 +35,12 @@ Tareas
           <a href="{% url 'personas:editar_tarea' object.pk %}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
           {% endif %}
           {% if 'personas.delete_tarea' in request.user.get_all_permissions %}
-          <a href="{% url 'personas:eliminar_tarea' object.pk %}" class="btn btn-sm btn-danger {% if not object.estado %}disabled" disabled="disabled"{% else %}"{% endif %}><i class="fa fa-trash"></i></a>
+          <a href="{% url 'personas:eliminar_tarea' object.pk %}" class="btn btn-sm btn-danger" {% if not object.estado %}disabled" disabled="disabled"{% else %}"{% endif %}><i class="fa fa-trash"></i></a>
           {% endif %}
         </td>
       </tr>
     {% endfor %}
   </tbody>
+ </div>
 </table>
 {% endblock body %}

@@ -1,64 +1,73 @@
-{% extends 'index.html' %}
+{% extends 'index.html' %} 
+  
+{% load static %} 
+  
+{% block body %}
+<style>
+  body {
+    background-image: url('{% static "img/fondoLogin.png" %}');
+    background-repeat: no-repeat;
+    background-position-x: 0px;
+  }
 
-{% load static %}
+</style>
 
-   {% block body %}
-    <style>
-      body {
-              background-image: url('{% static "img/fondoLogin.png" %}');
-              background-repeat: no-repeat; 
-              background-position-x: 0px;
-            }
-    </style>
 
-        
 
- <main style="margin-top: -7px;">
-          <div class="login container">
-             <div class="card"  id="login-card">
-               <div class="card-content">
-    
+<main style="margin-top: -7px;">
+  <div class="login container">
+    <div class="card" id="login-card">
+      <div class="card-content">
 
-<form method="POST">{% csrf_token %}
-            <div class="col s12 m12" style="opacity: 0.9;">
-              <div class="row" style="margin-top:-50px;">
-                <div class="col s6 m12">
-                    <img class="responsive-img" src="{% static 'img/titulo.png' %}"/>
-                </div>
+
+        <form method="POST">{% csrf_token %}
+          <div class="col s12 m12" style="opacity: 0.9; width: 100% !important;">
+            <div class="row" style="margin: 0 auto !important; width: 80% !important;">
+              <div class="col s6 m12">
+                <img class="responsive-img" src="{% static 'img/titulo.png' %}" />
               </div>
-              
-        
-              <div class="row">
-              <div class="row col s12 m12">
-              <div class="col s12 m10">
-                <div class="col s1 m1">
-                  <i class="material-icons" style="margin-top: 20px! important;">account_box</i>
-                </div>
-                <div class="col s10 m10">
-                  <label for="{{ input.username.auto_id }}">
+            </div>
+
+            <div class="row" style="margin: 0 auto !important; width: 70% !important;">
+              <!--<div class="row col s12 m12">-->
+              <div style="width: 100% !important;">
+                <!--<div class="col s12 m10">-->
+                <div style="display: flex !important;">
+                  <!--<div class="col s1 m1">-->
+                  <div style="height: 60px !important; margin: auto 10px !important;">
+                    <i class="material-icons" style="margin-top: 20px! important;">account_box</i>
+                  </div>
+                  <!--<div class="col s10 m10">-->
+                  <div style=" width: 100% !important; display: block !important;">
+                    <label for="{{ input.username.auto_id }}" style="font-size: 15px !important;">
                     {{ form.username.label }}
                   </label>
-                    <input class="form-control" type="text" placeholder="Usuario" name="{{ form.username.name }}">
+                    <input class="form-control" type="text" placeholder="Usuario" name="{{ form.username.name }}" style="width: 80% !important;
+                      border-radius: 8px !important; padding: 0px 15px !important; margin-top: 5px !important;">
+                  </div>
                 </div>
               </div>
-              </div>
-        
-             <div class="row col s12 m12">
-              <div class="col s12 m10">
-                <div class="col s1 m1">
-                   <i class="material-icons" style="margin-top: 20px! important;">lock</i>
-                </div>
-                <div class="col s10 m10">
-                  <label for="{{ form.password.auto_id }}">
+
+              <!--<div class="row col s12 m12">-->
+              <div style="width: 100% !important;">
+                <!--<div class="col s12 m10">-->
+                <div style="display: flex !important;">
+                  <!--<div class="col s1 m1">-->
+                  <div style="height: 60px !important; margin: auto 10px !important;">
+                    <i class="material-icons" style="margin-top: 20px! important;">lock</i>
+                  </div>
+                  <!--<div class="col s10 m10">-->
+                  <div style=" width: 80% !important; display: block !important;">
+                    <label for="{{ form.password.auto_id }}" style="font-size: 15px !important;">
                     {{ form.password.label }}
                   </label>
                     <input id="{{ form.password.auto_id }}" class="form-control" type="password" placeholder="Contraseña" name="{{ form.password.name }}">
+                  </div>
                 </div>
               </div>
-               </div>
-                 </div>
+            </div>
 
-              <center>
+            <center>
               <div class="row">
                 <div class="col-12 text-center">
                   <center>
@@ -72,15 +81,15 @@
                   </a>
                 </div>
               </div>
-              </center>
+            </center>
 
-          
+
           </div>
-    <form>
+          <form>
 
 
-           </div>
-            </div>
-          </div>
-        </main>
- {% endblock body %}
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock body %}

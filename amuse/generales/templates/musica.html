@@ -1,0 +1,37 @@
+{% extends 'index.html' %} 
+
+{% load static %} 
+
+{% block body %}
+<div class="container">
+  <div class="slider">
+    <div class="col s12 m12" style="display:flex !important;">
+      <div class="row">
+        <div class="col s11 m12">
+          <div class="medium card">
+            <div class="card-image">
+               <img src="{% static 'img/musica.jpg'%}">
+              <span class="card-title" style="color: white !important; font-weight: bold !important;">Música</span>
+            </div>
+            <div class="card-content">
+
+              <div class="ptext" style="width:100%">
+                <p style="text-align:center"><strong>Bartroma</strong></p>
+                <p>Grupo de música llanera Juvenil, construida en harás del talento boyacense, rompiendo fronteras entre regiones, 
+                y revolucionando el género con aires contemporáneos y propios de las raíces boyacenses.
+                Reunidos en el seno de la escuela superior de música en su convenio con el Glorioso Claustro Santanderino Colegio de Boyacá, 
+                en el cual sus integrantes iniciales se formaron y graduaron en Bachillerato con énfasis musical, transcurría el año 2013 y 
+                en ánimos de presentar un homenaje a nuestros maestros se decide formar el grupo de música llanera juvenil BARTROMA, 
+                como unión de los instrumentos que nos darían el camino para nuestros versos.<br>
+                Fundado por los Hermanos Rodríguez Caro:
+                Juan Camilo en el Arpa, Jonathan David en el cuatro, Esteban Tarazona en la Voz, Germán Pinzón, en los Capachos y 
+                Diego Alejandro García en el Contrabajo.</p><br>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endblock body %}

@@ -1,0 +1,55 @@
+{% extends 'index.html' %} 
+  
+{% load static %} 
+  
+{% block body %}
+<style>
+  body {
+    background-image: url('{% static "img/fondoLogin.png" %}');
+    background-repeat: no-repeat;
+    background-position-x: 0px;
+  }
+
+</style>
+
+<main style="margin-top: -7px;">
+  <div class="container">
+    <div class="card" style="border-radius: 10px; margin-top: 25px !important;">
+      <div class="card-content">
+          <div class="row" style=" width: 100% !important;">
+            <div class="col s12 m12">
+                <div class="col s6 m6">
+                    <h2 style="color:#5d2222 !important">Corporación Cultural Tierra y Fuego</h2>
+                    <br>
+                    <div>
+                         <img class="responsive-img" src="{% static 'img/grupo.png'%}">
+                         <h5 class="center-align"><i>Fotografía: Propia</i> </h5>
+                    </div>
+                    <h3 class="left-align">Esta Corporación sin áninomo de lucro, nace en el 2015, con el objetivo fundamental de ser un espacio abierto para personas interesadas en aprender, crear, ser y hacer arte; dejar a un lado la rutina y sumergirse en lo mejos de nosotros mismos.<br>
+                        Se cuenta con tres grupos base, como lo son:
+                        <ul>
+                            <li type="disc">Danza</li>
+                            <li type="disc">Música</li>
+                            <li type="disc">Teatro</li>
+                        </ul> 
+                    </h3>
+                </div>
+                <div class="s6 m6" style="margin-left: 30px !important; padding: 20px 0px !important;">
+                    <div>
+                        <h2 class="center-align" style="color:#5d2222 !important">Misión</h2>
+                        <h3 class="center-align"><i>Hacer del arte y la formación artística un evento cercano a todo espectador.</i> </h3>
+                    </div>
+                    <br><br><br>
+                    <div>
+                        <h2 class="center-align" style="color:#5d2222 !important">Visión</h2>
+                        <h3 class="center-align"><i>Para el 2020 ser un organismo de gran influencia artística y social en el departamento de Boyacá.</i> </h3>
+                    </div>
+                </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+{% endblock body %}
