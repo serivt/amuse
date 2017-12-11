@@ -68,8 +68,6 @@
               <li class="no-padding">
                 <ul class="collapsible collapsible-accordion">
                   <li class="bold"><a class="collapsible-header  waves-effect waves-teal"><strong>{{ request.user.username }}</strong></a>
-<<<<<<< HEAD
-=======
                     <div class="collapsible-body">
                       <ul>
                         <li><a href="{% url 'cuentas:cuenta' %}">Mi cuenta</a></li>
@@ -118,10 +116,7 @@
                     </ul>
                   </div>
                 </li>
->>>>>>> bc796625a2c1e9e004605d86c94d7bece6522852
               </ul>
-<<<<<<< HEAD
-=======
             {% endif %}
             {% if 'grupos.view_pago' in request.user.get_all_permissions %}
             <li class="bold"><a href="{% url 'grupos:lista_pagos' %}" class="waves-effect waves-teal"><strong>Pagos</strong></a></li>
@@ -142,10 +137,9 @@
               </ul>
             </li>
             {% endif %}
->>>>>>> bc796625a2c1e9e004605d86c94d7bece6522852
           </ul>
         </li>
-        
+
         </ul>
       </div>
     </nav>
