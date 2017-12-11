@@ -107,7 +107,7 @@
         <li class="">
           <img src="{% get_media_prefix %}{{ proyecto.imagen.url }}">
           <div class="caption left-align">
-            <h1>{{proyecto.nombre}}</h1>
+            <h1>{{proyecto.nombre}} {{ proyecto.imagen.url }}</h1>
               <h3>{{proyecto.autor}}</h3>
               <h4>Lugar:{{proyecto.lugar}}</h4>
               <h4>Fecha:{{proyecto.fecha_interpretacion}}</h4>
