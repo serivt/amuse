@@ -15,6 +15,7 @@ class InicialView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(InicialView, self).get_context_data(**kwargs)
+        context['proyectos'] = Proyecto.objects.filter(estado=True)
         return context
 
 

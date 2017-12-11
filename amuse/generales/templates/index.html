@@ -8,7 +8,7 @@
     <title>Amuse</title>
     <meta name="description" content="">
     <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.png' %}"/>
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- <link rel="stylesheet" href="{% static 'vendors/css/bootstrap.min.css' %}"> -->
     <link rel="stylesheet" href="{% static 'vendors/materialize/css/materialize.min.css' %}">
@@ -64,9 +64,9 @@
       <a href="{% url 'generales:inicial' %}" id="logo" class="brand-logo">
            <img src="{% static 'img/logoAmuse.png'%}">
       </a>
-      
+
       <a href="#" data-activates="mobile-demo" class="button-collapse">
-          <i class="material-icons">menu</i> 
+          <i class="material-icons">menu</i>
       </a>
       <ul class="right hide-on-med-and-down">
         <li><a href="{% url 'generales:inicial' %}"><i class="material-icons left">home</i>Inicio</a></li>
@@ -91,7 +91,7 @@
         <li><a href="{% url 'personas:registro_aspirantes' %}"><i class="material-icons">assignment_ind</i>Registrarse</a></li>
         <li><a href="{% url 'cuentas:login' %}"><i class="material-icons">account_balance_wallet</i>Iniciar Sesión</a></li>
         {% else %}
-        <li><a href="{% url 'cuentas:logout' %}"><i class="material-icons">account_balance_wallet</i>Cerrar Sesión</a></li>        
+        <li><a href="{% url 'cuentas:logout' %}"><i class="material-icons">account_balance_wallet</i>Cerrar Sesión</a></li>
         {% endif %}
       </ul>
     </div>
@@ -100,7 +100,7 @@
     {% block body %}
 
 <!-- Revisar NO funciona-->
-  <!--{% for proyecto in proyectos %}
+  {% for proyecto in proyectos %}
   <div class="container">
     <div class="slider">
       <ul class="slides">
@@ -122,7 +122,7 @@
       <li class="indicator-item"></li>
     </ul>
   </div>
-  {% endfor %}-->
+  {% endfor %}
 
     <div class="container">
     <div class="slider">
@@ -230,12 +230,12 @@
           </div>
           <div class="footer-copyright">
             <div class="container">
-            
+
             <a class="grey-text text-lighten-4 right" href="#!"> </a>
             </div>
           </div>
         </footer>
-            
+
   <script src="{% static 'vendors/js/jquery.min.js' %}"></script>
   <script src="{% static 'vendors/js/js.js' %}"></script>
   <script src="{% static 'vendors/js/chosen.jquery.min.js' %}"></script>
