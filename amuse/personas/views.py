@@ -17,7 +17,7 @@ from generales.utils import enviar_correo, generar_hash
 from django.contrib.auth.mixins import (
     LoginRequiredMixin, PermissionRequiredMixin
 )
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 
 
 class RolListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
@@ -88,6 +88,8 @@ class AcudienteFormView(LoginRequiredMixin, PermissionRequiredMixin, FormView):
         acudiente = form.save(commit=False) #false, que guarde el objeto en memoria y no en la db
         acudiente.tipo_persona = Persona.ACUDIENTE
         acudiente.save()
+        persona = Persona.objects.get(usuario=self.request.user)
+        persona.acudiente.add(acudiente)
         return super(AcudienteFormView, self).form_valid(form)
 
 class PersonaFormView(LoginRequiredMixin, PermissionRequiredMixin, FormView):
@@ -121,7 +123,11 @@ class PersonaFormView(LoginRequiredMixin, PermissionRequiredMixin, FormView):
             usuario.set_password(usuario.password)
             usuario.is_superuser = True
             usuario.save()
+            grupo = Group.objects.get_or_create(name='Director')[0]
+            usuario.groups.clear()
+            usuario.groups.add(grupo)
             persona.usuario = usuario
+            persona.estado = True
             persona.save()
             form.save_m2m()
         return super(PersonaFormView, self).form_valid(form)
@@ -150,8 +156,12 @@ class AceptarAspiranteView(LoginRequiredMixin, PermissionRequiredMixin, View):
         usuario = User(username=objeto.correo)
         usuario.set_password(password)
         usuario.save()
+        grupo = Group.objects.get_or_create(name='Aprendiz')[0]
+        usuario.groups.clear()
+        usuario.groups.add(grupo)
         objeto.tipo_persona = Persona.APRENDIZ
         objeto.usuario = usuario
+        objeto.estado = True
         enviar_correo(
             'emails/aceptar_aspirante',
             [objeto.correo],

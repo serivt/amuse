@@ -4,6 +4,8 @@ from django.contrib.auth.models import Group, User
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 
+from grupos.models import Grupo
+
 
 @python_2_unicode_compatible
 class Rol(models.Model):
@@ -150,6 +152,30 @@ class Persona(models.Model):
             roles.append(' %s' % rol.nombre)
         return ','.join(sorted(roles)).strip()
 
+    def get_grupos(self):
+        grupos = []
+        for grupo in Grupo.objects.filter(estudiantes__in=[self]):
+            grupos.append(' %s' % grupo.nombre)
+        return ','.join(sorted(grupos)).strip()
+
+    def get_categorias(self):
+        categorias = []
+        for grupo in Grupo.objects.filter(estudiantes__in=[self]):
+            categorias.append(' %s' % grupo.categoria.nombre)
+        return ','.join(sorted(categorias)).strip()
+
+    def get_acudientes(self):
+        acudientes = []
+        for acudiente in self.acudiente.all():
+            acudientes.append(' %s' % acudiente.get_nombre_completo())
+        return ','.join(sorted(acudientes)).strip()
+
+    def get_numero_acudientes(self):
+        acudientes = []
+        for acudiente in self.acudiente.all():
+            acudientes.append(' %s' % acudiente.telefono)
+        return ','.join(sorted(acudientes)).strip()
+
     @staticmethod
     def get_estudiantes():
         return Persona.objects.filter(tipo_persona=Persona.APRENDIZ)
@@ -160,12 +186,7 @@ class Persona(models.Model):
 
     @staticmethod
     def get_acudiente(excluir=None):
-        rol_acudiente = Rol.objects.get_or_create(nombre=settings.ACUDIENTE)[0]
-        if excluir:
-            return Persona.objects.filter(roles__in=[rol_acudiente]).exclude(
-                pk=excluir)
-        else:
-            return Persona.objects.filter(roles__in=[rol_acudiente])
+        return Persona.objects.filter(tipo_persona=Persona.ACUDIENTE)
 
 
 @python_2_unicode_compatible

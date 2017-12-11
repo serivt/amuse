@@ -15,7 +15,6 @@
         <tr>
           <th>#</th>
           <th>Nombre Completo</th>
-          <th>Email</th>
           <th>Teléfono</th>
           <th>Tipo Parentezco</th>
           {% if 'personas.change_acudiente' in request.user.get_all_permissions or 'personas.delete_acudiente' in request.user.get_all_permissions %}
@@ -28,7 +27,6 @@
         <tr>
           <td>{{ forloop.counter }}</td>
           <td>{{ object.get_nombre_completo }}</td>
-          <td>{{ object.correo }}</td>
           <td>{{ object.telefono }}</td>
           <td>{{ object.get_tipo_parentezco_display }}</td> <!--con cualquier choices -->
           <td>

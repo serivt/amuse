@@ -8,5 +8,6 @@ urlpatterns = [
     url(r'^cuentas/', include('cuentas.urls', namespace='cuentas')),
     url(r'^personas/', include('personas.urls', namespace='personas')),
     url(r'^proyectos/', include('proyectos.urls', namespace='proyectos')),
+    url(r'^reportes/', include('reportes.urls', namespace='reportes')),
     url(r'^admin/', admin.site.urls),
 ]
