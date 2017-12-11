@@ -120,6 +120,8 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = BASE_DIR.ancestor(1).child('media')
 
+MEDIA_URL = '/media/'
+
 STATICFILES_DIRS = (
     BASE_DIR.ancestor(1).child('static'),
 )
