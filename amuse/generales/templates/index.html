@@ -100,10 +100,10 @@
     {% block body %}
 
 <!-- Revisar NO funciona-->
-  {% for proyecto in proyectos %}
-  <div class="container">
-    <div class="slider">
-      <ul class="slides">
+<div class="container">
+  <div class="slider">
+    <ul class="slides">
+        {% for proyecto in proyectos %}
         <li class="">
           <img src="{{ proyecto.imagen.url }}">
           <div class="caption left-align">
@@ -114,6 +114,7 @@
               <h5 class="light grey-text text-lighten-3">{{proyecto.descripcion}}</h5>
           </div>
         </li>
+        {% endfor %}
       </ul>
     </div>
     <ul class="indicators">
@@ -122,7 +123,6 @@
       <li class="indicator-item"></li>
     </ul>
   </div>
-  {% endfor %}
 
     <div class="container">
     <div class="slider">
