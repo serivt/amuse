@@ -111,8 +111,10 @@ class ServicioView(View):
         proyectos = Proyecto.objects.all()
         for proyecto in proyectos:
             grupos = []
+            grupos_pk = []
             for grupo in proyecto.grupos.all():
                 grupos.append(grupo.nombre)
+                grupos_pk.append(grupo.pk)
             _data = {
                 'id_proyecto': proyecto.pk,
                 'nombre_proyecto': proyecto.nombre,
@@ -124,6 +126,7 @@ class ServicioView(View):
                     '%Y-%m-%d'),
                 'nombre_persona': proyecto.director.get_nombres(),
                 'apellido_persona': proyecto.director.get_apellidos(),
+                'grupos': grupos_pk,
                 'nombre_grupo': grupos,
                 'direccion_presentacion': proyecto.lugar,
                 'autor': proyecto.autor,
